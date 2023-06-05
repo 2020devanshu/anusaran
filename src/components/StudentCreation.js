@@ -151,7 +151,7 @@ export default function TeacherCreation({ currId }) {
       .catch((err) => {
         console.log(err);
         notify();
-        window.location.reload();
+        // window.location.reload();
       });
   };
 

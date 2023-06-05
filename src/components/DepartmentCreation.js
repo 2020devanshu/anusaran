@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DeptCreation() {
+  const notify = () => toast.error("Try Again");
+
   const [data, setData] = useState({
     depName: "",
   });
@@ -38,6 +41,7 @@ export default function DeptCreation() {
         window.location.reload();
       })
       .catch((err) => {
+        notify();
         console.log(err);
       });
   };
@@ -88,9 +92,7 @@ export default function DeptCreation() {
             depData.length > 0 &&
             depData.map((x) => {
               return (
-                <div
-                  className="bg-white shadow-lg rounded-lg p-6 mt-4"
-                >
+                <div className="bg-white shadow-lg rounded-lg p-6 mt-4">
                   <h2 className="text-lg font-bold text-gray-900 ">
                     {x.departmentName}
                   </h2>
