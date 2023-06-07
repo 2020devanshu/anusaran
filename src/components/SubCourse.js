@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function SubCourse() {
   const [qr, setqr] = useState("");
-  const [Attendance, setAttendance] = useState(null)
+  const [Attendance, setAttendance] = useState(null);
   const params = useParams();
   function downloadQR(qrCodeUrl) {
     // Create a new anchor element to download the image
@@ -29,10 +29,10 @@ export default function SubCourse() {
               .then((res) => res.data.data);
             const respAttendance = await axios
               .get(
-                `http://65.2.30.68:8000/getAttendanceSubCourses?subcourses_id=${params.id}&InstituteId=${res.data.data[0].InstituteId}`
+                `http://65.2.30.68:8000/getAttendanceSubCourses?subcourses_id=${1}&InstituteId=${2}`
               )
               .then((res) => res.data.data);
-            setAttendance(respAttendance)
+            setAttendance(respAttendance);
             console.log("resQr", respAttendance);
             setqr(respQr);
             return res.data.data;
@@ -46,7 +46,7 @@ export default function SubCourse() {
   return (
     <div className="flex flex-col justify-center bg-slate-300 p-10 items-center">
       <div class="p-10 md:space-x-16 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
-        <div class="px-6 py-4 text-center shadow-blue-300 border-4 rounded-lg">
+        <div class="px-6 py-4 text-center shadow-blue-300 border-4 rounded-lg ">
           <div class="font-bold text-3xl mb-2">Module Details</div>
           <p class="text-gray-700 text-base">
             Within our courses, we have implemented a modular approach to
@@ -62,17 +62,51 @@ export default function SubCourse() {
               <button onClick={() => downloadQR(qr)}>Download QR Code</button>
             )}
           </div>
-          <div>
+          <div >
             <div class="font-bold text-3xl mb-2">Attendance Details</div>
-            {
-              Attendance && Attendance.length > 0 && Attendance.map((x)=>{
-                return (
-                  <>
-                    <h1>attendance working</h1>
-                  </>
-                )
-              })
-            }
+            <table className="min-w-full divide-y divide-black-300">
+              <thead>
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Is Present?
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-black-200">
+                {Attendance &&
+                  Attendance.length > 0 &&
+                  Attendance.map((x) => {
+                    return (
+                      <tr>
+                        <td className="whitespace-nowrap text-left py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                          {x.name}
+                        </td>
+                        <td className="whitespace-nowrap text-left px-3 py-4 text-sm text-gray-500">
+                          {x.date}
+                        </td>
+                        <td className="whitespace-nowrap text-left px-3 py-4 text-sm text-gray-500">
+                          {x.isPresent ? "Yes" : "No"}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
