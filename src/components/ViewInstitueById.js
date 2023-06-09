@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import FeedbackCard from "./FeedbackData";
 
 export default function InstituteById() {
   const params = useParams();
@@ -11,6 +12,7 @@ export default function InstituteById() {
   const [princi, setprinci] = useState(null);
   const [courses, setcourses] = useState(null);
   const [teacher, setteacher] = useState(null);
+  const [feedback, setfeedback] = useState(null);
   const navigate = useNavigate();
   console.log("params", params.id);
   const handleClick = () => {
@@ -18,6 +20,14 @@ export default function InstituteById() {
   };
   useEffect(() => {
     setcurrId(params.id);
+    const fetchFeedback = async () => {
+      const resp = await axios
+        .get(`http://65.2.30.68:8000/getFeedback?instituteId=${params.id}`)
+        .then((res2) => {
+          return res2.data.data;
+        });
+      setfeedback(resp);
+    };
     const fetchInstitute = async () => {
       const response = await axios
         .get(
@@ -81,6 +91,7 @@ export default function InstituteById() {
       // setcourses(resp);
       setteacher(newArr);
     };
+    fetchFeedback();
     fetchTeachers();
     fetchStudent();
     fetchCourses();
@@ -99,7 +110,18 @@ export default function InstituteById() {
     <div className="flex flex-col justify-center p-10 items-center bg-slate-300">
       <div class="font-bold text-3xl mb-2">{Name}</div>
       <p class="text-gray-700 text-base">
-      The institutes dashboard serves as a comprehensive and centralized platform for administrators to effectively manage all aspects of their institution. From user management to course administration, this powerful tool provides administrators with a streamlined and efficient way to oversee various administrative functions. Additionally, the dashboard offers access to comprehensive data and analytics, allowing administrators to make data-driven decisions and gain valuable insights into enrollment trends, course offerings, and overall institutional performance. With its user-friendly interface and robust features, the institutes dashboard empowers administrators to efficiently navigate and handle the diverse aspects of institutional management, ultimately contributing to the success and growth of the institution.
+        The institutes dashboard serves as a comprehensive and centralized
+        platform for administrators to effectively manage all aspects of their
+        institution. From user management to course administration, this
+        powerful tool provides administrators with a streamlined and efficient
+        way to oversee various administrative functions. Additionally, the
+        dashboard offers access to comprehensive data and analytics, allowing
+        administrators to make data-driven decisions and gain valuable insights
+        into enrollment trends, course offerings, and overall institutional
+        performance. With its user-friendly interface and robust features, the
+        institutes dashboard empowers administrators to efficiently navigate and
+        handle the diverse aspects of institutional management, ultimately
+        contributing to the success and growth of the institution.
       </p>
       {princi && princi.length > 0
         ? princi.map((x) => {
@@ -219,6 +241,15 @@ export default function InstituteById() {
                   <p className="mt-2 text-gray-600">{x.Additional}</p>
                 </div>
               </div>
+            );
+          })}
+      </div>
+      <div className="mt-4 flex justify-around w-full">
+        {feedback &&
+          feedback.length > 0 &&
+          feedback.map((x) => {
+            return (
+              <FeedbackCard feedbackData={x}/>
             );
           })}
       </div>

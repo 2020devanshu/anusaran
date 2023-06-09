@@ -24,6 +24,7 @@ import Courses from "./components/Courses";
 import CourseDesc from "./components/CourseDesc";
 import SubCourseCreation from "./components/SubCourseCreation";
 import SubCourse from "./components/SubCourse";
+import Feedback from "./components/Feedback";
 const App = () => {
  
   const [token, setToken] = useState("");
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="principal-creation" element={<PrincipalCreation />} />
             <Route path="course-creation" element={<CourseCreation />} />
             <Route path="dept-creation" element={<DeptCreation />} />
+            <Route path="feedback" element={<Feedback />} />
 
             <Route path="institute-creation" element={<InstituteCreation />} />
             <Route path="institute-list" element={<InstituteView />} />
@@ -80,10 +82,7 @@ const App = () => {
               path="course/:id/create-subcourse/:id/course/:id"
               element={<SubCourse />}
             />
-            <Route
-              path="course/:id/subcourse/:id"
-              element={<SubCourse />}
-            />
+            <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
             <Route
               path="/institute-list/institute/:id/create-principal/:id"
               element={<PrincipalCreation />}

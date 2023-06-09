@@ -193,6 +193,16 @@ export default function NavBar({}) {
                 Create Department
               </span>
             </Link>
+            <Link
+              onClick={handleClose}
+              to={"feedback"}
+              className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-center"
+            >
+              <i className=" text-sm"></i>
+              <span className="text-xl ml-4 text-gray-200 font-bold">
+                Feedback
+              </span>
+            </Link>
             <div
               onClick={handleLogout}
               className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-center"
