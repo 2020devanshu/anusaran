@@ -244,13 +244,12 @@ export default function InstituteById() {
             );
           })}
       </div>
+      {feedback && feedback.length > 0 && <h1 className="text-4xl">feedback</h1>}
       <div className="mt-4 flex justify-around w-full">
         {feedback &&
           feedback.length > 0 &&
           feedback.map((x) => {
-            return (
-              <FeedbackCard feedbackData={x}/>
-            );
+            return <FeedbackCard feedbackData={x} />;
           })}
       </div>
     </div>
