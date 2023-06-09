@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import StudentAttendance from "./StudentAttendance";
 
 export default function SubCourse() {
   const [qr, setqr] = useState("");
@@ -29,7 +30,7 @@ export default function SubCourse() {
               .then((res) => res.data.data);
             const respAttendance = await axios
               .get(
-                `http://65.2.30.68:8000/getAttendanceSubCourses?subcourses_id=${1}&InstituteId=${2}`
+                `http://65.2.30.68:8000/getAttendanceSubCourses?subcourses_id=${params.id}&InstituteId=${res.data.data[0].InstituteId}`
               )
               .then((res) => res.data.data);
             setAttendance(respAttendance);
@@ -62,54 +63,11 @@ export default function SubCourse() {
               <button onClick={() => downloadQR(qr)}>Download QR Code</button>
             )}
           </div>
-          <div >
-            <div class="font-bold text-3xl mb-2">Attendance Details</div>
-            <table className="min-w-full divide-y divide-black-300">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Date
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Is Present?
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-black-200">
-                {Attendance &&
-                  Attendance.length > 0 &&
-                  Attendance.map((x) => {
-                    return (
-                      <tr>
-                        <td className="whitespace-nowrap text-left py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                          {x.name}
-                        </td>
-                        <td className="whitespace-nowrap text-left px-3 py-4 text-sm text-gray-500">
-                          {x.date}
-                        </td>
-                        <td className="whitespace-nowrap text-left px-3 py-4 text-sm text-gray-500">
-                          {x.isPresent ? "Yes" : "No"}
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
+      {Attendance && Attendance.length > 0 && (
+        <StudentAttendance data={Attendance} />
+      )}
     </div>
   );
 }
