@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import Select from "react-select";
 import "react-toastify/dist/ReactToastify.css";
-
+import Select from "react-select";
 export default function TeacherCreation({ currId }) {
   const [options, setOptions] = useState([]);
   const [stud, setstud] = useState([]);
@@ -27,7 +26,23 @@ export default function TeacherCreation({ currId }) {
           .then((res2) => {
             return res2.data.data;
           });
+        const responseCourse = await axios
+          .get(
+            `http://65.2.30.68:8000/getCourses?Institute=${princData[0].institutionId}`
+          )
+          .then((res) => {
+            return res.data.data;
+          });
+        const newArrCourse = responseCourse.map((x) => {
+          return {
+            label: x.course,
+            value: x.course_id,
+          };
+        });
+        setOptions(newArrCourse);
         setprinc(princData[0]);
+
+        console.log("getCoursesUser", responseCourse, princ);
         console.log("princData", princData[0]);
         const newArr = resp.filter(
           (x) => x.institutionId === princData[0].institutionId
@@ -45,14 +60,8 @@ export default function TeacherCreation({ currId }) {
           return res.data.data;
         });
       console.log("response", response);
-      const newArr = response.map((x) => {
-        return {
-          label: x.departmentName,
-          value: x.id,
-        };
-      });
-      setOptions(newArr);
     };
+    const fetchCourses = async () => {};
     fetchPrinc();
     fetchRes();
   }, []);
@@ -73,6 +82,11 @@ export default function TeacherCreation({ currId }) {
       setImageSrc(e.target.files[0]);
     }
   };
+  const [dataCourse, setDataCourse] = useState({
+    course_id: "",
+    Institute_id: "",
+    user_id: "",
+  });
   const [data, setData] = useState({
     email: "",
     fname: "",
@@ -180,6 +194,15 @@ export default function TeacherCreation({ currId }) {
               className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
+        </div>
+        <div className="mt-2">
+          Course
+          <Select
+            options={options}
+            onChange={(option) => {
+              setData({ ...data, institute_id: option.value });
+            }}
+          />
         </div>
         <div>
           <div className="flex items-center justify-between">
