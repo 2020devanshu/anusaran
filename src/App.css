@@ -1,0 +1,34 @@
+.navItem:hover {
+  background-color: #8266f733;
+}
+
+.navItem {
+  font-size: 500px;
+}
+
+.teachercontent {
+  background-color: #f8f6ff;
+}
+
+.studentcontent {
+  background-color: #7455f6;
+}
+
+.instcontent {
+  background-color: #7455f6;
+}
+
+.carousel .control-dots .dot {
+  /* apply margin-top */
+  margin-top: 1rem;
+  /* set color to white */
+  background: white;
+}
+
+.carousel .control-dots .dot.selected {
+  /* set active dot color to black */
+  background: black;
+}
+.cardcontent {
+  background-color: #9077f8;
+}
