@@ -26,6 +26,7 @@ import SubCourseCreation from "./components/SubCourseCreation";
 import SubCourse from "./components/SubCourse";
 import Feedback from "./components/Feedback";
 import "./App.css";
+import { AppProvider } from "./components/AppContext";
 const App = () => {
   const [token, setToken] = useState("");
   const [role, setrole] = useState("");
@@ -40,63 +41,73 @@ const App = () => {
   }, [token, role, []]);
 
   return (
-    <div>
+    <AppProvider>
       {token ? (
-        <>
-          <NavBar />
-          <Routes>
-            {role === "admin" ? (
-              <>
-                <Route path="/" element={<AdminDashboard />} />
-                <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              </>
-            ) : (
-              <>
-                <Route path="/" element={<PrincipalDashboard />} />
-                <Route
-                  path="principal-dashboard"
-                  element={<PrincipalDashboard />}
-                />
-              </>
-            )}
+        <div >
+          <div>
+            <NavBar />
+          </div>
+          <div>
+            <Routes>
+              {role === "admin" ? (
+                <>
+                  <Route path="/" element={<AdminDashboard />} />
+                  <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<PrincipalDashboard />} />
+                  <Route
+                    path="principal-dashboard"
+                    element={<PrincipalDashboard />}
+                  />
+                </>
+              )}
 
-            <Route path="teacher-creation" element={<TeacherCreation />} />
-            <Route path="student-creation" element={<StudentCreation />} />
-            <Route path="principal-creation" element={<PrincipalCreation />} />
-            <Route path="course-creation" element={<CourseCreation />} />
-            <Route path="dept-creation" element={<DeptCreation />} />
-            <Route path="feedback" element={<Feedback />} />
+              <Route path="teacher-creation" element={<TeacherCreation />} />
+              <Route path="student-creation" element={<StudentCreation />} />
+              <Route
+                path="principal-creation"
+                element={<PrincipalCreation />}
+              />
+              <Route path="course-creation" element={<CourseCreation />} />
+              <Route path="dept-creation" element={<DeptCreation />} />
+              <Route path="feedback" element={<Feedback />} />
 
-            <Route path="institute-creation" element={<InstituteCreation />} />
-            <Route path="institute-list" element={<InstituteView />} />
-            <Route
-              path="/institute-list/institute/:id"
-              element={<InstituteById />}
-            />
-            <Route path="course/:id" element={<CourseDesc />} />
-            <Route
-              path="course/:id/create-subcourse/:id"
-              element={<SubCourseCreation />}
-            />
-            <Route
-              path="course/:id/create-subcourse/:id/course/:id"
-              element={<SubCourse />}
-            />
-            <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
-            <Route
-              path="/institute-list/institute/:id/create-principal/:id"
-              element={<PrincipalCreation />}
-            />
-            <Route
-              path="/institute-list/institute/:id/create-teacher/:id"
-              element={<TeacherCreation />}
-            />
-            <Route
-              path="/institute-list/institute/:id/create-student/:id"
-              element={<StudentCreation />}
-            />
-          </Routes>
-        </>
+              <Route
+                path="institute-creation"
+                element={<InstituteCreation />}
+              />
+              <Route path="institute-list" element={<InstituteView />} />
+              <Route
+                path="/institute-list/institute/:id"
+                element={<InstituteById />}
+              />
+              <Route path="course/:id" element={<CourseDesc />} />
+              <Route
+                path="course/:id/create-subcourse/:id"
+                element={<SubCourseCreation />}
+              />
+              <Route
+                path="course/:id/create-subcourse/:id/course/:id"
+                element={<SubCourse />}
+              />
+              <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
+              <Route
+                path="/institute-list/institute/:id/create-principal/:id"
+                element={<PrincipalCreation />}
+              />
+              <Route
+                path="/institute-list/institute/:id/create-teacher/:id"
+                element={<TeacherCreation />}
+              />
+              <Route
+                path="/institute-list/institute/:id/create-student/:id"
+                element={<StudentCreation />}
+              />
+            </Routes>
+          </div>
+        </div>
       ) : (
         <>
           <Routes>
@@ -105,7 +116,7 @@ const App = () => {
           </Routes>
         </>
       )}
-    </div>
+    </AppProvider>
   );
 };
 

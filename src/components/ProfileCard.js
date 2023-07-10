@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileCard = ({ imgSrc, name, designation }) => {
   return (
-    <div className="bg-transparent w-1/3 mx-auto flex flex-col justify-center items-center space-x-4 rounded-lg overflow-hidden">
+    <div className="bg-transparent w-full md:w-1/3 mx-auto flex flex-col justify-center items-center space-x-4 rounded-lg overflow-hidden">
       <div className="flex-shrink-0">
         {/* <img className="h-48 w-full object-cover" src={imgSrc} alt={name} />
          */}

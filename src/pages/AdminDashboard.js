@@ -7,11 +7,14 @@ import Institute from "../components/Institute";
 import { Link, useNavigate } from "react-router-dom/dist";
 import { Navigate } from "react-router-dom/dist";
 import Courses from "../components/Courses";
+import { useAppContext } from "../components/AppContext";
 
 export default function AdminDashboard() {
+  const { handleClose, close, handleOpen } = useAppContext();
+
   return (
     <div>
-      <div className="flex flex-col justify-center bg-white p-14 items-center">
+      <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
         <div className="navbar flex justify-between w-full">
           <div className="navleftitem">
             <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
@@ -50,12 +53,15 @@ export default function AdminDashboard() {
                 </g>
               </svg>
 
-              <h1 className=" font-bold text-2xl ml-4">
+              <h1 className=" text-2xl ml-4">
                 Welcome back,<br></br> <span>Admin</span>
               </h1>
             </div>
           </div>
-          <div className="navitemright flex items-center gap-5">
+          <div
+            class="invisible md:visible md:flex items-center gap-5 navitemright"
+            onClick={handleOpen}
+          >
             <div>
               <svg
                 width="42"
@@ -68,7 +74,7 @@ export default function AdminDashboard() {
               </svg>
             </div>
             <div>
-              <p>Admin</p>
+              <p className="font-bold">Admin</p>
             </div>
             <div>
               <svg
@@ -89,17 +95,21 @@ export default function AdminDashboard() {
 
         <div className="workContainer mb-4 w-full">
           <div>
-            <h1 className="text-6xl mb-2">How this works ?</h1>
+            <h1 className="text-2xl md:text-6xl mb-2 font-bold">
+              How this works ?
+            </h1>
           </div>
           <div class="border-b-2 border-black mb-2"></div>
 
           <div className="mainbox w-full mt-8 flex flex-col items-center">
-            <div className="teachercontent   p-14 rounded-xl md:flex justify-center mb-4">
-              <div class="md:border-r-2  border-black mb-2 text-3xl p-10 w-100% whitespace-nowrap mr-4">
-                For Teachers
+            <div className="teachercontent  text-center  md:p-14 rounded-xl md:flex justify-center mb-4">
+              <div class=" md:mb-2 whitespace-nowrap md:mr-4 flex justify-center">
+                <p className="md:border-r-2 border-b-2 md:border-b-0 md:mb-2 text-3xl md:p-10 md:w-100% py-10 border-black">
+                  For Teachers
+                </p>
               </div>
               <div>
-                <p className="text-2xl text-center leading-8 ml-24 mr-24">
+                <p className="md:text-2xl text-center leading-8 md:ml-24 md:mr-24 ml-10 mr-10">
                   Our institutional panel goes beyond administrative functions
                   and also enables you to effortlessly create and manage teacher
                   profiles. With a few simple steps, you can onboard teachers
@@ -108,12 +118,14 @@ export default function AdminDashboard() {
                 </p>
               </div>
             </div>
-            <div className="studentcontent   p-14 rounded-xl md:flex justify-center mb-4">
-              <div class="md:border-r-2  border-black mb-2 text-3xl p-10 w-100% whitespace-nowrap mr-4">
-                For Students
+            <div className="studentcontent   text-center  md:p-14 rounded-xl md:flex justify-center mb-4">
+              <div class="md:mb-2 whitespace-nowrap md:mr-4 flex justify-center">
+                <p className="md:border-r-2 border-b-2 md:border-b-0 md:mb-2 text-3xl md:p-10 md:w-100% py-10 border-black">
+                  For Students
+                </p>
               </div>
               <div>
-                <p className="text-2xl text-center leading-8 ml-24 mr-24">
+                <p className="md:text-2xl text-center leading-8 md:ml-24 md:mr-24 ml-10 mr-10">
                   In addition to managing teachers, our institutional panel
                   facilitates the seamless creation of student profiles. You can
                   easily add students to the system, capturing essential
@@ -122,12 +134,14 @@ export default function AdminDashboard() {
                 </p>
               </div>
             </div>
-            <div className="teachercontent   p-14 rounded-xl md:flex justify-center mb-4">
-              <div class="md:border-r-2  border-black mb-2 text-3xl p-10 w-100% whitespace-nowrap mr-4">
-                For Courses
+            <div className="teachercontent   text-center  md:p-14 rounded-xl md:flex justify-center mb-4">
+              <div class="md:mb-2 whitespace-nowrap md:mr-4 flex justify-center">
+                <p className="md:border-r-2 border-b-2 md:border-b-0 md:mb-2 text-3xl md:p-10 md:w-100% py-10 border-black">
+                  For Courses
+                </p>
               </div>
               <div>
-                <p className="text-2xl text-center leading-8 ml-24 mr-24">
+                <p className="md:text-2xl text-center leading-8 md:ml-24 md:mr-24 ml-10 mr-10">
                   Our panel simplifies the process of adding and managing
                   courses within your institution. You can effortlessly input
                   course details, including course name, code, description, and
@@ -184,7 +198,7 @@ export default function AdminDashboard() {
           <div class="border-b-2 border-black mb-2"></div>
 
           <div className="mainbox w-full mt-8 flex gap-12 flex-wrap justify-center">
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>
@@ -194,7 +208,7 @@ export default function AdminDashboard() {
                 academic progress and eligibility for certain privileges.
               </p>
             </div>
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>
@@ -204,7 +218,7 @@ export default function AdminDashboard() {
                 academic progress and eligibility for certain privileges.
               </p>
             </div>
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>
@@ -214,7 +228,7 @@ export default function AdminDashboard() {
                 academic progress and eligibility for certain privileges.
               </p>
             </div>
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>
@@ -224,7 +238,7 @@ export default function AdminDashboard() {
                 academic progress and eligibility for certain privileges.
               </p>
             </div>
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>
@@ -234,7 +248,7 @@ export default function AdminDashboard() {
                 academic progress and eligibility for certain privileges.
               </p>
             </div>
-            <div className="card teachercontent w-80 h-96">
+            <div className="card border-2 border-black rounded-lg w-80 h-96">
               <p className="font-bold text-xl mt-16 ml-4">
                 Attendance and Punctuality
               </p>

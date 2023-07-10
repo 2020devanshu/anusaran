@@ -26,41 +26,16 @@ export default function InstituteView() {
   };
 
   return (
-    <div className="flex flex-col justify-center bg-white p-14 items-center">
+    <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
       <div className="navbar flex justify-between w-full">
-        <div className="navleftitem">
+        <div className="navleftitem ">
           <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
-            <svg
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="75" cy="75" r="75" fill="#7455F6" />
-              <mask
-                id="mask0_14_301"
-                style={{ maskType: "alpha" }}
-                maskUnits="userSpaceOnUse"
-                x="0"
-                y="0"
-                width="150"
-                height="150"
-              >
-                <circle cx="75" cy="75" r="75" fill="#D9D9D9" />
-              </mask>
-              <g mask="url(#mask0_14_301)">
-                <circle cx="74.9997" cy="69.9153" r="19.0678" fill="#FEFEFE" />
-                <circle cx="74.9999" cy="143.644" r="49.5763" fill="#FEFEFE" />
-              </g>
-            </svg>
-
-            <h1 className=" font-bold text-2xl ml-4">
-              Welcome back,<br></br> <span>Admin</span>
+            <h1 className=" font-bold md:text-2xl ">
+              Welcome, <span>Admin</span>
             </h1>
           </div>
         </div>
-        <div className="navitemright flex items-center gap-5">
+        <div className="navitemright flex items-center gap-5 invisible md:visible md:flex">
           <div>
             <svg
               width="42"
@@ -93,17 +68,17 @@ export default function InstituteView() {
       </div>
       <div className="workContainer mb-4 w-full">
         <div>
-          <h1 className="text-6xl mb-2">All Institute Details</h1>
+          <h1 className="text-2xl  font-bold md:text-6xl mb-2">All Institute Details</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
 
-        <div className="mainbox w-full mt-8 flex gap-12 flex-wrap justify-center">
+        <div className="mainbox w-full md:mt-8 flex gap-12 flex-wrap justify-center">
           <div className="flex flex-wrap mt-10 gap-5 justify-center">
             {institutes.map((institute) => (
               <div
                 key={institute.institute_id}
                 onClick={() => handleClick(institute)}
-                className="card instcontent w-80 h-96 flex  flex-col items-center justify-center"
+                className="card instcontent w-80 h-96 flex  flex-col items-center justify-center rounded-md"
               >
                 <div className="border-b-2 border-black pb-6">
                   <img

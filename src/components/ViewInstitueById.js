@@ -6,7 +6,7 @@ import FeedbackCard from "./FeedbackCard";
 import ProfileCard from "./ProfileCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-
+import { useMediaQuery } from "react-responsive";
 export default function InstituteById() {
   const params = useParams();
   const [Name, setName] = useState("");
@@ -26,6 +26,7 @@ export default function InstituteById() {
   const handleClick = () => {
     navigate("create-principal/" + params.id);
   };
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Set the screen width threshold here
   useEffect(() => {
     setcurrId(params.id);
     const fetchFeedback = async () => {
@@ -34,8 +35,15 @@ export default function InstituteById() {
         .then((res2) => {
           if (res2.data.data && res2.data.data.length > 0) {
             const pairs = [];
-            for (let i = 0; i < res2.data.data.length; i += 2) {
-              pairs.push(res2.data.data.slice(i, i + 2));
+            console.log('isMobile', isMobile)
+            if (isMobile) {
+              for (let feedback of res2.data.data) {
+                pairs.push([feedback]);
+              }
+            } else {
+              for (let i = 0; i < res2.data.data.length; i += 2) {
+                pairs.push(res2.data.data.slice(i, i + 2));
+              }
             }
             setpairedFeedbacks(pairs);
             console.log("pairedFeedbacks", pairedFeedbacks);
@@ -128,17 +136,21 @@ export default function InstituteById() {
 
   return (
     <div className="flex flex-col justify-center p-10 items-center bg-white">
-      <div className="navbar flex justify-between w-full">
+      <div className="navbar md:flex justify-between w-full">
         <div className="navleftitem flex justify-center flex-col ">
-          <h1 className="text-6xl font-bold">{Name}</h1>
+          <h1 className="text-6xl font-bold xsm:mb-4 m-0">{Name}</h1>
           <p>
             The institutes dashboard serves as a comprehensive and centralized
             platform for administrators to effectively manage all aspects of
             their institution. From user management to course administration,
             this powerful tool provides administrators with...
           </p>
+          <div className=" w-full md:mr-2 md:pl-10 block md:hidden xsm:my-4 m-0">
+            <img src={logo} className="h-56 w-full" />
+          </div>
         </div>
-        <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
+
+        <div className="navitemright  flex-col items-center gap-5 w-1/2 p-10 xsm:hidden md:flex">
           <div className=" flex items-center justify-end w-full gap-5">
             <div>
               <svg
@@ -178,10 +190,10 @@ export default function InstituteById() {
       {/* princ details */}
       <div className="workContainer mb-4 w-full">
         <div>
-          <h1 className="text-6xl mb-2">Representative Details</h1>
+          <h1 className="text-3xl md:text-6xl mb-2">Representatives</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
-        <div className="flex ">
+        <div className="xsm:flex xsm:flex-col md:flex-row">
           {princi &&
             princi.length > 0 &&
             princi.map((x) => {
@@ -221,10 +233,10 @@ export default function InstituteById() {
 
       <div className="workContainer mb-4 mt-4 w-full flex flex-col">
         <div>
-          <h1 className="text-6xl mb-2">Student Details</h1>
+          <h1 className="text-3xl md:text-6xl mb-2">Student Details</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
-        <div className="flex flex-wrap">
+        <div className="xsm:flex xsm:flex-col md:flex-row flex-wrap">
           {limit
             ? stud &&
               stud.length > 0 &&
@@ -319,10 +331,10 @@ export default function InstituteById() {
       {/* {teacher && teacher.length > 0 && <h1 className="text-4xl">Teacher</h1>} */}
       <div className="workContainer mb-4 mt-4 w-full flex flex-col">
         <div>
-          <h1 className="text-6xl mb-2">Teachers</h1>
+          <h1 className="text-3xl md:text-6xl mb-2">Teachers</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
-        <div className="flex flex-wrap">
+        <div className="xsm:flex xsm:flex-col md:flex-row flex-wrap">
           {teacher &&
             teacher.length > 0 &&
             teacher.map((x, ind) => {

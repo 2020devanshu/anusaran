@@ -9,12 +9,9 @@ import { Link, useNavigate } from "react-router-dom/dist";
 import { Navigate } from "react-router-dom/dist";
 import HamburgerMenu from "./HambergerMenu";
 import mainLogo from "../mainLogo.jpg";
+import { useAppContext } from "./AppContext";
 export default function NavBar({}) {
-  const [close, setClose] = useState(false);
-  function handleClose() {
-    console.log("close", close);
-    setClose(!close);
-  }
+  const { handleClose, close, handleOpen } = useAppContext();
   const [role, setrole] = useState(localStorage.getItem("role"));
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -25,24 +22,26 @@ export default function NavBar({}) {
     window.location.reload(true);
   };
   const navbarRef = useRef(null);
-  useEffect(() => {
-    // Close Navbar when clicking outside the navbar element
-    function handleClickOutside(event) {
-      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-        handleClose();
-      }
-    }
+  // useEffect(() => {
+  //   // Close Navbar when clicking outside the navbar element
+  //   if (!close) {
+  //     function handleClickOutside(event) {
+  //       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+  //         handleClose();
+  //       }
+  //     }
 
-    document.addEventListener("click", handleClickOutside);
+  //     document.addEventListener("click", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  //     return () => {
+  //       document.removeEventListener("click", handleClickOutside);
+  //     };
+  //   }
+  // }, []);
 
   const navigate = useNavigate();
   return (
-    <div ref={navbarRef}>
+    <div>
       {localStorage.getItem("role") === "admin" ? (
         <div style={{ background: "#F8F6FF" }}>
           <div
