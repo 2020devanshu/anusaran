@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
   }
 
   function handleOpen() {
-    setClose(false);
+    setClose(!close);
   }
 
   return (

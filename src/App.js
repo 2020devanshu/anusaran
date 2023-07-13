@@ -43,10 +43,8 @@ const App = () => {
   return (
     <AppProvider>
       {token ? (
-        <div >
-          <div>
-            <NavBar />
-          </div>
+        <div className="flex">
+          <NavBar />
           <div>
             <Routes>
               {role === "admin" ? (

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom/dist";
+import { useAppContext } from "../components/AppContext";
+
 export default function InstituteView() {
+  const { handleClose, close, handleOpen } = useAppContext();
   const [imgUrl, setimgUrl] = useState(null);
   const [institutes, setInstitutes] = useState([]);
   const navigate = useNavigate();
@@ -47,7 +50,7 @@ export default function InstituteView() {
               <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
             </svg>
           </div>
-          <div>
+          <div onClick={handleOpen}>
             <p>Admin</p>
           </div>
           <div>
@@ -95,11 +98,11 @@ export default function InstituteView() {
                   </div>
                   <div className="flex flex-row">
                     <div className="flex flex-col">
-                      <p className="  font-light text-gray-400">
+                      <p className="  font-light text-black">
                         Created at:{" "}
                         {new Date(institute.createdAt).toLocaleDateString()}
                       </p>
-                      <p className="  font-light text-gray-400">
+                      <p className="  font-light text-black">
                         Updated at:{" "}
                         {new Date(institute.updatedAt).toLocaleDateString()}
                       </p>

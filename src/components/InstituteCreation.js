@@ -2,8 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useAppContext } from "../components/AppContext";
 
 export default function InstituteCreation() {
+  const { handleClose, close, handleOpen } = useAppContext();
+
   const notify = () => toast("Try again");
   const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState(null);
@@ -74,7 +77,7 @@ export default function InstituteCreation() {
 
   return (
     <div>
-      <div className="flex min-h-full flex-1 flex-col justify-center bg-white px-6 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center bg-white px-6 lg:px-8 w-screen">
         <div className="navbar flex justify-between w-full">
           <div className="navleftitem flex justify-center flex-col "></div>
           <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
@@ -90,7 +93,7 @@ export default function InstituteCreation() {
                   <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
                 </svg>
               </div>
-              <div>
+              <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
               <div>
