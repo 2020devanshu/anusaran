@@ -20,7 +20,7 @@ export default function AdminLogin() {
     console.log("data", data);
     e.preventDefault();
     axios
-      .post("http://65.2.30.68:8000/LoginUser", {
+      .post("http://65.1.211.146:8000/LoginUser", {
         email: data.email,
         password: data.password,
       })
@@ -29,7 +29,7 @@ export default function AdminLogin() {
         if (res.data.msg === "Admin has login") {
           // Call the verify endpoint after successful login
           axios
-            .post("http://65.2.30.68:8000/verify", {
+            .post("http://65.1.211.146:8000/verify", {
               token: res.data.data,
             })
             .then((verificationResponse) => {

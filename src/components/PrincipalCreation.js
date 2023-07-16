@@ -60,7 +60,7 @@ export default function PrincipalCreation({ currId }) {
     const formData = new FormData();
     formData.append("file", imageSrc);
 
-    const res = await axios.post("http://65.2.30.68:8000/registerUser", {
+    const res = await axios.post("http://65.1.211.146:8000/registerUser", {
       email: data.email,
       password: data.password,
       fname: data.fname,
@@ -69,7 +69,7 @@ export default function PrincipalCreation({ currId }) {
       username: data.userName,
     });
     const response = await axios.post(
-      "http://65.2.30.68:8000/uploads",
+      "http://65.1.211.146:8000/uploads",
       formData,
       {
         headers: {
@@ -82,7 +82,7 @@ export default function PrincipalCreation({ currId }) {
     console.log("fileUrl", fileUrl);
 
     axios
-      .post("http://65.2.30.68:8000/insertPrincipal", {
+      .post("http://65.1.211.146:8000/insertPrincipal", {
         email: data.email,
         profilePhoto: response.data.url[0],
         address: data.address,

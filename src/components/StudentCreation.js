@@ -16,19 +16,19 @@ export default function TeacherCreation({ currId }) {
   const notify = () => toast("Try again!");
   const fetchPrinc = async () => {
     const response = await axios
-      .get("http://65.2.30.68:8000/principalAllData")
+      .get("http://65.1.211.146:8000/principalAllData")
       .then(async (res) => {
         const princData = res.data.data.filter((x) => {
           return x.email === localStorage.getItem("email");
         });
         const resp = await axios
-          .get("http://65.2.30.68:8000/getDataAllSt")
+          .get("http://65.1.211.146:8000/getDataAllSt")
           .then((res2) => {
             return res2.data.data;
           });
         const responseCourse = await axios
           .get(
-            `http://65.2.30.68:8000/getCourses?Institute=${princData[0].institutionId}`
+            `http://65.1.211.146:8000/getCourses?Institute=${princData[0].institutionId}`
           )
           .then((res) => {
             return res.data.data;
@@ -55,7 +55,7 @@ export default function TeacherCreation({ currId }) {
   useEffect(() => {
     const fetchRes = async () => {
       const response = await axios
-        .get("http://65.2.30.68:8000/getDepartment")
+        .get("http://65.1.211.146:8000/getDepartment")
         .then((res) => {
           return res.data.data;
         });
@@ -123,7 +123,7 @@ export default function TeacherCreation({ currId }) {
     const formData = new FormData();
     formData.append("file", imageSrc);
 
-    const res = await axios.post("http://65.2.30.68:8000/registerUser", {
+    const res = await axios.post("http://65.1.211.146:8000/registerUser", {
       email: data.email,
       password: data.password,
       fname: data.fname,
@@ -132,7 +132,7 @@ export default function TeacherCreation({ currId }) {
       username: data.userName,
     });
     const response = await axios.post(
-      "http://65.2.30.68:8000/uploads",
+      "http://65.1.211.146:8000/uploads",
       formData,
       {
         headers: {
@@ -144,7 +144,7 @@ export default function TeacherCreation({ currId }) {
     const fileUrl = response.data.url;
     console.log("fileUrl", fileUrl);
     axios
-      .post("http://65.2.30.68:8000/createStudentsDetails", {
+      .post("http://65.1.211.146:8000/createStudentsDetails", {
         email: data.email,
         profilePhoto: response.data.url[0],
         address: data.address,

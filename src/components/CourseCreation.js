@@ -21,7 +21,7 @@ export default function CourseCreation(params) {
   useEffect(() => {
     const fetchPrinc = async () => {
       const response = await axios
-        .get("http://65.2.30.68:8000/principalAllData")
+        .get("http://65.1.211.146:8000/principalAllData")
         .then(async (res) => {
           const newArr = res.data.data.filter((x) => {
             return x.email === localStorage.getItem("email");
@@ -29,7 +29,7 @@ export default function CourseCreation(params) {
           console.log("newArr[0]", newArr[0]);
           const resp = await axios
             .get(
-              `http://65.2.30.68:8000/getCourses?Institute=${newArr[0].institutionId}`
+              `http://65.1.211.146:8000/getCourses?Institute=${newArr[0].institutionId}`
             )
             .then((res2) => {
               return res2.data.data;
@@ -43,7 +43,7 @@ export default function CourseCreation(params) {
     const fetchCourse = async () => {};
     const fetchRes = async () => {
       const response = await axios
-        .get("http://65.2.30.68:8000/getAllInstitute")
+        .get("http://65.1.211.146:8000/getAllInstitute")
         .then((res) => {
           return res.data.data;
         });
@@ -72,7 +72,7 @@ export default function CourseCreation(params) {
     e.preventDefault();
 
     axios
-      .post("http://65.2.30.68:8000/insertCourses", {
+      .post("http://65.1.211.146:8000/insertCourses", {
         course: data.course,
         Institute: data.institute_id,
         startTime: data.startTime,

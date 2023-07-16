@@ -13,7 +13,7 @@ export default function InstituteView() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://65.2.30.68:8000/getAllInstitute"
+          "http://65.1.211.146:8000/getAllInstitute"
         );
         setInstitutes(response.data.data);
       } catch (error) {
@@ -71,7 +71,9 @@ export default function InstituteView() {
       </div>
       <div className="workContainer mb-4 w-full">
         <div>
-          <h1 className="text-2xl  font-bold md:text-6xl mb-2">All Institute Details</h1>
+          <h1 className="text-2xl  font-bold md:text-6xl mb-2">
+            All Institute Details
+          </h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
 

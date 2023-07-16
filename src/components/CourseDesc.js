@@ -47,7 +47,7 @@ export default function CourseDesc() {
 
     // const fileUrl = response.data.url[0];
     const resp = await axios
-      .get(`http://65.2.30.68:8000/getCoursesById?course_id=${params.id}`)
+      .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
       .then(async (res) => {
         axios
           .post("http://3.110.216.199:8000/insertVideo", {
@@ -71,7 +71,7 @@ export default function CourseDesc() {
   useEffect(() => {
     const qrGen = async () => {
       const resp = await axios.get(
-        `http://65.2.30.68:8000/generateQR?user_id=1`
+        `http://65.1.211.146:8000/generateQR?user_id=1`
       );
       setqr(resp.data.data);
       const newS = qr.replace(/\n/g, "").replace(/ /g, "").trim();
@@ -81,13 +81,13 @@ export default function CourseDesc() {
     };
     const fge = async () => {
       const resp = await axios
-        .get(`http://65.2.30.68:8000/getCoursesById?course_id=${params.id}`)
+        .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
         .then(async (res) => {
           console.log("res", res.data.data);
           if (res.data.data.Institute) {
             const resp2 = await axios
               .get(
-                `http://65.2.30.68:8000/getsubCourses?InstituteId=${res.data.data.Institute}`
+                `http://65.1.211.146:8000/getsubCourses?InstituteId=${res.data.data.Institute}`
               )
               .then((res2) => {
                 return res2.data.data;
@@ -126,29 +126,32 @@ export default function CourseDesc() {
             <div onClick={() => handleClick()}>Create SubCourse</div>
           </button>
         )}
-
-        <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
-          <h1 className="text-2xl font-bold">Upload course related videos</h1>
-          {video && (
-            <>
+        {localStorage.getItem("role") === "admin" && (
+          <>
+            <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+              <h1 className="text-2xl font-bold">
+                Upload course related videos
+              </h1>
+              {video && (
+                <>
+                  <input
+                    type="text"
+                    onChange={(e) => setname(e.target.value)}
+                  ></input>
+                  <button className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <div onClick={uploadVideo}>Upload Video</div>
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="mt-2">
               <input
-                type="text"
-                onChange={(e) => setname(e.target.value)}
-              ></input>
-              <button className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <div onClick={uploadVideo}>Upload Video</div>
-              </button>
-            </>
-          )}
-        </div>
-        <div className="mt-2">
-          <input
-            type="file"
-            accept="video/mp4,video/x-m4v,video/*"
-            onChange={handleVideoUpload}
-            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-          {/* <input
+                type="file"
+                accept="video/mp4,video/x-m4v,video/*"
+                onChange={handleVideoUpload}
+                className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+              {/* <input
                   id="logo"
                   name="logo"
                   type="image"
@@ -156,7 +159,9 @@ export default function CourseDesc() {
                   required
                   onChange={handleInput}
                 /> */}
-        </div>
+            </div>
+          </>
+        )}
 
         <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
           <h1 className="text-2xl font-bold">Existing Subcourses</h1>

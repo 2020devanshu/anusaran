@@ -31,11 +31,11 @@ export default function InstituteById() {
     setcurrId(params.id);
     const fetchFeedback = async () => {
       const resp = await axios
-        .get(`http://65.2.30.68:8000/getFeedback?instituteId=${params.id}`)
+        .get(`http://65.1.211.146:8000/getFeedback?instituteId=${params.id}`)
         .then((res2) => {
           if (res2.data.data && res2.data.data.length > 0) {
             const pairs = [];
-            console.log('isMobile', isMobile)
+            console.log("isMobile", isMobile);
             if (isMobile) {
               for (let feedback of res2.data.data) {
                 pairs.push([feedback]);
@@ -55,7 +55,7 @@ export default function InstituteById() {
     const fetchInstitute = async () => {
       const response = await axios
         .get(
-          `http://65.2.30.68:8000/getInstituteById?institute_id=${params.id}`
+          `http://65.1.211.146:8000/getInstituteById?institute_id=${params.id}`
         )
         .then((res) => {
           console.log("res", res);
@@ -66,7 +66,7 @@ export default function InstituteById() {
     };
     const fetchPrincipal = async () => {
       const resp = await axios
-        .get("http://65.2.30.68:8000/principalAllData")
+        .get("http://65.1.211.146:8000/principalAllData")
         .then((res) => {
           return res.data.data;
         });
@@ -79,7 +79,7 @@ export default function InstituteById() {
     };
     const fetchStudent = async () => {
       const resp = await axios
-        .get("http://65.2.30.68:8000/getDataAllSt")
+        .get("http://65.1.211.146:8000/getDataAllSt")
         .then((res) => {
           return res.data.data;
         });
@@ -92,7 +92,7 @@ export default function InstituteById() {
     };
     const fetchCourses = async () => {
       const resp = await axios
-        .get(`http://65.2.30.68:8000/getCourses?Institute=${params.id}`)
+        .get(`http://65.1.211.146:8000/getCourses?Institute=${params.id}`)
         .then((res) => {
           return res.data.data;
         });
@@ -103,7 +103,7 @@ export default function InstituteById() {
     };
     const fetchTeachers = async () => {
       const resp = await axios
-        .get(`http://65.2.30.68:8000/getAllTeacher`)
+        .get(`http://65.1.211.146:8000/getAllTeacher`)
         .then((res) => {
           return res.data.data;
         });

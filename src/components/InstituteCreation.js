@@ -46,7 +46,7 @@ export default function InstituteCreation() {
 
     // Send the file to the server
     const response = await axios.post(
-      "http://65.2.30.68:8000/uploads",
+      "http://65.1.211.146:8000/uploads",
       formData,
       {
         headers: {
@@ -60,7 +60,7 @@ export default function InstituteCreation() {
     console.log("fileUrl", fileUrl);
     // Insert the URL into the database
     axios
-      .post("http://65.2.30.68:8000/insertInstitute", {
+      .post("http://65.1.211.146:8000/insertInstitute", {
         InstituteName: data.name,
         InstituteLogo: response.data.url[0],
       })

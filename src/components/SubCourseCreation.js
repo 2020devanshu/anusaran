@@ -27,7 +27,7 @@ export default function SubCourseCreation() {
     e.preventDefault();
 
     axios
-      .post("http://65.2.30.68:8000/insertsubCourses", {
+      .post("http://65.1.211.146:8000/insertsubCourses", {
         courseId: parseInt(params.id),
         subcourses: data.subcourses,
         InstituteId: Course.Institute,
@@ -46,7 +46,7 @@ export default function SubCourseCreation() {
   useEffect(() => {
     const fge = async () => {
       const resp = await axios
-        .get(`http://65.2.30.68:8000/getCoursesById?course_id=${params.id}`)
+        .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
         .then((res) => {
           return res.data.data;
         });

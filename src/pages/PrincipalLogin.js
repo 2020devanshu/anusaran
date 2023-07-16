@@ -19,7 +19,7 @@ export default function PrincipalLogin() {
     console.log("data", data);
     e.preventDefault();
     axios
-      .post("http://65.2.30.68:8000/LoginUser", {
+      .post("http://65.1.211.146:8000/LoginUser", {
         email: data.email,
         password: data.password,
       })
@@ -29,7 +29,7 @@ export default function PrincipalLogin() {
         // Call the verify endpoint after successful login
         if (res.data.msg === "Principal has login") {
           axios
-            .post("http://65.2.30.68:8000/verify", {
+            .post("http://65.1.211.146:8000/verify", {
               token: res.data.data,
             })
             .then((verificationResponse) => {
@@ -64,7 +64,7 @@ export default function PrincipalLogin() {
             className="mx-auto h-24 w-auto border-4"
           />
           <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
-            👋  Institutional Admin 
+            👋 Institutional Admin
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

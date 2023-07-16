@@ -15,7 +15,7 @@ export default function DeptCreation() {
   useEffect(() => {
     const func = async () => {
       const res = await axios
-        .get("http://65.2.30.68:8000/getDepartment")
+        .get("http://65.1.211.146:8000/getDepartment")
         .then((res) => {
           return res.data.data;
         });
@@ -32,7 +32,7 @@ export default function DeptCreation() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://65.2.30.68:8000/insertDepartment", {
+      .post("http://65.1.211.146:8000/insertDepartment", {
         departmentName: data.depName,
       })
       .then((res) => {

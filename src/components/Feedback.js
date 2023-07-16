@@ -7,7 +7,7 @@ export default function Feedback() {
   useEffect(() => {
     const fetchFeedback = async () => {
       const response = await axios
-        .get("http://65.2.30.68:8000/principalAllData")
+        .get("http://65.1.211.146:8000/principalAllData")
         .then(async (res) => {
           const newArr = res.data.data.filter((x) => {
             return x.email === localStorage.getItem("email");
@@ -15,7 +15,7 @@ export default function Feedback() {
           console.log("newArr[0]", newArr[0]);
           const resp = await axios
             .get(
-              `http://65.2.30.68:8000/getFeedback?instituteId=${newArr[0].institutionId}`
+              `http://65.1.211.146:8000/getFeedback?instituteId=${newArr[0].institutionId}`
             )
             .then((res2) => {
               return res2.data.data;
