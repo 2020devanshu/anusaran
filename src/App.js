@@ -27,8 +27,9 @@ import SubCourse from "./components/SubCourse";
 import Feedback from "./components/Feedback";
 import "./App.css";
 import { AppProvider } from "./components/AppContext";
-import ViewAssignment from "./components/UploadVideos";
-import UploadVideos from "./components/UploadVideos";
+import ViewAssignment from "./components/MoveUtility";
+import UploadVideos from "./components/MoveUtility";
+import MovePage from "./components/MoveUtility";
 const App = () => {
   const [token, setToken] = useState("");
   const [role, setrole] = useState("");
@@ -78,7 +79,7 @@ const App = () => {
                 path="institute-creation"
                 element={<InstituteCreation />}
               />
-              <Route path="videos" element={<UploadVideos />} />
+              <Route path="move" element={<MovePage />} />
               <Route path="institute-list" element={<InstituteView />} />
               <Route
                 path="/institute-list/institute/:id"

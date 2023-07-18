@@ -87,7 +87,7 @@ export default function SubCourse() {
     const formData = new FormData();
     formData.append("file", video);
     const response = await axios.post(
-      "http://3.110.216.199:8000/uploadFile",
+      "http://65.1.211.146:8000/uploadFile",
       formData,
       {
         headers: {
@@ -104,7 +104,7 @@ export default function SubCourse() {
       )
       .then(async (res) => {
         const res2 = await axios
-          .post("http://3.110.216.199:8000/insertVideo", {
+          .post("http://65.1.211.146:8000/insertVideo", {
             videoName: name,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -132,7 +132,7 @@ export default function SubCourse() {
       )
       .then(async (res) => {
         const response = await axios
-          .post("http://3.110.216.199:8000/insertAdmin", {
+          .post("http://65.1.211.146:8000/insertSetAttendance  ", {
             minAttendance: parseInt(numnderAttemdamce),
             institutionId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -145,9 +145,9 @@ export default function SubCourse() {
   const uploadAssignment = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", video);
+    formData.append("file", assignment);
     const response = await axios.post(
-      "http://3.110.216.199:8000/uploadFile",
+      "http://65.1.211.146:8000/uploadFile",
       formData,
       {
         headers: {
@@ -164,7 +164,7 @@ export default function SubCourse() {
       )
       .then(async (res) => {
         const res2 = await axios
-          .post("http://3.110.216.199:8000/inserAssignment", {
+          .post("http://65.1.211.146:8000/inserAssignment", {
             assignmentsName: assName,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),

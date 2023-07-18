@@ -35,7 +35,7 @@ export default function CourseDesc() {
     const formData = new FormData();
     formData.append("file", video);
     const response = await axios.post(
-      "http://3.110.216.199:8000/uploadFile",
+      "http://65.1.211.146:8000/uploadFile",
       formData,
       {
         headers: {
@@ -50,7 +50,7 @@ export default function CourseDesc() {
       .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
       .then(async (res) => {
         axios
-          .post("http://3.110.216.199:8000/insertVideo", {
+          .post("http://65.1.211.146:8000/insertVideo", {
             videoName: name,
             instituteId: res.data.data.Institute,
             courseId: params.id,
