@@ -35,9 +35,10 @@ export default function PrincipalLogin() {
             .then((verificationResponse) => {
               console.log(
                 "Verification successful:",
-                verificationResponse.data
+                verificationResponse.data[0].userDetail[0].institutionId
               );
               localStorage.setItem("token", res.data.data);
+              localStorage.setItem("institutionId", verificationResponse.data[0].userDetail[0].institutionId)
               localStorage.setItem("role", "principal");
               localStorage.setItem("email", data.email);
 

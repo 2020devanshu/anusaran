@@ -9,6 +9,8 @@ export default function InstituteView() {
   const [institutes, setInstitutes] = useState([]);
   const navigate = useNavigate();
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,10 +33,10 @@ export default function InstituteView() {
   return (
     <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
       <div className="navbar flex justify-between w-full">
-        <div className="navleftitem ">
+        <div className="navleftitem ml-6">
           <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
             <h1 className=" font-bold md:text-2xl ">
-              Welcome, <span>Admin</span>
+              Welcome, <span>{localStorage.getItem("role")}</span>
             </h1>
           </div>
         </div>
@@ -51,7 +53,7 @@ export default function InstituteView() {
             </svg>
           </div>
           <div onClick={handleOpen}>
-            <p>Admin</p>
+            <p>{localStorage.getItem("role")}</p>
           </div>
           <div>
             <svg

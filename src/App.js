@@ -30,6 +30,13 @@ import { AppProvider } from "./components/AppContext";
 import ViewAssignment from "./components/MoveUtility";
 import UploadVideos from "./components/MoveUtility";
 import MovePage from "./components/MoveUtility";
+import Calendar from "./components/Calendar";
+import MyCalendar from "./components/Calendar";
+import Student from "./components/Student";
+import AddVideo from "./components/AddVideo";
+import Assignments from "./components/Assignments";
+import Teacher from "./components/Teacher";
+
 const App = () => {
   const [token, setToken] = useState("");
   const [role, setrole] = useState("");
@@ -48,12 +55,14 @@ const App = () => {
       {token ? (
         <div className="flex">
           <NavBar />
-          <div>
+          <div className="w-full ">
             <Routes>
               {role === "admin" ? (
                 <>
                   <Route path="/" element={<AdminDashboard />} />
                   <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                  <Route path="institute-list" element={<InstituteView />} />
+                
                 </>
               ) : (
                 <>
@@ -67,6 +76,8 @@ const App = () => {
 
               <Route path="teacher-creation" element={<TeacherCreation />} />
               <Route path="student-creation" element={<StudentCreation />} />
+              <Route path="students" element={<Student />} />
+
               <Route
                 path="principal-creation"
                 element={<PrincipalCreation />}
@@ -74,26 +85,32 @@ const App = () => {
               <Route path="course-creation" element={<CourseCreation />} />
               <Route path="dept-creation" element={<DeptCreation />} />
               <Route path="feedback" element={<Feedback />} />
+              <Route path="calendar" element={<MyCalendar />} />
 
               <Route
                 path="institute-creation"
                 element={<InstituteCreation />}
               />
               <Route path="move" element={<MovePage />} />
-              <Route path="institute-list" element={<InstituteView />} />
               <Route
                 path="/institute-list/institute/:id"
                 element={<InstituteById />}
               />
               <Route path="course/:id" element={<CourseDesc />} />
+              <Route path="courses/course/:id" element={<CourseDesc />} />
+              <Route path="assignments" element={<Assignments />} />
+
               <Route
                 path="course/:id/create-subcourse/:id"
                 element={<SubCourseCreation />}
               />
               <Route
-                path="course/:id/create-subcourse/:id/course/:id"
-                element={<SubCourse />}
+                path="create-subcourse/:id"
+                element={<SubCourseCreation />}
               />
+              <Route path="addvideo" element={<AddVideo />} />
+              <Route path="subcourse/:id" element={<SubCourse />} />
+              <Route path="subcourse/:id" element={<SubCourse />} />
               <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
               <Route
                 path="/institute-list/institute/:id/create-principal/:id"
@@ -107,6 +124,9 @@ const App = () => {
                 path="/institute-list/institute/:id/create-student/:id"
                 element={<StudentCreation />}
               />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/teacher" element={<Teacher />} />
+
             </Routes>
           </div>
         </div>

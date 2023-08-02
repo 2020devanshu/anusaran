@@ -215,7 +215,7 @@ export default function InstituteById() {
           Create Principal
         </button>
       )}
-      {localStorage.getItem("role") === "principal" ? (
+      {/* {localStorage.getItem("role") === "principal" ? (
         <>
           <button
             onClick={() => handleTeacherClick()}
@@ -229,7 +229,7 @@ export default function InstituteById() {
         </>
       ) : (
         <></>
-      )}
+      )} */}
 
       <div className="workContainer mb-4 mt-4 w-full flex flex-col">
         <div>

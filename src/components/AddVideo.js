@@ -6,9 +6,17 @@ import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { useAppContext } from "./AppContext";
 
-export default function SubCourseCreation() {
+export default function AddVideo() {
   const { handleClose, close, handleOpen } = useAppContext();
 
+  const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
+  const [video, setvideo] = useState(null);
+  const [assignment, setAssignment] = useState(null);
+  const [name, setname] = useState("");
+  const [assName, setassName] = useState("");
+  const [qr, setqr] = useState("");
+  const [Attendance, setAttendance] = useState(null);
+  const [assignmentDueDate, setAssignmentDueDate] = useState(new Date());
   const params = useParams();
   const notify = () => toast("Try again");
   const [options, setOptions] = useState([]);
@@ -60,8 +68,83 @@ export default function SubCourseCreation() {
     fge();
   }, []);
 
+  const handleVideoUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      console.log("e.target.files", e.target.files);
+
+      // // Converting to a base64 string
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   setImageSrc(e.target.result);
+      // };
+      // // reader.readAsDataURL(imgFile);
+      console.log("setvideo", URL.createObjectURL(e.target.files[0]));
+
+      // Alternatively, you can use the file object directly
+      setvideo(e.target.files[0]);
+    }
+  };
+  const handlePDFUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      console.log("e.target.files", e.target.files);
+
+      // // Converting to a base64 string
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   setImageSrc(e.target.result);
+      // };
+      // // reader.readAsDataURL(imgFile);
+      console.log("setvideo", URL.createObjectURL(e.target.files[0]));
+
+      // Alternatively, you can use the file object directly
+      setAssignment(e.target.files[0]);
+    }
+  };
+  const uploadVideo = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", video);
+    const response = await axios.post(
+      "http://65.1.211.146:8000/uploadFile",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("response of video", response.data.data[0]);
+
+    // const fileUrl = response.data.url[0];
+    const resp = await axios
+      .get(
+        "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" + params.id
+      )
+      .then(async (res) => {
+        const res2 = await axios
+          .post("http://65.1.211.146:8000/insertVideo", {
+            videoName: name,
+            instituteId: res.data.data[0].InstituteId,
+            courseId: parseInt(res.data.data[0].courseId),
+            subCourseId: parseInt(res.data.data[0].subCourseId),
+            videosPaths: response.data.data[0],
+          })
+          .then((res) => {
+            console.log("succ", res);
+            // localStorage.setItem("token", res.data.token);
+            // navigate("/institute-list");
+          })
+          .catch((err) => {
+            console.log("error is here", err);
+            // notify();
+          });
+        console.log("res2", res2);
+      })
+      .catch((err) => console.log("err in here", err));
+  };
+
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center bg-white px-6 lg:px-8 ">
+    <div className="flex min-h-full flex-1 flex-col bg-white px-6 lg:px-8 ">
       <div className="navbar flex justify-between w-full">
         <div className="navleftitem flex justify-center flex-col "></div>
         <div className="navitemright flex flex-col items-center gap-5 w-1/2 px-10 pt-10">
@@ -99,7 +182,7 @@ export default function SubCourseCreation() {
       </div>
       <div className="workContainer mb-4 w-full">
         <div>
-          <h1 className="text-6xl mb-2">Add Course</h1>
+          <h1 className="text-6xl mb-2">Add Videos</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
         <div className="flex p-4">
@@ -113,7 +196,7 @@ export default function SubCourseCreation() {
                       htmlFor="name"
                       className="block text-lg font-medium leading-6 text-gray-900"
                     >
-                      Course Name*
+                      Course Id*
                     </label>
                   </div>
                   <div className="mt-2">
@@ -133,7 +216,7 @@ export default function SubCourseCreation() {
                       htmlFor="name"
                       className="block text-lg font-medium leading-6 text-gray-900"
                     >
-                      Grading System*
+                      Subcourse Id
                     </label>
                   </div>
                   <div className="mt-2">
@@ -149,59 +232,42 @@ export default function SubCourseCreation() {
                 </div>
               </div>
               <div className="w-1/2">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Upload Course Image
-                  </label>
-                </div>
+                <div className="flex items-center justify-between"></div>
                 <div className="mt-2">
-                  <div className="custom-file-upload">
-                    <input
-                      id="file-upload"
-                      type="file"
-                      accept="image/*"
-                      className="hidden "
-                    />
-                    <label for="file-upload">
-                      <div className="input-inner  inputbox w-full">
-                        <svg
-                          width="50"
-                          height="50"
-                          viewBox="0 0 50 50"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                        >
-                          <rect width="50" height="50" fill="url(#pattern0)" />
-                          <defs>
-                            <pattern
-                              id="pattern0"
-                              patternContentUnits="objectBoundingBox"
-                              width="1"
-                              height="1"
-                            >
-                              <use
-                                xlinkHref="#image0_5_276"
-                                transform="scale(0.0111111)"
-                              />
-                            </pattern>
-                            <image
-                              id="image0_5_276"
-                              width="90"
-                              height="90"
-                              xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACe0lEQVR4nO2cP24TQRSHvyrQIxFBUnEFrgI0dIgqEOcANEBlJM7BLSgJCQgcTkCLgAbZFSAeWmkiWVa8/2b2eWfn90lPsmTPeufz29nx250FIYQQQgghhBBCCFFxDZgBZ8AKsBaxjTG3XYU+PgX2cOYAuGi5ozYCWTFt12MR+u6WyX0kW2SHd9V2Mz57Zfas5w5aZId31faqeIID5xLNew/RS4mmcjA4XQ/P3NlZfyUaiR4CZbQTEu2ERDsh0U5ItBMS7URp09neXAdOQulgtVb2nIUCmUjAIfClJisvwmdEZCbXSV6XrcyO4KRD2fM45otK53xsZc+pshxb2XOq051lB9G/arbzT2VSn6FDohNe26xuJdiGRCe6Wr9ouKot0S04bJDd5j4Nie6Q2cdhHF6GOO1w55FEOyHRTkj01EX3ZR94CXwEvoeoXr8I74kEPGq4tXcVPiMieN7hj0OV3aIn1jG6yL4JPAPeAT+BH8CHsI1bpf1iNpDs/SC2riL3mIKwAWU/AP5MdTjqWia1iJi32J97wO+G7bwqYR5tkVGdTJu4D/wdKLOLEW0tZc8TDUdFi7YWw8idhMNR0aKtIbNvJD5CihZtNZIeDjAcFS3agNcbteS7wLfER8glRYs24CvwBnjbYi4dI7t40ZbwR5tPoUxqmUT2WCaRPZZJZI9lEtljmUT2WCYxOrLZ0URkM4/OHYl2QqKdkGgnJNoJiXZCop2Q6KmL1uPYqF0ul4yzAf7m2ojbXhXV0ozBqdaDlC76CKfFN4uCRX/yfLzxQU/Z2xhz203Jt3FmLywhO+1wgtzGmNteLpc72sWDuoUQQgghhBBCCCEYIf8B/kaoZm018W4AAAAASUVORK5CYII="
-                            />
-                          </defs>
-                        </svg>
-
-                        <p>Drag or drop file to upload</p>
-                      </div>
-                    </label>
-                  </div>
-
+                  <>
+                    <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+                      <h1 className="text-2xl font-bold">
+                        Upload course related videos
+                      </h1>
+                      {video && (
+                        <>
+                          <input
+                            type="text"
+                            onChange={(e) => setname(e.target.value)}
+                          ></input>
+                          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            <div onClick={uploadVideo}>Upload Video</div>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        type="file"
+                        accept="video/mp4,video/x-m4v,video/*"
+                        onChange={handleVideoUpload}
+                        className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                      {/* <input
+                  id="logo"
+                  name="logo"
+                  type="image"
+                  alt="#"
+                  required
+                  onChange={handleInput}
+                /> */}
+                    </div>
+                  </>
                   {/* <input
                   id="logo"
                   name="logo"
@@ -235,94 +301,4 @@ export default function SubCourseCreation() {
       <ToastContainer />
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-  //       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-  //         <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
-  //           SubCourse Creation
-  //         </h2>
-  //       </div>
-  //       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-  //         <form className="space-y-6" action="#" onSubmit={handleSubmit}>
-  //           {/* Course Name */}
-  //           <div>
-  //             <div className="flex items-center justify-between">
-  //               <label
-  //                 htmlFor="subcourses"
-  //                 className="block text-lg font-medium leading-6 text-gray-900"
-  //               >
-  //                 subcourses
-  //               </label>
-  //             </div>
-  //             <div className="mt-2">
-  //               <input
-  //                 id="subcourses"
-  //                 name="subcourses"
-  //                 type="text"
-  //                 required
-  //                 className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-  //                 onChange={handleInput}
-  //               />
-  //             </div>
-  //           </div>
-
-  //           {/* Start Time */}
-  //           <div>
-  //             <div className="flex items-center justify-between">
-  //               <label
-  //                 htmlFor="startTime"
-  //                 className="block text-lg font-medium leading-6 text-gray-900"
-  //               >
-  //                 Start Time
-  //               </label>
-  //             </div>
-  //             <div className="mt-2">
-  //               <input
-  //                 id="startTime"
-  //                 name="startTime"
-  //                 type="time"
-  //                 required
-  //                 className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-  //                 onChange={handleInput}
-  //               />
-  //             </div>
-  //           </div>
-  //           {/* End Time */}
-  //           <div>
-  //             <div className="flex items-center justify-between">
-  //               <label
-  //                 htmlFor="endTime"
-  //                 className="block text-lg font-medium leading-6 text-gray-900"
-  //               >
-  //                 End Time
-  //               </label>
-  //             </div>
-  //             <div className="mt-2">
-  //               <input
-  //                 id="endTime"
-  //                 name="endTime"
-  //                 type="time"
-  //                 required
-  //                 className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-  //                 onChange={handleInput}
-  //               />
-  //             </div>
-  //           </div>
-
-  //           <div>
-  //             <button
-  //               type="submit"
-  //               className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-  //             >
-  //               Create
-  //             </button>
-  //           </div>
-  //         </form>
-  //       </div>
-  //     </div>
-  //     <ToastContainer />
-  //   </div>
-  // );
 }

@@ -1,0 +1,4294 @@
+{
+	"info": {
+		"_postman_id": "079e0dce-05e7-46ab-ba68-daf6ca81b7dc",
+		"name": "School",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"newprincipal@gmail.com\",\r\n    \"password\": \"apple\",\r\n    \"fname\": \"9863\",\r\n    \"lname\": \"rest\",\r\n    \"username\": \"Prince kumar\",\r\n    \"phone\": 9693161773\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/registerUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"registerUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get By Id user data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"prince11march1998@gmail3.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getByIdUserDetail",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getByIdUserDetail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserDetails",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"prince11march1998@gmail3.com\",\r\n    \"otp\": 1234567,\r\n    \"password\": \"pri@123\",\r\n    \"fname\": \"Raman\",\r\n    \"lname\": \"Deep\",\r\n    \"username\": \"Prince kumar\",\r\n    \"phone\": 98655585,\r\n    \"institutionname\": \"finofii\",\r\n    \"courseenrolled\": \"software\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateUserDetails",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateUserDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserDetails",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"email\": \"prince11march1998@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/deleteUserDetails",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteUserDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princekumar25feb@gmail.com\",\r\n    \"password\": \"pri@2124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updatePassword",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "LoginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"student@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/LoginUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"LoginUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nodemailer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princekumar25feb@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/sendMail",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"sendMail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyJwt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByaW5jZWt1bWFyODcwOTIzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGlWb05BNUJsL2xkcWdhSUYydmRKd08xSDg4ei52S25rOTQ1ZFVZcWhRdGxRN2tUNTVvdExhIiwiZm5hbWUiOiJwcmluY2UxMSIsImxuYW1lIjoia3VtYXIxMSIsInBob25lIjo5NjkzMTYxNzczLCJpYXQiOjE2ODM2OTk3MjZ9.MQxqX4p8816rWLB-AtNrRxjJLtRYyyUM0fFhoeD3ldU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/verify",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generateOtp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/generateOtp",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"generateOtp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StudentsDetails",
+			"item": [
+				{
+					"name": "/createStudentsDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princekumar25eb@gmail.com\",\r\n    \"name\": \"prince kumar\",\r\n    \"profilePhoto\": \"dfghj\",\r\n    \"institutionId\": 1,\r\n    \"class\": 1,\r\n    \"section\": \"A\",\r\n    \"address\": \"address\",\r\n    \"Additional\": \"Additional\",\r\n    \"zipCode\": 99666,\r\n    \"city\": \"Ara\",\r\n    \"state\": \"Bihar\",\r\n    \"country\": \"India\",\r\n    \"gender\":\"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/createStudentsDetails",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"createStudentsDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDataAllSt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getDataAllSt",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDataAllSt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDetailById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getDetailById?user_id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDetailById"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDetails",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"prince kumar\",\r\n    \"profilePhoto\": \"dfghj\",\r\n    \"phone\": 9693161773,\r\n    \"institutionId\": 2,\r\n    \"class\": 1,\r\n    \"section\": \"A\",\r\n    \"address\": \"address\",\r\n    \"Additional\": \"Additional\",\r\n    \"zipCode\": 99666,\r\n    \"city\": \"Ara\",\r\n    \"state\": \"Bihar\",\r\n    \"country\": \"India\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateDetailsSt?user_id=15",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateDetailsSt"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deteteDetailsSt",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/deteteDetailsSt?user_id=15",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deteteDetailsSt"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDataTeacherWise",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacherId\": 1,\r\n    \"Class\":1,\r\n    \"institutionId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getDataTeacherWise",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDataTeacherWise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudentByInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getStudentByInstitute?institutionId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getStudentByInstitute"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudentByInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getStudentByInstitute?institutionId=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getStudentByInstitute"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfilePic",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"profilePhoto\":\"http://65.2.30.68:8000/profile/file1683017226737.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateProfilePic?user_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateProfilePic"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "createAttendance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"Comment\": \"today i am absent\",\r\n    \"date\": \"05/03/2023\",\r\n    \"section\": \"B\",\r\n    \"Class\": \"3\",\r\n    \"coursesId\": 1,\r\n    \"institutionId\": 1,\r\n    \"subCoursesId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/createAttendance",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"createAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceSt",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceSt",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceSt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceTe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceTe",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceTe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceByid",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceByid",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceByid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAttendance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":15,\r\n    \"Comment\": \"today i am absent\",\r\n    \"date\": \"05/01/2023\",\r\n    \"section\": \"A\",\r\n    \"Class\": \"1\",\r\n    \"coursesId\": 1,\r\n    \"institutionId\": 1,\r\n    \"subCoursesId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateAttendance",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDataClassWise",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Class\":1,\r\n    \"institutionId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getDataClassWise",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDataClassWise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAttendance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"user_id\":15,\r\n    \"date\": \"05/01/2023\",\r\n    \"isPersent\":1,\r\n    \"Comment\":\"fghj\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/deleteAttendance",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current Month Attendance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceCM?userId=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceCM"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceBetweenMonth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 15,\r\n    \"startDate\": \"2022-03-06\",\r\n    \"endDate\": \"2023-05-29\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceBetweenMonth",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceBetweenMonth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceSummeryMonthly",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":3,\r\n   \"date\": \"2023-05-24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAttendanceSummeryMonthly",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceSummeryMonthly"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceSubCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAttendanceSubCourses?subcourses_id=43&InstituteId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceSubCourses"
+							],
+							"query": [
+								{
+									"key": "subcourses_id",
+									"value": "43"
+								},
+								{
+									"key": "InstituteId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAttendanceByInstituteCourse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAttendanceByInstituteCourse?institutionId=43&course_id=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAttendanceByInstituteCourse"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "43"
+								},
+								{
+									"key": "course_id",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roleWiseGetDetails",
+			"item": [
+				{
+					"name": "roleWiseGetDetails",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\":\"prince11march1998@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/roleWiseGetDetails",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"roleWiseGetDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "QRCode",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/generateQR?user_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"generateQR"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instituteQr",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/instituteQr?institute_id=3&subcourses_id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"instituteQr"
+							],
+							"query": [
+								{
+									"key": "institute_id",
+									"value": "3"
+								},
+								{
+									"key": "subcourses_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "createTeacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"12233.com\",\r\n    \"profilePhoto\": \"rest.profilePhoto\",\r\n    \"institutionId\": 1,\r\n    \"address\": \"rest.address\",\r\n    \"Additional\": \"rest.Additional\",\r\n    \"zipCode\": 6563,\r\n    \"city\": \"rest.city\",\r\n    \"state\": \"rest.state\",\r\n    \"country\": \"rest.country\",\r\n    \"gender\": \"Male\",\r\n    \"dob\": \"11/03/1998\",\r\n    \"Department_Id\": 2,\r\n    \"Semester\": 2,\r\n    \"eContactName\": \"55566\",\r\n    \"eContactNum\": 626222,\r\n    \"eContactRela\": \"rest.eContactRela\",\r\n    \"Employee_ID\": \"rest.Employee_ID\",\r\n    \"TIWExperience\": 55,\r\n    \"TTWExperience\": 66,\r\n    \"Title\": \"Professor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://65.2.30.68:8000/createTeacher",
+							"protocol": "http",
+							"host": [
+								"65",
+								"2",
+								"30",
+								"68"
+							],
+							"port": "8000",
+							"path": [
+								"createTeacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/getAllTeacher",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getAllTeacher",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAllTeacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeacherByInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getTeacherByInstitute?institutionId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getTeacherByInstitute"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTeacherDetails",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"wweSheamus@google.com\",\r\n    \"profilePhoto\": \"rest.profilePhoto\",\r\n    \"phone\": 9863,\r\n    \"name\":\"Prince kumar\",\r\n    \"institutionId\": 43,\r\n    \"address\": \"rest.address\",\r\n    \"Additional\": \"rest.Additional\",\r\n    \"zipCode\": 6563,\r\n    \"city\": \"rest.city\",\r\n    \"state\": \"rest.state\",\r\n    \"country\": \"rest.country\",\r\n    \"gender\": \"Male\",\r\n    \"dob\": \"11/03/1998\",\r\n    \"Department_Id\": 2,\r\n    \"Semester\": 2,\r\n    \"eContactName\": \"55566\",\r\n    \"eContactNum\": 626222,\r\n    \"eContactRela\": \"rest.eContactRela\",\r\n    \"Employee_ID\": \"rest.Employee_ID\",\r\n    \"TIWExperience\": 55,\r\n    \"TTWExperience\": 66,\r\n    \"Title\": \"Professor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateTeacherProfile",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateTeacherProfile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subCourses",
+			"item": [
+				{
+					"name": "insertsubCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseId\": 38,\r\n    \"subcourses\": \"Akshi Jaswal\",\r\n    \"InstituteId\": 45,\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\",\r\n    \"startDate\":\"06/10/2023\",\r\n    \"endDate\":\"06/10/2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertsubCourses",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertsubCourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getsubCoursesAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getsubCoursesAll",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getsubCoursesAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getsubCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getsubCourses?InstituteId=4",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getsubCourses"
+							],
+							"query": [
+								{
+									"key": "InstituteId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getsubCoursesById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getsubCoursesById?subcourses_id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getsubCoursesById"
+							],
+							"query": [
+								{
+									"key": "subcourses_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatesubCoursesById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course\": 31,\r\n    \"subcourses\": \"44 subcourses\",\r\n    \"InstituteId\": 43,\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\",\r\n    \"startDate\": \"06/12/2023\",\r\n    \"endDate\": \"06/14/2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updatesubCoursesById?subcourses_id=44",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updatesubCoursesById"
+							],
+							"query": [
+								{
+									"key": "subcourses_id",
+									"value": "44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletesubCoursesById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deletesubCoursesById?subcourses_id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deletesubCoursesById"
+							],
+							"query": [
+								{
+									"key": "subcourses_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instituteToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getToken?InstituteId=31&subcourses_id=10",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getToken"
+							],
+							"query": [
+								{
+									"key": "InstituteId",
+									"value": "31"
+								},
+								{
+									"key": "subcourses_id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "insertCourses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course\": \"Hindi\",\r\n    \"Institute\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertCourses",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertCourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoursesAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getCoursesAll",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getCoursesAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getCourses?Institute=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getCourses"
+							],
+							"query": [
+								{
+									"key": "Institute",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoursesById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getCoursesById?course_id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getCoursesById"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCoursesById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"course\": \"English\",\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\",\r\n    \"Institute\":41\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateCoursesById?course_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateCoursesById"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCoursesById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteCoursesById?course_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteCoursesById"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institute",
+			"item": [
+				{
+					"name": "getAllInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAllInstitute",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAllInstitute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertInstitute",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"InstituteName\":\"finoii\",\r\n     \"InstituteLogo\":\"fghjkl\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertInstitute",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertInstitute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInstituteById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getInstituteById?institute_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getInstituteById"
+							],
+							"query": [
+								{
+									"key": "institute_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateInstitute",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"InstituteName\":\"finoi\",\r\n     \"InstituteLogo\":\"fghjkl\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateInstitute?institute_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateInstitute"
+							],
+							"query": [
+								{
+									"key": "institute_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteInstitute",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteInstitute?institute_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteInstitute"
+							],
+							"query": [
+								{
+									"key": "institute_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "uploads",
+			"item": [
+				{
+					"name": "uploads",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Amit Kumar/Downloads/WhatsApp Image 2023-06-26 at 12.33.36 PM.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Domain}}/uploads",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserCourses",
+			"item": [
+				{
+					"name": "userCoursesInsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_id\": [\r\n        1,\r\n        2\r\n    ],\r\n    \"Institute_id\": 1,\r\n    \"user_id\": 3,\r\n    \"teacher_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/userCoursesInsert",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userCoursesInsert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userCoursesUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_id\": 2,\r\n    \"Institute_id\": 1,\r\n    \"teacher_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/userCoursesUpdate?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userCoursesUpdate"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userCoursesdelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/userCoursesdelete?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userCoursesdelete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoursesUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getCoursesUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getCoursesUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCoursesByuser_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserCoursesByuser_id?user_id=48",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserCoursesByuser_id"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "48"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userSubcourses",
+			"item": [
+				{
+					"name": "userSubcoursesInsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subcourses_id\": [1,2,3],\r\n        \"course_id\": 1,\r\n        \"Institute_id\":1,\r\n        \"user_id\": 3,\r\n        \"teacher_Id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/userSubcoursesInsert",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userSubcoursesInsert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userSubcoursesUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subcourses_id\": 3,\r\n        \"course_id\": 2,\r\n        \"Institute_id\":1,\r\n        \"studentId_id\": 2,\r\n        \"teacher_Id\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/userSubcoursesUpdate?id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userSubcoursesUpdate"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userSubcoursesdelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/userSubcoursesdelete?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userSubcoursesdelete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubcoursesUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getSubcoursesUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getSubcoursesUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserSubcoursesByuser_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserSubcoursesByuser_id?user_id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserSubcoursesByuser_id"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserSubcourse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserSubcourse",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserSubcourse"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userSubCoursesCreate",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "insertDepartment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departmentName\":\"departmentName\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertDepartment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertDepartment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDepartment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getDepartment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDepartment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDepartmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getDepartmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getDepartmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDepartmentById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departmentName\":\"departmentName11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateDepartmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateDepartmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDepartmentById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteDepartmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteDepartmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "insertSkill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"skillName\":\"skillName\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertSkill",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSkillData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getSkillData",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getSkillData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSkillById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getSkillById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getSkillById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSkillById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/updateSkillById",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateSkillById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSkillById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteSkillById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteSkillById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Qualification",
+			"item": [
+				{
+					"name": "studentQualification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 2,\r\n    \"X_Passed\": \"Yes\",\r\n    \"X_PassedYear\": \"2017/01/01\",\r\n    \"X_marks\": 65,\r\n    \"XII_Passed\": \"Yes\",\r\n    \"XII_PassedYear\": \"2013/12/32\",\r\n    \"XII_Marks\": 65,\r\n    \"graduate_Year\": \"2015/12/12\",\r\n    \"graduation\": \"Yes\",\r\n    \"Marks_Graduare\": 52,\r\n    \"Stream\": \"Scince\",\r\n    \"Highest_degree\": \"\",\r\n    \"FieldsOfStudy\": \"\",\r\n    \"type\": \"0\",\r\n    \"ProfessionalCertificationApp\": \"No\",\r\n    \"ProfessionalCertificationName\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/studentQualification",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentQualification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getstudentQualification",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getstudentQualificationById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "updatestudentQualificationById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "deletestudentQualificationById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deletestudentQualificationById?user_id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deletestudentQualificationById"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacherQualification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 5,\r\n    \"graduate_Year\": \"2015/12/12\",\r\n    \"graduation\": \"Yes\",\r\n    \"Marks_Graduare\": 52,\r\n    \"Stream\": \"Scince\",\r\n    \"Highest_degree\": \"\",\r\n    \"FieldsOfStudy\": \"\",\r\n    \"type\": \"0\",\r\n    \"ProfessionalCertificationApp\": \"No\",\r\n    \"ProfessionalCertificationName\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/teacherQualification",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"teacherQualification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeacherQualification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getTeacherQualification",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getTeacherQualification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeacherQualificationById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getTeacherQualificationById?user_id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getTeacherQualificationById"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTeacherQualificationById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 5,\r\n    \"graduate_Year\": \"2015/12/12\",\r\n    \"graduation\": \"Yes\",\r\n    \"Marks_Graduare\": 52,\r\n    \"Stream\": \"Scince\",\r\n    \"Highest_degree\": \"\",\r\n    \"FieldsOfStudy\": \"\",\r\n    \"type\": \"0\",\r\n    \"ProfessionalCertificationApp\": \"No\",\r\n    \"ProfessionalCertificationName\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateTeacherQualificationById",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateTeacherQualificationById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTeacherQualificationById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userskill",
+			"item": [
+				{
+					"name": "insertuserskill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 3,\r\n    \"skill_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertuserskill",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertuserskill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuserskill",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getuserskillById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "updateuserskillById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 3,\r\n    \"skill_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateuserskillById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateuserskillById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteuserskillById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteuserskillById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteuserskillById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Principal",
+			"item": [
+				{
+					"name": "insertPrincipal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"something007@google.com\",\r\n     \"name\": \"ghj\",\r\n      \"profilePhoto\":\"hjkkh\",\r\n      \"address\":\"rest\",\r\n      \"city\":\"rest\" ,\r\n      \"Additional\":\"rest\" ,\r\n      \"zipCode\":552 ,\r\n      \"state\":\"rest\" ,\r\n      \"country\":\"rest\",\r\n      \"phone\":85233,\r\n      \"institutionId\":1 ,\r\n      \"gender\": \"Male\",\r\n      \"dob\":\"11/03/1998\" ,\r\n      \"eContactName\":\"rest\",\r\n      \"eContactNum\":95413,\r\n      \"eContactRela\":\"rest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertPrincipal",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertPrincipal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "principalData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/principalAllData",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"principalAllData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "principalDataById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/principalDataById?user_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"principalDataById"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePrincipal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"name\": \"ghj\",\r\n      \"profilePhoto\":\"hjkkh\",\r\n      \"address\":\"rest\",\r\n      \"city\":\"rest\" ,\r\n      \"Additional\":\"rest\" ,\r\n      \"zipCode\":552 ,\r\n      \"state\":\"rest\" ,\r\n      \"country\":\"rest\",\r\n      \"phone\":85233,\r\n      \"gender\": \"Male\",\r\n      \"dob\":\"11/03/1998\" ,\r\n      \"eContactName\":\"rest\",\r\n      \"eContactNum\":95413,\r\n      \"eContactRela\":\"rest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updatePrincipal?user_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updatePrincipal"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePrincipal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deletePrincipal?user_id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deletePrincipal"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "absent",
+			"item": [
+				{
+					"name": "absent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/absent",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"absent"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "insertFeedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"feedback@gmail.com\",\r\n    \"name\":\"feedback\",\r\n    \"feedback\":\"feedback\",\r\n    \"image\":\"sdfghjk\",\r\n    \"institutionId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertFeedback",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertFeedback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFeedback",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getFeedback?instituteId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getFeedback"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFeedbackById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getFeedbackById?id=6",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getFeedbackById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFeedbackByUserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"feedback@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/getFeedbackByUserId",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getFeedbackByUserId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "s3 upload",
+			"item": [
+				{
+					"name": "uploadFile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Amit Kumar/Downloads/1687329787119pri.png"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Domain}}/uploadFile",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"uploadFile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "uploadVideo",
+			"item": [
+				{
+					"name": "insertVideo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"videosPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1687329787119pri.png\",\r\n    \"videoName\": \"first Image\",\r\n    \"courseId\": 31,\r\n    \"subCourseId\": 63,\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertVideo",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertVideo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVideos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getVideos",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getVideos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVideoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getVideoById?id=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getVideoById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVideo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"videosPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1687329787119pri.png\",\r\n    \"videoName\": \"first Image\",\r\n    \"courseId\": 31,\r\n    \"subCourseId\": 63,\r\n    \"userId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateVideo?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateVideo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVideo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteVideo?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteVideo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllVideoModuleWise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAllVideoModuleWise",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAllVideoModuleWise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVideoModuleWise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getVideoModuleWise?courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getVideoModuleWise"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserVieos",
+			"item": [
+				{
+					"name": "viewUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"videoId\": 2,\r\n    \"instituteId\": 43,\r\n    \"courseId\": 43,\r\n    \"subCourseId\": 63,\r\n    \"userId\": 4,\r\n    \"videoMin\": \"5\",\r\n    \"videSawMin\": \"1\",\r\n    \"status\": \"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/viewUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"viewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getViewUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getViewUser",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getViewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getViewUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getViewUserById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getViewUserById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateViewData",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"videoId\": 3,\r\n    \"instituteId\": 43,\r\n    \"courseId\": 31,\r\n    \"subCourseId\": 63,\r\n    \"userId\": 4,\r\n    \"videoMin\": 3,\r\n    \"videoSawMin\": 2,\r\n    \"status\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateViewData?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateViewData"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteViewData",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteViewData?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteViewData"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "videoNotViewUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/videoNotViewUser?subcoursesId=63&instituteId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"videoNotViewUser"
+							],
+							"query": [
+								{
+									"key": "subcoursesId",
+									"value": "63"
+								},
+								{
+									"key": "instituteId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllViewVideoModule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAllViewVideoModule",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAllViewVideoModule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getViewVideoModule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getViewVideoModule?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getViewVideoModule"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "videoNotViewUserModule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/videoNotViewUserModule?instituteId=43&courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"videoNotViewUserModule"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "43"
+								},
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assignment",
+			"item": [
+				{
+					"name": "inserAssignment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignmentsName\": \"assignment First\",\r\n    \"assignmentsPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"lastDate\": \"06/26/2023\",\r\n    \"instituteId\": 3,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 2,\r\n    \"userId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/inserAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"inserAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAllAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAllAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAssignmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAssignment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignmentsName\": \"assignmentsName\",\r\n    \"assignmentsPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"lastDate\": \"06/10/2023\",\r\n    \"instituteId\": 2,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 2,\r\n    \"userId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateAssignment?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateAssignment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAssignment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteAssignment?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteAssignment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserAssignment",
+			"item": [
+				{
+					"name": "inserUserAssignment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignmentPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/16877622126611687329787119pri.png\",\r\n    \"assignmentsId\": 1,\r\n    \"submitDate\":\"06/26/2023\",\r\n    \"instituteId\": 2,\r\n    \"courseId\":2,\r\n    \"subCourseId\":2,\r\n    \"userId\":3,\r\n    \"uploadPath\":\"rtyuio\",\r\n    \"status\":\"Created\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/inserUserAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"inserUserAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserAssignmentByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserAssignmentByUserId?userId=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserAssignmentByUserId"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserAssignmentById?userId=3&assignmentsId=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserAssignmentById"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "assignmentsId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserAssignment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignmentPaths\": \"rest.assignmentPaths\",\r\n    \"assignmentsId\": 2,\r\n    \"submitDate\":\"08/10/2023\",\r\n    \"instituteId\": 2,\r\n    \"courseId\":2,\r\n    \"subCourseId\":2,\r\n    \"userId\":3,\r\n    \"marks\":2,\r\n      \"uploadPath\":\"rtyuio\",\r\n    \"status\":\"Submitted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateUserAssignment?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateUserAssignment"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserAssignment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/deleteUserAssignment?userId=3&assignmentsId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteUserAssignment"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "assignmentsId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignmentNotUploadUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/assignmentNotUploadUser?instituteId=1&subCourseId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"assignmentNotUploadUser"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "1"
+								},
+								{
+									"key": "subCourseId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignmentNotsubmitte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/assignmentNotsubmitte",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"assignmentNotsubmitte"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TeacherModule",
+			"item": [
+				{
+					"name": "insertTeacherModule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"instituteId\": 1,\r\n    \"courseId\": 1,\r\n    \"subcourseId\": 1,\r\n    \"userId\": 5,\r\n    \"teachDate\": \"06/27/2023\",\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertTeacherModule",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertTeacherModule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTeacherModule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getTeacherModule",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getTeacherModule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TeacherModuleById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/TeacherModuleById?courseId=2&instituteId=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"TeacherModuleById"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "2"
+								},
+								{
+									"key": "instituteId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTeacherModule",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"instituteId\": 1,\r\n    \"courseId\": 2,\r\n    \"subcourseId\": 3,\r\n    \"userId\": 5,\r\n    \"teachDate\": \"06/27/2023\",\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateTeacherModule?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateTeacherModule"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTeacherModule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteTeacherModule?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteTeacherModule"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Set Attendance Admin",
+			"item": [
+				{
+					"name": "insertAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"minAttendance\": 85,\r\n      \"coursesId\": 1,\r\n      \"institutionId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertSetAttendance",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertSetAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSetAttendance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getSetAttendance",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getSetAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSetAttendanceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getSetAttendanceById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getSetAttendanceById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSetAttendance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"minAttendance\": 85,\r\n      \"coursesId\": 1,\r\n      \"institutionId\": 2,\r\n      \"startDate\": \"2023-06-30\",\r\n      \"endDate\": \"2023-07-28\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateSetAttendance?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateSetAttendance"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSetAttendance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteSetAttendance?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteSetAttendance"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAttendanceModuleM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/allAttendanceModuleM?date=2023-06-24",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"allAttendanceModuleM"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-06-24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAttendanceModuleCD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/allAttendanceModuleCD",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"allAttendanceModuleCD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AttendanceModuleWiseM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AttendanceModuleWiseM?courseId=1&date=2023-06-24",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AttendanceModuleWiseM"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2023-06-24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AttendanceModuleWiseCD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AttendanceModuleWiseCD?courseId=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AttendanceModuleWiseCD"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacherWiswAtten",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/teacherWiseAtten?teacherId=6",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"teacherWiseAtten"
+							],
+							"query": [
+								{
+									"key": "teacherId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allTeacherWiseAtten",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/allTeacherWiseAtten",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"allTeacherWiseAtten"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "weeklyAttendance",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "weeklyAttendanceById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "fifteenDayAttendance",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceSubmoduleCD",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceSubmoduleM",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceSubmoduleCDById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "attendanceSubmoduleMById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StudentFeedback",
+			"item": [
+				{
+					"name": "insertFeedbackByStu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 4,\r\n    \"name\": \"name\",\r\n    \"feedback\": \"feedback\",\r\n    \"institutionId\": 1,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 1,\r\n    \"rating\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertFeedbackByStu",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertFeedbackByStu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "studentFeedbackAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/studentFeedbackAll",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentFeedbackAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "studentFeedbackById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/studentFeedbackById?id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentFeedbackById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateFeedbackByStu",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 4,\r\n      \"name\": \"Hindi\",\r\n      \"feedback\": \"Knowledge\",\r\n      \"institutionId\": 1,\r\n      \"courseId\": 1,\r\n      \"rating\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateFeedbackByStu?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateFeedbackByStu"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFeedbackByStu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteFeedbackByStu?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteFeedbackByStu"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "studentFeedbackSubAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/studentFeedbackSubAll",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentFeedbackSubAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "studentFeedbackSubById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/studentFeedbackSubById?id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentFeedbackSubById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "studentFeedbackByInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/studentFeedbackByInstitute?institutionId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"studentFeedbackByInstitute"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teacherFeedback",
+			"item": [
+				{
+					"name": "insertFeedbackTeac",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"name\": \"name\",\r\n    \"feedback\": \"feedback\",\r\n    \"institutionId\": 1,\r\n    \"courseId\": 1,\r\n    \"rating\": 2,\r\n    \"subCourseId\": 1,\r\n    \"studentId\": 2,\r\n    \"responsiveness\": 1,\r\n    \"attentive\": 2,\r\n    \"politeness\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/insertFeedbackTeac",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"insertFeedbackTeac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacherFeedbackAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/teacherFeedbackAll",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"teacherFeedbackAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacherFeedbackById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/teacherFeedbackById?id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"teacherFeedbackById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateFeedbackByTea",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hindi\",\r\n    \"feedback\": \"feedback\",\r\n    \"institutionId\": 1,\r\n    \"courseId\": 1,\r\n    \"rating\": 2,\r\n    \"subCourseId\": 1,\r\n    \"studentId\": 2,\r\n    \"responsiveness\": 1,\r\n    \"attentive\": 2,\r\n    \"politeness\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateFeedbackByTea?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateFeedbackByTea"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFeedbackByTea",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteFeedbackByTea?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteFeedbackByTea"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacherFeedbackByInstitute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/teacherFeedbackByInstitute?institutionId=3",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"teacherFeedbackByInstitute"
+							],
+							"query": [
+								{
+									"key": "institutionId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "limitStudents",
+			"item": [
+				{
+					"name": "isertStudentLimit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"instituteId\": 3,\r\n      \"maxNoOfStudents\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/isertStudentLimit",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"isertStudentLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudentLimit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getStudentLimit",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getStudentLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getStudentLimitById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getStudentLimitById?instituteId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getStudentLimitById"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStudentLimit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"maxNoOfStudents\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Domain}}/updateStudentLimit?instituteId=6",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"updateStudentLimit"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteStudentLimit",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/deleteStudentLimit?instituteId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"deleteStudentLimit"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Domain}}",
+					"host": [
+						"{{Domain}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
