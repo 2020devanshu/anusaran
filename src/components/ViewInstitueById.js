@@ -207,14 +207,14 @@ export default function InstituteById() {
             })}
         </div>
       </div>
-      {localStorage.getItem("role") === "admin" && (
+      {/* {localStorage.getItem("role") === "admin" && (
         <button
           onClick={() => handleClick()}
           className="flex w-full justify-center   mb-5 rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Create Principal
         </button>
-      )}
+      )} */}
       {/* {localStorage.getItem("role") === "principal" ? (
         <>
           <button
@@ -239,27 +239,27 @@ export default function InstituteById() {
         <div className="xsm:flex xsm:flex-col md:flex-row flex-wrap">
           {limit
             ? stud &&
-              stud.length > 0 &&
-              stud.slice(0, 3).map((x, ind) => {
-                return (
-                  <ProfileCard
-                    imgSrc={x.profilePhoto}
-                    name={x.name}
-                    designation="Student"
-                  />
-                );
-              })
+            stud.length > 0 &&
+            stud.slice(0, 3).map((x, ind) => {
+              return (
+                <ProfileCard
+                  imgSrc={x.profilePhoto}
+                  name={x.name}
+                  designation="Student"
+                />
+              );
+            })
             : stud &&
-              stud.length > 0 &&
-              stud.map((x, ind) => {
-                return (
-                  <ProfileCard
-                    imgSrc={x.profilePhoto}
-                    name={x.name}
-                    designation="Student"
-                  />
-                );
-              })}
+            stud.length > 0 &&
+            stud.map((x, ind) => {
+              return (
+                <ProfileCard
+                  imgSrc={x.profilePhoto}
+                  name={x.name}
+                  designation="Student"
+                />
+              );
+            })}
         </div>
         <div className="flex justify-center">
           <div
