@@ -15,6 +15,7 @@ export default function SubCourseCreation() {
   const [Course, setCourse] = useState([]);
   const navigate = useNavigate();
   const [data, setData] = useState({
+    name:"",
     subcourses: "",
     startTime: "",
     endTime: "",
@@ -30,26 +31,26 @@ export default function SubCourseCreation() {
     e.preventDefault();
 
     axios
-      .post("http://65.1.211.146:8000/insertsubCourses", {
+      .post("http://151.106.39.4:8080/insertsubCourses", {
+
         courseId: parseInt(params.id),
-        subcourses: data.subcourses,
+        subcourses: data.name,
         InstituteId: Course.Institute,
-        startTime: data.startTime,
-        endTime: data.endTime,
       })
       .then((res) => {
         console.log(res);
-        navigate("course/" + params.id);
+        notify();
+
+        // navigate("course/" + params.id);
       })
       .catch((err) => {
         console.log(err);
-        notify();
       });
   };
   useEffect(() => {
     const fge = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
+        .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
         .then((res) => {
           return res.data.data;
         });
@@ -99,11 +100,11 @@ export default function SubCourseCreation() {
       </div>
       <div className="workContainer mb-4 w-full">
         <div>
-          <h1 className="text-6xl mb-2">Add Course</h1>
+          <h1 className="text-6xl mb-2">Add Sub Course</h1>
         </div>
         <div class="border-b-2 border-black mb-2"></div>
         <div className="flex p-4">
-          <form className="space-y-6 w-full" action="#">
+          <form className="space-y-6 w-full" onSubmit={handleSubmit}>
             {/* Institute Name */}
             <div className="flex justify-between ">
               <div className="w-1/2">
@@ -223,7 +224,6 @@ export default function SubCourseCreation() {
                 Create
               </button>
               <button
-                type="submit"
                 className="flex w-1/12 justify-center rounded-md px-5 py-3 text-lg font-semibold leading-6 text-purple-500 border-purple-500 border-2 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
               >
                 Reset

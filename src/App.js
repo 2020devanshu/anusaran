@@ -110,7 +110,6 @@ const App = () => {
               />
               <Route path="addvideo" element={<AddVideo />} />
               <Route path="subcourse/:id" element={<SubCourse />} />
-              <Route path="subcourse/:id" element={<SubCourse />} />
               <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
               <Route
                 path="/institute-list/institute/:id/create-principal/:id"

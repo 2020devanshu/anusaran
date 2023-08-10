@@ -38,18 +38,18 @@ export default function SubCourse() {
       if (params.id) {
         const resp = await axios
           .get(
-            "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" +
-              params.id
+            "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" +
+            params.id
           )
           .then(async (res) => {
             const respQr = await axios
               .get(
-                `http://65.1.211.146:8000/instituteQr?institute_id=${res.data.data[0].InstituteId}&subcourses_id=${params.id}`
+                `http://151.106.39.4:8080/instituteQr?institute_id=${res.data.data[0].InstituteId}&subcourses_id=${params.id}`
               )
               .then((res) => res.data.data);
             const respAttendance = await axios
               .get(
-                `http://65.1.211.146:8000/getAttendanceSubCourses?subcourses_id=${params.id}&InstituteId=${res.data.data[0].InstituteId}`
+                `http://151.106.39.4:8080/getAttendanceSubCourses?subcourses_id=${params.id}&InstituteId=${res.data.data[0].InstituteId}`
               )
               .then((res) => res.data.data);
             setAttendance(respAttendance);
@@ -100,7 +100,7 @@ export default function SubCourse() {
     const formData = new FormData();
     formData.append("file", video);
     const response = await axios.post(
-      "http://65.1.211.146:8000/uploadFile",
+      "http://151.106.39.4:8080/uploadFile",
       formData,
       {
         headers: {
@@ -113,11 +113,11 @@ export default function SubCourse() {
     // const fileUrl = response.data.url[0];
     const resp = await axios
       .get(
-        "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" + params.id
+        "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
       )
       .then(async (res) => {
         const res2 = await axios
-          .post("http://65.1.211.146:8000/insertVideo", {
+          .post("http://151.106.39.4:8080/insertVideo", {
             videoName: name,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -141,11 +141,11 @@ export default function SubCourse() {
     e.preventDefault();
     const resp = await axios
       .get(
-        "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" + params.id
+        "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
       )
       .then(async (res) => {
         const response = await axios
-          .post("http://65.1.211.146:8000/insertSetAttendance  ", {
+          .post("http://151.106.39.4:8080/insertSetAttendance  ", {
             minAttendance: parseInt(numnderAttemdamce),
             institutionId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -169,7 +169,7 @@ export default function SubCourse() {
     const formData = new FormData();
     formData.append("file", assignment);
     const response = await axios.post(
-      "http://65.1.211.146:8000/uploadFile",
+      "http://151.106.39.4:8080/uploadFile",
       formData,
       {
         headers: {
@@ -182,11 +182,11 @@ export default function SubCourse() {
     // const fileUrl = response.data.url[0];
     const resp = await axios
       .get(
-        "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" + params.id
+        "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
       )
       .then(async (res) => {
         const res2 = await axios
-          .post("http://65.1.211.146:8000/inserAssignment", {
+          .post("http://151.106.39.4:8080/inserAssignment", {
             assignmentsName: assName,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -257,7 +257,7 @@ export default function SubCourse() {
           />
         </div>
       </div>
-      <FloatingButton onClick={()=>navigate("/addvideo")}>Add Videos</FloatingButton>
+      <FloatingButton onClick={() => navigate("/addvideo")}>Add Videos</FloatingButton>
     </>
   );
 

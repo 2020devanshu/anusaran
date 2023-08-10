@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from './AppContext';
 import AssignmentCard from './AssignmentCard';
 import { useState } from 'react';
 import SubAssignmentCard from './SubAssignmentCard';
+import axios from 'axios';
 
 export default function Assignments() {
     const { handleClose, close, handleOpen } = useAppContext();
     const [currentAssignment, setcurrentAssignment] = useState("")
     const [currentSubAssignment, setcurrentSubAssignment] = useState("")
+    const [assignment, setassignment] = useState(null)
 
+    useEffect(() => {
+        const fetchAssignment = async () => {
+            const resp = await axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => { return res.data.data })
+            console.log('resp', resp)
+            if (localStorage.getItem("role") === "principal") {
+                let newArr = resp.filter((x) => x.instituteId === localStorage.getItem("institutionId"))
+                setassignment(newArr)
+
+            }
+            else
+                setassignment(resp)
+        }
+        fetchAssignment()
+    }, [])
+
+
+    const handleAssignmentName = (e) => {
+        setcurrentAssignment(e)
+    }
+
+    const handleSubName = (e) => {
+        console.log('e', e)
+        setcurrentSubAssignment(e)
+    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
@@ -62,7 +88,7 @@ export default function Assignments() {
                     <div>
                         <div className='flex justify-between w-full'>
                             <div className='flex text-3xl ml-4 font-bold'>
-                                Array
+                                {currentSubAssignment}
                             </div>
                             <div>
                                 <p className="text-gray-600 mt-4 ">Assignment Date: <span className='text-red-500'>{"23-05-2023"}</span></p>
@@ -150,7 +176,7 @@ export default function Assignments() {
                                     <path d="M12.0963 22.7562C11.4126 22.7562 10.7777 22.5946 10.2242 22.2875C8.87302 21.5278 8.14046 20.0247 8.14046 18.0528V1.92241C8.14046 1.25974 8.69395 0.710205 9.36139 0.710205C10.0288 0.710205 10.5823 1.25974 10.5823 1.92241V18.0528C10.5823 19.1034 10.8916 19.8792 11.4288 20.1701C11.9986 20.4934 12.8777 20.3318 13.8381 19.7661L15.987 18.4892C16.866 17.972 18.1195 17.972 18.9986 18.4892L21.1474 19.7661C22.1242 20.3479 23.0033 20.4934 23.5567 20.1701C24.094 19.863 24.4033 19.0872 24.4033 18.0528V1.92241C24.4033 1.25974 24.9567 0.710205 25.6242 0.710205C26.2916 0.710205 26.8451 1.25974 26.8451 1.92241V18.0528C26.8451 20.0247 26.1126 21.5278 24.7614 22.2875C23.4102 23.0471 21.6358 22.8855 19.894 21.8511L17.7451 20.5742C17.6474 20.5096 17.3381 20.5096 17.2405 20.5742L15.0916 21.8511C14.0823 22.4491 13.0405 22.7562 12.0963 22.7562Z" fill="#1C1C1C" />
                                 </svg>
 
-                                Algorithms
+                                {currentAssignment}
                             </div>
                             <div className='flex mt-8  text-xl justify-around w-1/2'>
                                 <p>
@@ -160,18 +186,23 @@ export default function Assignments() {
                                     Average Marks:<span className='font-bold text-2xl'> 9.5</span>
                                 </p>
                             </div>
-                            <div className='flex gap-4' onClick={() => setcurrentSubAssignment("something")}>
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} />
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} />
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} />
+                            <div className='flex gap-4' >
+                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
+                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
+                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
                             </div>
                         </div>
                     </> :
 
-                        <div className="flex justify-around gap-4" onClick={() => setcurrentAssignment("Math")}  >
-                            <AssignmentCard name="Math" assignments={5} key={1} />
-                            <AssignmentCard name="Science" assignments={3} />
-                            <AssignmentCard name="History" assignments={2} />
+                        <div className="flex justify-around gap-4"  >
+                            {
+                                assignment && assignment.length > 0 && assignment.map((x) => {
+                                    return (
+                                        <AssignmentCard name={x.assignmentsName} assignments={5} key={1} handleAssignment={handleAssignmentName} />
+                                    )
+                                })
+                            }
+
                         </div>
             }
 

@@ -12,7 +12,7 @@ export default function Principal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://65.1.211.146:8000/insertDepartment", {
+      .post("http://151.106.39.4:8080/insertDepartment", {
         departmentName: data.depName,
       })
       .then((res) => {

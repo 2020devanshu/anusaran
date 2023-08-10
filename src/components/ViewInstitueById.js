@@ -7,6 +7,8 @@ import ProfileCard from "./ProfileCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useMediaQuery } from "react-responsive";
+
+
 export default function InstituteById() {
   const params = useParams();
   const [Name, setName] = useState("");
@@ -22,6 +24,15 @@ export default function InstituteById() {
   const navigate = useNavigate();
   const [pairedFeedbacks, setpairedFeedbacks] = useState([]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
+
+    navigate("/");
+    window.location.reload(true);
+  };
+
   console.log("params", params.id);
   const handleClick = () => {
     navigate("create-principal/" + params.id);
@@ -31,7 +42,7 @@ export default function InstituteById() {
     setcurrId(params.id);
     const fetchFeedback = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getFeedback?instituteId=${params.id}`)
+        .get(`http://151.106.39.4:8080/getFeedback?instituteId=${params.id}`)
         .then((res2) => {
           if (res2.data.data && res2.data.data.length > 0) {
             const pairs = [];
@@ -55,7 +66,7 @@ export default function InstituteById() {
     const fetchInstitute = async () => {
       const response = await axios
         .get(
-          `http://65.1.211.146:8000/getInstituteById?institute_id=${params.id}`
+          `http://151.106.39.4:8080/getInstituteById?institute_id=${params.id}`
         )
         .then((res) => {
           console.log("res", res);
@@ -66,7 +77,7 @@ export default function InstituteById() {
     };
     const fetchPrincipal = async () => {
       const resp = await axios
-        .get("http://65.1.211.146:8000/principalAllData")
+        .get("http://151.106.39.4:8080/principalAllData")
         .then((res) => {
           return res.data.data;
         });
@@ -79,7 +90,7 @@ export default function InstituteById() {
     };
     const fetchStudent = async () => {
       const resp = await axios
-        .get("http://65.1.211.146:8000/getDataAllSt")
+        .get("http://151.106.39.4:8080/getDataAllSt")
         .then((res) => {
           return res.data.data;
         });
@@ -92,7 +103,7 @@ export default function InstituteById() {
     };
     const fetchCourses = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getCourses?Institute=${params.id}`)
+        .get(`http://151.106.39.4:8080/getCourses?Institute=${params.id}`)
         .then((res) => {
           return res.data.data;
         });
@@ -103,7 +114,7 @@ export default function InstituteById() {
     };
     const fetchTeachers = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getAllTeacher`)
+        .get(`http://151.106.39.4:8080/getAllTeacher`)
         .then((res) => {
           return res.data.data;
         });
@@ -166,7 +177,7 @@ export default function InstituteById() {
             <div>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"

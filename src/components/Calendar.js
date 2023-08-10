@@ -65,9 +65,9 @@ function MyCalendar() {
 
   useEffect(() => {
     // Fetch the events from the API when the component mounts
-    const getteacher = axios.get("http://65.1.211.146:8000/getTeacherModule");
+    const getteacher = axios.get("http://151.106.39.4:8080/getTeacherModule");
 
-    const getAssignm = axios.get("http://65.1.211.146:8000/getAllAssignment");
+    const getAssignm = axios.get("http://151.106.39.4:8080/getAllAssignment");
 
     axios.all([getteacher, getAssignm]).then(
       axios.spread((...responses) => {
@@ -110,7 +110,7 @@ function MyCalendar() {
     // Combine the teacher events and assignment events and update the events state
 
     // Fetch the teachers from the API when the component mounts
-    axios.get("http://65.1.211.146:8000/getAllTeacher").then((res) => {
+    axios.get("http://151.106.39.4:8080/getAllTeacher").then((res) => {
       setTeachers(
         res.data.data.map((teacher) => ({
           value: teacher.user_id,
@@ -118,7 +118,7 @@ function MyCalendar() {
         }))
       );
     });
-    axios.get("http://65.1.211.146:8000/getAllAssignment").then((res) => {
+    axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => {
       console.log("res.data.data", res.data.data);
       setAssignments(
         res.data.data.map((assignment) => ({
@@ -136,7 +136,7 @@ function MyCalendar() {
   useEffect(() => {
     if (selectedTeacher) {
       // Fetch the courses for the selected teacher when it changes
-      axios.get(`http://65.1.211.146:8000/getCoursesAll`).then((res) => {
+      axios.get(`http://151.106.39.4:8080/getCoursesAll`).then((res) => {
         setCourses(
           res.data.data.map((course) => ({
             value: course.course_id,
@@ -178,7 +178,7 @@ function MyCalendar() {
     let time24hrEnd = `${hours2}:${minutes2}`;
 
     axios
-      .post("http://65.1.211.146:8000/insertTeacherModule", {
+      .post("http://151.106.39.4:8080/insertTeacherModule", {
         courseId: selectedCourse,
         userId: selectedTeacher,
         teachDate: selectedDate,
@@ -222,7 +222,7 @@ function MyCalendar() {
     let time24hrEnd = `${hours2}:${minutes2}`;
     axios
       .put(
-        `http://65.1.211.146:8000/updateTeacherModule?id=${selectedEvent.id}`,
+        `http://151.106.39.4:8080/updateTeacherModule?id=${selectedEvent.id}`,
         {
           start: date,
           end: date2,
@@ -238,7 +238,7 @@ function MyCalendar() {
     // Delete the selected event
     axios
       .delete(
-        `http://65.1.211.146:8000/deleteTeacherModule?id=${selectedEvent.id}`
+        `http://151.106.39.4:8080/deleteTeacherModule?id=${selectedEvent.id}`
       )
       .then((res) => {
         // ... other code

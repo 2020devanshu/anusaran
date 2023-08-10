@@ -4,8 +4,10 @@ import { useAppContext } from "../components/AppContext";
 import Select from "react-select";
 import { Chart } from "react-google-charts";
 import FloatingButton from "./FloatingButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Teacher() {
+  const navigate = useNavigate()
   const { handleClose, close, handleOpen } = useAppContext();
   const [currentActive, setcurrentActive] = useState("");
   const [myData, setData] = useState([]);
@@ -35,7 +37,7 @@ export default function Teacher() {
   const fetchAttendance = async () => {
     const resp = await axios
       .get(
-        `http://65.1.211.146:8000/getAttendanceByInstituteCourse?institutionId=${InstituteId}&course_id=${CourseId}`
+        `http://151.106.39.4:8080/getAttendanceByInstituteCourseTe?institutionId=${InstituteId}&course_id=${CourseId}`
       )
       .then((res) => {
         console.log("res here", res);
@@ -72,14 +74,20 @@ export default function Teacher() {
   useEffect(() => {
     const fetchStudents = async () => {
       const resp = await axios
-        .get("http://65.1.211.146:8000/getDataAllSt")
+        .get("http://151.106.39.4:8080/getAllTeacher")
         .then((res) => res.data.data);
-      setData(resp);
-      console.log("myData", myData);
+
+      if (localStorage.getItem("role") === "principal") {
+        let newArr = resp.filter((x) => x.Institute === localStorage.getItem("institutionId"))
+        setData(newArr);
+      }
+      else
+        setData(resp);
+
     };
     const fetchInstitutes = async () => {
       await axios
-        .get("http://65.1.211.146:8000/getAllInstitute")
+        .get("http://151.106.39.4:8080/getAllInstitute")
         .then((res) => {
           setinstitutes(
             res.data.data.map((inst) => ({
@@ -90,6 +98,16 @@ export default function Teacher() {
         });
     };
 
+    const func = async () => {
+
+      if (localStorage.getItem("role") === "principal") {
+        console.log("hre2222", InstituteId)
+
+        setInstituteId(localStorage.getItem("institutionId"));
+      }
+    }
+    func()
+
     fetchStudents();
     fetchInstitutes();
     fetchAttendance();
@@ -98,7 +116,7 @@ export default function Teacher() {
   useEffect(() => {
     const fetchCourses = async () => {
       const response = await axios
-        .get(`http://65.1.211.146:8000/getCourses?Institute=${InstituteId}`)
+        .get(`http://151.106.39.4:8080/getCourses?Institute=${InstituteId}`)
         .then((res) => {
           return res.data.data;
         });
@@ -140,7 +158,7 @@ export default function Teacher() {
   return (
     <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
       <div className="navbar flex justify-between w-full">
-        <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
+        <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10 z-50 ml-4">
           <div>
             <h1
               className="text-4xl cursor-pointer"
@@ -206,12 +224,15 @@ export default function Teacher() {
       {currentActive === "Attendance" ? (
         <div>
           <div className="flex justify-center">
-            <Select
-              options={institutes}
-              onChange={(option) => {
-                setInstituteId(option.value);
-              }}
-            />
+            {
+              localStorage.getItem("role") === "admin" && <Select
+                options={institutes}
+                onChange={(option) => {
+                  setInstituteId(option.value);
+                }}
+              />
+            }
+
           </div>
           {InstituteId && (
             <div>
@@ -325,7 +346,7 @@ export default function Teacher() {
                 </div>
                 <div className="details mt-4">
                   <div className="flex flex-col justify-center items-center">
-                    <div>name</div>
+                    <div>{studentData.name}</div>
                     <div className="text-gray-500">btech, cse</div>
                   </div>
                   <div>
@@ -339,7 +360,7 @@ export default function Teacher() {
           })}
         </div>
       )}
-      <FloatingButton onClick={() => console.log('s')}>Add Teachers</FloatingButton>
+      <FloatingButton onClick={() => navigate("/teacher-creation")}>Add Teachers</FloatingButton>
     </div>
   );
 }

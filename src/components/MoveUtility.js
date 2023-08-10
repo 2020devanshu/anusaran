@@ -17,7 +17,7 @@ function MovePage() {
     // fetch institutes
     const fetchInstitutes = async () => {
       const response = await axios
-        .get("http://65.1.211.146:8000/getAllInstitute")
+        .get("http://151.106.39.4:8080/getAllInstitute")
         .then((res) => {
           return res.data.data;
         });
@@ -34,7 +34,7 @@ function MovePage() {
     const fetchCourses = async () => {
       const response = await axios
         .get(
-          `http://65.1.211.146:8000/getCourses?Institute=${selectedInstitute}`
+          `http://151.106.39.4:8080/getCourses?Institute=${selectedInstitute}`
         )
         .then((res) => {
           return res.data.data;
@@ -57,7 +57,7 @@ function MovePage() {
   const moveCourse = () => {
     axios
       .put(
-        `http://65.1.211.146:8000/updateCoursesById?course_id=${selectedCourse}`,
+        `http://151.106.39.4:8080/updateCoursesById?course_id=${selectedCourse}`,
         {
           Institute: targetInstitute,
         }

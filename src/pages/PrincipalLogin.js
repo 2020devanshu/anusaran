@@ -19,7 +19,7 @@ export default function PrincipalLogin() {
     console.log("data", data);
     e.preventDefault();
     axios
-      .post("http://65.1.211.146:8000/LoginUser", {
+      .post("http://151.106.39.4:8080/LoginUser", {
         email: data.email,
         password: data.password,
       })
@@ -29,7 +29,7 @@ export default function PrincipalLogin() {
         // Call the verify endpoint after successful login
         if (res.data.msg === "Principal has login") {
           axios
-            .post("http://65.1.211.146:8000/verify", {
+            .post("http://151.106.39.4:8080/verify", {
               token: res.data.data,
             })
             .then((verificationResponse) => {

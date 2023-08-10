@@ -38,7 +38,7 @@ export default function AddVideo() {
     e.preventDefault();
 
     axios
-      .post("http://65.1.211.146:8000/insertsubCourses", {
+      .post("http://151.106.39.4:8080/insertsubCourses", {
         courseId: parseInt(params.id),
         subcourses: data.subcourses,
         InstituteId: Course.Institute,
@@ -57,7 +57,7 @@ export default function AddVideo() {
   useEffect(() => {
     const fge = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
+        .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
         .then((res) => {
           return res.data.data;
         });
@@ -105,7 +105,7 @@ export default function AddVideo() {
     const formData = new FormData();
     formData.append("file", video);
     const response = await axios.post(
-      "http://65.1.211.146:8000/uploadFile",
+      "http://151.106.39.4:8080/uploadFile",
       formData,
       {
         headers: {
@@ -118,11 +118,11 @@ export default function AddVideo() {
     // const fileUrl = response.data.url[0];
     const resp = await axios
       .get(
-        "http://65.1.211.146:8000/getsubCoursesById?subcourses_id=" + params.id
+        "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
       )
       .then(async (res) => {
         const res2 = await axios
-          .post("http://65.1.211.146:8000/insertVideo", {
+          .post("http://151.106.39.4:8080/insertVideo", {
             videoName: name,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
@@ -222,7 +222,7 @@ export default function AddVideo() {
                   <div className="mt-2">
                     <input
                       id="name"
-                      name="name"
+                      name="subcourse"
                       type="text"
                       required
                       className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

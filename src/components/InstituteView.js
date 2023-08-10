@@ -15,7 +15,7 @@ export default function InstituteView() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://65.1.211.146:8000/getAllInstitute"
+          "http://151.106.39.4:8080/getAllInstitute"
         );
         setInstitutes(response.data.data);
       } catch (error) {

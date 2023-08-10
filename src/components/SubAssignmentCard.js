@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SubAssignmentCard = ({ assignmentName, score, submissionDate }) => {
+const SubAssignmentCard = ({ assignmentName, score, submissionDate, handleSubNameClick }) => {
     return (
-        <div className="flex justify-between items-center bg-gray-200 p-4 rounded-lg shadow-sm my-2 w-1/3">
+        <div className="flex justify-between items-center bg-gray-200 p-4 rounded-lg shadow-sm my-2 w-1/3" onClick={() => handleSubNameClick(assignmentName)}>
             <div className='w-full'>
                 <div className='flex justify-between w-full'>
 

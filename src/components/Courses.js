@@ -21,12 +21,21 @@ export default function Courses() {
   const [institutes, setInstitutes] = useState([]);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
+
+    navigate("/");
+    window.location.reload(true);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
 
       try {
         const response = await axios.get(
-          "http://65.1.211.146:8000/getCoursesAll"
+          "http://151.106.39.4:8080/getCoursesAll"
         );
         if (localStorage.getItem("role") === "principal") {
           response = response.data.data.filter((x) => x.Institute === localStorage.getItem("institutionId"))
@@ -56,22 +65,20 @@ export default function Courses() {
 
   return (
     <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
-      <FloatingButton onClick={handleClickAdd}>Add Courses</FloatingButton>
       <div className="navbar flex justify-between w-full">
-        <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
-          <div>
+        <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10 z-50 ml-6">
+          <div onClick={() => setcurrentActive("")}>
             <h1
               className="text-4xl cursor-pointer"
-              onClick={() => setcurrentActive("")}
             >
               Courses
             </h1>
           </div>
-          <div>
+          <div onClick={() => setcurrentActive("Self Learning")}>
             <h1
               className={`text-xl cursor-pointer ${currentActive === "Attendance" ? "text-purple-500" : ""
                 }`}
-              onClick={() => setcurrentActive("Self Learning")}
+
             >
               Self Learning
             </h1>
@@ -93,7 +100,7 @@ export default function Courses() {
             <div onClick={handleOpen}>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"
@@ -204,6 +211,8 @@ export default function Courses() {
           </div>
         </div>
       )}
+      <FloatingButton onClick={handleClickAdd}>Add Courses</FloatingButton>
+
     </div>
   );
 }

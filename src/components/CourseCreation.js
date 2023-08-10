@@ -14,17 +14,34 @@ export default function CourseCreation(params) {
   const navigate = useNavigate();
   const notify = () => toast.error("Try Again");
   const notifySucc = () => toast.success("Success");
+  const [imageSrc, setImageSrc] = useState(null)
+  const [InstituteId, setInstituteId] = useState(null);
+  const [institutes, setinstitutes] = useState([]);
+
 
   const [data, setData] = useState({
     course: "",
     startTime: "",
     endTime: "",
     institute_id: "",
+    hours: ""
   });
   useEffect(() => {
+    const fetchInstitutes = async () => {
+      await axios
+        .get("http://151.106.39.4:8080/getAllInstitute")
+        .then((res) => {
+          setinstitutes(
+            res.data.data.map((inst) => ({
+              value: inst.institute_id,
+              label: inst.InstituteName,
+            }))
+          );
+        });
+    };
     const fetchPrinc = async () => {
       const response = await axios
-        .get("http://65.1.211.146:8000/principalAllData")
+        .get("http://151.106.39.4:8080/principalAllData")
         .then(async (res) => {
           const newArr = res.data.data.filter((x) => {
             return x.email === localStorage.getItem("email");
@@ -32,7 +49,7 @@ export default function CourseCreation(params) {
           console.log("newArr[0]", newArr[0]);
           const resp = await axios
             .get(
-              `http://65.1.211.146:8000/getCourses?Institute=${newArr[0].institutionId}`
+              `http://151.106.39.4:8080/getCourses?Institute=${newArr[0].institutionId}`
             )
             .then((res2) => {
               return res2.data.data;
@@ -43,10 +60,10 @@ export default function CourseCreation(params) {
           return res.data.data;
         });
     };
-    const fetchCourse = async () => {};
+    const fetchCourse = async () => { };
     const fetchRes = async () => {
       const response = await axios
-        .get("http://65.1.211.146:8000/getAllInstitute")
+        .get("http://151.106.39.4:8080/getAllInstitute")
         .then((res) => {
           return res.data.data;
         });
@@ -64,6 +81,7 @@ export default function CourseCreation(params) {
       fetchCourse();
     }
     fetchRes();
+    fetchInstitutes()
   }, []);
 
   const handleInput = (e) => {
@@ -71,15 +89,51 @@ export default function CourseCreation(params) {
     console.log("data", data);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+  const handleImageUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      console.log("e.target.files", e.target.files);
+      const imgFile = e.target.files[0];
+
+      // // Converting to a base64 string
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   setImageSrc(e.target.result);
+      // };
+      // // reader.readAsDataURL(imgFile);
+      console.log("imageSrc", URL.createObjectURL(e.target.files[0]));
+
+      // Alternatively, you can use the file object directly
+      setImageSrc(e.target.files[0]);
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("data.logo", data.logo);
+    const formData = new FormData();
+    formData.append("file", imageSrc);
+
+    // Send the file to the server
+    const response = await axios.post(
+      "http://151.106.39.4:8080/uploads",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    // Get the URL of the uploaded file
+    const fileUrl = response.data.url;
+    console.log("fileUrl", fileUrl);
+    // Insert the URL into the database
     axios
-      .post("http://65.1.211.146:8000/insertCourses", {
-        course: data.course,
-        Institute: data.institute_id,
-        startTime: data.startTime,
-        endTime: data.endTime,
+      .post("http://151.106.39.4:8080/insertCourses", {
+        course: data.name,
+        Institute: InstituteId,
+        startTime: data.startDate,
+        endTime: data.endDate,
       })
       .then((res) => {
         console.log(res);
@@ -98,6 +152,35 @@ export default function CourseCreation(params) {
 
         notify();
       });
+  };
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: '0',
+      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+      borderRadius: '0.375rem', // rounded-md
+      paddingLeft: '0.75rem', // px-3
+      paddingRight: '0.75rem', // px-3
+      paddingTop: '0.375rem', // py-1.5
+      paddingBottom: '0.375rem', // py-1.5
+      fontSize: '0.875rem', // sm:text-sm
+      lineHeight: '1.5rem', // sm:leading-6
+      backgroundColor: "#f8f6ff",
+      '&:hover': {
+        borderColor: '#cbd5e0', // ring-gray-300
+      },
+      '&:focus': {
+        borderColor: '#4c51bf', // focus:ring-indigo-600
+        boxShadow: '0 0 0 2px rgba(76, 81, 191, 0.5)', // Approximation of focus:ring-2 focus:ring-indigo-600
+      },
+    }),
+    input: (provided, state) => ({
+      ...provided,
+      color: '#2d3748', // text-gray-900
+      '::placeholder': {
+        color: '#a0aec0', // placeholder:text-gray-400
+      },
+    }),
   };
 
   return (
@@ -143,7 +226,7 @@ export default function CourseCreation(params) {
         </div>
         <div class="border-b-2 border-black mb-2"></div>
         <div className="flex p-4">
-          <form className="space-y-6 w-full" action="#">
+          <form className="space-y-6 w-full" action="#" onSubmit={handleSubmit}>
             {/* Institute Name */}
             <div className="flex justify-between">
               <div className="w-full">
@@ -178,7 +261,7 @@ export default function CourseCreation(params) {
                 <div className="mt-2">
                   <input
                     id="name"
-                    name="name"
+                    name="grade"
                     type="text"
                     required
                     className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -199,49 +282,54 @@ export default function CourseCreation(params) {
                 </label>
               </div>
               <div className="mt-2">
-                <div className="custom-file-upload">
-                  <input
-                    id="file-upload"
-                    type="file"
-                    accept="image/*"
-                    className="hidden "
-                  />
-                  <label for="file-upload">
-                    <div className="input-inner  inputbox">
-                      <svg
-                        width="50"
-                        height="50"
-                        viewBox="0 0 50 50"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                      >
-                        <rect width="50" height="50" fill="url(#pattern0)" />
-                        <defs>
-                          <pattern
-                            id="pattern0"
-                            patternContentUnits="objectBoundingBox"
-                            width="1"
-                            height="1"
-                          >
-                            <use
-                              xlinkHref="#image0_5_276"
-                              transform="scale(0.0111111)"
-                            />
-                          </pattern>
-                          <image
-                            id="image0_5_276"
-                            width="90"
-                            height="90"
-                            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACe0lEQVR4nO2cP24TQRSHvyrQIxFBUnEFrgI0dIgqEOcANEBlJM7BLSgJCQgcTkCLgAbZFSAeWmkiWVa8/2b2eWfn90lPsmTPeufz29nx250FIYQQQgghhBBCCFFxDZgBZ8AKsBaxjTG3XYU+PgX2cOYAuGi5ozYCWTFt12MR+u6WyX0kW2SHd9V2Mz57Zfas5w5aZId31faqeIID5xLNew/RS4mmcjA4XQ/P3NlZfyUaiR4CZbQTEu2ERDsh0U5ItBMS7URp09neXAdOQulgtVb2nIUCmUjAIfClJisvwmdEZCbXSV6XrcyO4KRD2fM45otK53xsZc+pshxb2XOq051lB9G/arbzT2VSn6FDohNe26xuJdiGRCe6Wr9ouKot0S04bJDd5j4Nie6Q2cdhHF6GOO1w55FEOyHRTkj01EX3ZR94CXwEvoeoXr8I74kEPGq4tXcVPiMieN7hj0OV3aIn1jG6yL4JPAPeAT+BH8CHsI1bpf1iNpDs/SC2riL3mIKwAWU/AP5MdTjqWia1iJi32J97wO+G7bwqYR5tkVGdTJu4D/wdKLOLEW0tZc8TDUdFi7YWw8idhMNR0aKtIbNvJD5CihZtNZIeDjAcFS3agNcbteS7wLfER8glRYs24CvwBnjbYi4dI7t40ZbwR5tPoUxqmUT2WCaRPZZJZI9lEtljmUT2WCYxOrLZ0URkM4/OHYl2QqKdkGgnJNoJiXZCop2Q6KmL1uPYqF0ul4yzAf7m2ojbXhXV0ozBqdaDlC76CKfFN4uCRX/yfLzxQU/Z2xhz203Jt3FmLywhO+1wgtzGmNteLpc72sWDuoUQQgghhBBCCCEYIf8B/kaoZm018W4AAAAASUVORK5CYII="
-                          />
-                        </defs>
-                      </svg>
+                {
+                  imageSrc ? <> Image Uploaded</> : <div className="custom-file-upload">
 
-                      <p>Drag or drop file to upload</p>
-                    </div>
-                  </label>
-                </div>
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden "
+                    />
+                    <label for="file-upload">
+                      <div className="input-inner  inputbox">
+                        <svg
+                          width="50"
+                          height="50"
+                          viewBox="0 0 50 50"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                        >
+                          <rect width="50" height="50" fill="url(#pattern0)" />
+                          <defs>
+                            <pattern
+                              id="pattern0"
+                              patternContentUnits="objectBoundingBox"
+                              width="1"
+                              height="1"
+                            >
+                              <use
+                                xlinkHref="#image0_5_276"
+                                transform="scale(0.0111111)"
+                              />
+                            </pattern>
+                            <image
+                              id="image0_5_276"
+                              width="90"
+                              height="90"
+                              xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACe0lEQVR4nO2cP24TQRSHvyrQIxFBUnEFrgI0dIgqEOcANEBlJM7BLSgJCQgcTkCLgAbZFSAeWmkiWVa8/2b2eWfn90lPsmTPeufz29nx250FIYQQQgghhBBCCFFxDZgBZ8AKsBaxjTG3XYU+PgX2cOYAuGi5ozYCWTFt12MR+u6WyX0kW2SHd9V2Mz57Zfas5w5aZId31faqeIID5xLNew/RS4mmcjA4XQ/P3NlZfyUaiR4CZbQTEu2ERDsh0U5ItBMS7URp09neXAdOQulgtVb2nIUCmUjAIfClJisvwmdEZCbXSV6XrcyO4KRD2fM45otK53xsZc+pshxb2XOq051lB9G/arbzT2VSn6FDohNe26xuJdiGRCe6Wr9ouKot0S04bJDd5j4Nie6Q2cdhHF6GOO1w55FEOyHRTkj01EX3ZR94CXwEvoeoXr8I74kEPGq4tXcVPiMieN7hj0OV3aIn1jG6yL4JPAPeAT+BH8CHsI1bpf1iNpDs/SC2riL3mIKwAWU/AP5MdTjqWia1iJi32J97wO+G7bwqYR5tkVGdTJu4D/wdKLOLEW0tZc8TDUdFi7YWw8idhMNR0aKtIbNvJD5CihZtNZIeDjAcFS3agNcbteS7wLfER8glRYs24CvwBnjbYi4dI7t40ZbwR5tPoUxqmUT2WCaRPZZJZI9lEtljmUT2WCYxOrLZ0URkM4/OHYl2QqKdkGgnJNoJiXZCop2Q6KmL1uPYqF0ul4yzAf7m2ojbXhXV0ozBqdaDlC76CKfFN4uCRX/yfLzxQU/Z2xhz203Jt3FmLywhO+1wgtzGmNteLpc72sWDuoUQQgghhBBCCCEYIf8B/kaoZm018W4AAAAASUVORK5CYII="
+                            />
+                          </defs>
+                        </svg>
+
+                        <p>Drag or drop file to upload</p>
+                      </div>
+                    </label>
+                  </div>
+                }
+
 
                 {/* <input
                   id="logo"
@@ -265,7 +353,7 @@ export default function CourseCreation(params) {
               <div className="mt-2">
                 <textarea
                   id="name"
-                  name="name"
+                  name="course_desc"
                   rows="4"
                   cols="50"
                   className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -286,7 +374,7 @@ export default function CourseCreation(params) {
                 <div className="mt-2">
                   <input
                     id="name"
-                    name="name"
+                    name="startDate"
                     type="datetime-local"
                     required
                     className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -306,7 +394,7 @@ export default function CourseCreation(params) {
                 <div className="mt-2">
                   <input
                     id="name"
-                    name="name"
+                    name="endDate"
                     type="datetime-local"
                     required
                     className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -328,11 +416,30 @@ export default function CourseCreation(params) {
                 <div className="mt-2">
                   <input
                     id="name"
-                    name="name"
+                    name="hours"
                     type="text"
                     required
                     className="block w-1/3 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     onChange={handleInput}
+                  />
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="name"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    InstituteId
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <Select
+                    options={institutes}
+                    onChange={(option) => {
+                      setInstituteId(option.value);
+                    }}
+                    styles={customStyles}
                   />
                 </div>
               </div>
@@ -345,7 +452,7 @@ export default function CourseCreation(params) {
                 Create
               </button>
               <button
-                type="submit"
+
                 className="flex w-1/12 justify-center rounded-md px-5 py-3 text-lg font-semibold leading-6 text-purple-500 border-purple-500 border-2 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
               >
                 Reset

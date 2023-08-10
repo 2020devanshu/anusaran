@@ -42,11 +42,9 @@ export default function NavBar({ }) {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="text-gray-100 text-xl absolute " >
+      <div className="absolute" >
         <div className="p-2.5 mt-1 flex items-center">
-          <div className="rounded-md" >
-            <img src={mainLogo} alt="Logo" onClick={handleOpen} style={{ width: "13%" }} />
-          </div>
+          <img src={mainLogo} alt="Logo" onClick={handleOpen} style={{ width: "13%", cursor: "pointer" }} />
         </div>
       </div>
       {localStorage.getItem("role") === "admin" ? (

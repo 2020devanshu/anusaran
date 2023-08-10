@@ -4,14 +4,22 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RxDashboard } from "react-icons/rx";
 import Principal from "../components/Principal";
 import Institute from "../components/Institute";
-import { Link, useNavigate } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom/dist";
 import Courses from "../components/Courses";
 import { useAppContext } from "../components/AppContext";
 
 export default function AdminDashboard() {
   const { handleClose, close, handleOpen } = useAppContext();
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
 
+    navigate("/");
+    window.location.reload(true);
+  };
   return (
     <div>
       <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
@@ -74,9 +82,9 @@ export default function AdminDashboard() {
               </svg>
             </div>
             <div>
-              <p className="font-bold">Admin</p>
+              <p className="font-bold">Admins</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"

@@ -39,7 +39,7 @@ export default function CourseDesc() {
     const formData = new FormData();
     formData.append("file", video);
     const response = await axios.post(
-      "http://65.1.211.146:8000/uploadFile",
+      "http://151.106.39.4:8080/uploadFile",
       formData,
       {
         headers: {
@@ -51,10 +51,10 @@ export default function CourseDesc() {
 
     // const fileUrl = response.data.url[0];
     const resp = await axios
-      .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
+      .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
       .then(async (res) => {
         axios
-          .post("http://65.1.211.146:8000/insertVideo", {
+          .post("http://151.106.39.4:8080/insertVideo", {
             videoName: name,
             instituteId: res.data.data.Institute,
             courseId: params.id,
@@ -75,7 +75,7 @@ export default function CourseDesc() {
   useEffect(() => {
     const qrGen = async () => {
       const resp = await axios.get(
-        `http://65.1.211.146:8000/generateQR?user_id=1`
+        `http://151.106.39.4:8080/generateQR?user_id=1`
       );
       setqr(resp.data.data);
       const newS = qr.replace(/\n/g, "").replace(/ /g, "").trim();
@@ -85,13 +85,13 @@ export default function CourseDesc() {
     };
     const fge = async () => {
       const resp = await axios
-        .get(`http://65.1.211.146:8000/getCoursesById?course_id=${params.id}`)
+        .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
         .then(async (res) => {
           console.log("res", res.data.data);
           if (res.data.data.Institute) {
             const resp2 = await axios
               .get(
-                `http://65.1.211.146:8000/getsubCourses?InstituteId=${res.data.data.Institute}`
+                `http://151.106.39.4:8080/getsubCourses?InstituteId=${res.data.data.Institute}`
               )
               .then((res2) => {
                 return res2.data.data;
@@ -217,7 +217,7 @@ export default function CourseDesc() {
                 subCourse.length > 0 &&
                 subCourse.map((x) => {
                   return (
-                    <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden horizontalCard" onClick={()=>navigate("/subcourse/"+x.subcourses_id)}>
+                    <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden horizontalCard" onClick={() => navigate("/subcourse/" + x.subcourses_id)}>
                       <div className="w-1/3">
                         <img
                           src={"https://via.placeholder.com/150"}
