@@ -108,7 +108,7 @@ const App = () => {
                 path="create-subcourse/:id"
                 element={<SubCourseCreation />}
               />
-              <Route path="addvideo" element={<AddVideo />} />
+              <Route path="addvideo/:id" element={<AddVideo />} />
               <Route path="subcourse/:id" element={<SubCourse />} />
               <Route path="course/:id/subcourse/:id" element={<SubCourse />} />
               <Route

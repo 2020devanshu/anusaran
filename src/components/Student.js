@@ -30,6 +30,7 @@ export default function Student() {
   const [studentAttendanceData, setstudentAttendanceData] = useState({});
   const [numberOfNo, setnumberOfNo] = useState(0);
   const [numberOfYes, setnumberOfYes] = useState(0);
+  const [ratingData, setratingData] = useState(["Rating", "Frequency"]);
 
   const fetchAttendance = async () => {
     const resp = await axios
@@ -67,6 +68,28 @@ export default function Student() {
 
     console.log("studentAttendanceData", attendanceTemp);
   };
+  function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  const fetchFeedback = async () => {
+    const resp = await axios
+      .get(
+        `http://151.106.39.4:8080/studentFeedbackByInstitute?institutionId=${InstituteId}`
+      )
+      .then((res) => {
+        console.log("res here", res);
+        setratingData([
+          ["Rating", "Frequency"],
+          ["1 star", randomIntFromInterval(1,1000)],
+          ["2 star", randomIntFromInterval(1, 1000)],
+          ["3 star", randomIntFromInterval(1, 1000)],
+          ["4 star", randomIntFromInterval(1, 1000)],
+          ["5 star", randomIntFromInterval(1, 1000)],
+        ])
+        console.log('ratingData', ratingData)
+      });
+  }
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -125,6 +148,7 @@ export default function Student() {
     };
     fetchCourses();
     fetchAttendance();
+    fetchFeedback()
   }, [InstituteId, CourseId]);
   const attendanceData = [
     ["Boolean", "Value"],
@@ -137,13 +161,6 @@ export default function Student() {
     // legend: "none",
   };
 
-  const ratingData = [
-    ["Rating", "Frequency"],
-    ["1 star", 1000],
-    ["2 star", 1170],
-    ["3 star", 660],
-    ["5 star", 1030],
-  ];
 
   const ratingOptions = {
     chart: {},

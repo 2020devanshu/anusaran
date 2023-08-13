@@ -87,20 +87,20 @@ export default function CourseDesc() {
       const resp = await axios
         .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
         .then(async (res) => {
-          console.log("res", res.data.data);
-          if (res.data.data.Institute) {
+          console.log("ress", res.data.data[0].Institute);
+          if (res.data.data[0].Institute) {
             const resp2 = await axios
               .get(
-                `http://151.106.39.4:8080/getsubCourses?InstituteId=${res.data.data.Institute}`
+                `http://151.106.39.4:8080/getsubCourses?InstituteId=${res.data.data[0].Institute}`
               )
               .then((res2) => {
                 return res2.data.data;
               });
             const newArr = resp2.filter(
-              (x) => x.courseId === res.data.data.course_id
+              (x) => x.courseId === res.data.data[0].course_id
             );
             setsubCourse(newArr);
-            console.log("subcourses", newArr);
+            console.log("subcourses", resp2);
           }
           return res.data.data;
         });

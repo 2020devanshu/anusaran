@@ -113,7 +113,7 @@ export default function AddVideo() {
         },
       }
     );
-    console.log("response of video", response.data.data[0]);
+    console.log("response of video", response.data.data);
 
     // const fileUrl = response.data.url[0];
     const resp = await axios
@@ -127,7 +127,7 @@ export default function AddVideo() {
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
             subCourseId: parseInt(res.data.data[0].subCourseId),
-            videosPaths: response.data.data[0],
+            videosPathsUrl: response.data.data[0],
           })
           .then((res) => {
             console.log("succ", res);
@@ -189,48 +189,7 @@ export default function AddVideo() {
           <form className="space-y-6 w-full" action="#">
             {/* Institute Name */}
             <div className="flex justify-between ">
-              <div className="w-1/2">
-                <div className="w-full">
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="name"
-                      className="block text-lg font-medium leading-6 text-gray-900"
-                    >
-                      Course Id*
-                    </label>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      onChange={handleInput}
-                    />
-                  </div>
-                </div>
-                <div className="w-full mt-2">
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="name"
-                      className="block text-lg font-medium leading-6 text-gray-900"
-                    >
-                      Subcourse Id
-                    </label>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      id="name"
-                      name="subcourse"
-                      type="text"
-                      required
-                      className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      onChange={handleInput}
-                    />
-                  </div>
-                </div>
-              </div>
+
               <div className="w-1/2">
                 <div className="flex items-center justify-between"></div>
                 <div className="mt-2">

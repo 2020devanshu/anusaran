@@ -5,6 +5,7 @@ import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppContext } from "./AppContext";
+import { CircleLoader } from "react-spinners";
 
 export default function CourseCreation(params) {
   const { handleClose, close, handleOpen } = useAppContext();
@@ -17,6 +18,8 @@ export default function CourseCreation(params) {
   const [imageSrc, setImageSrc] = useState(null)
   const [InstituteId, setInstituteId] = useState(null);
   const [institutes, setinstitutes] = useState([]);
+  const [uploadedImageId, setuploadedImageId] = useState(null);
+  const [loading, setloading] = useState(false)
 
 
   const [data, setData] = useState({
@@ -90,7 +93,8 @@ export default function CourseCreation(params) {
   };
 
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
+    setloading(true)
     if (e.target.files && e.target.files[0]) {
       console.log("e.target.files", e.target.files);
       const imgFile = e.target.files[0];
@@ -105,53 +109,61 @@ export default function CourseCreation(params) {
 
       // Alternatively, you can use the file object directly
       setImageSrc(e.target.files[0]);
+      console.log("data.logo", data.logo);
+      const formData = new FormData();
+
+      // Send the file to the server
+      formData.append("file", imageSrc);
+
+      // Send the file to the server
+      await axios.post(
+        "http://151.106.39.4:8080/uploads",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      ).then((res) => {
+        const fileUrl = res.data.url;
+        console.log("fileUrl", fileUrl);
+        setloading(false)
+      })
+
+      // Get the URL of the uploaded file
+
+
+      // Get the URL of the uploaded file
     }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("data.logo", data.logo);
-    const formData = new FormData();
-    formData.append("file", imageSrc);
 
-    // Send the file to the server
-    const response = await axios.post(
-      "http://151.106.39.4:8080/uploads",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
 
-    // Get the URL of the uploaded file
-    const fileUrl = response.data.url;
-    console.log("fileUrl", fileUrl);
-    // Insert the URL into the database
-    axios
-      .post("http://151.106.39.4:8080/insertCourses", {
-        course: data.name,
-        Institute: InstituteId,
-        startTime: data.startDate,
-        endTime: data.endDate,
-      })
-      .then((res) => {
-        console.log(res);
-        setData({ ...data, course: "" });
+    // axios
+    //   .post("http://151.106.39.4:8080/insertCourses", {
+    //     course: data.name,
+    //     Institute: InstituteId,
+    //     coursesImageUrl
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     setData({ ...data, course: "" });
 
-        console.log("data", data);
-        notifySucc();
-        window.location.reload();
-        // navigate("./");
-      })
-      .catch((err) => {
-        console.log(err);
-        setData({ ...data, course: "" });
+    //     console.log("data", data);
+    //     notifySucc();
+    //     window.location.reload();
+    //     // navigate("./");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setData({ ...data, course: "" });
 
-        console.log("data", data);
+    //     console.log("data", data);
 
-        notify();
-      });
+    //     notify();
+    //   });
   };
   const customStyles = {
     control: (provided, state) => ({
@@ -249,7 +261,7 @@ export default function CourseCreation(params) {
                   />
                 </div>
               </div>
-              <div className="w-full">
+              {/* <div className="w-full">
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="name"
@@ -268,70 +280,74 @@ export default function CourseCreation(params) {
                     onChange={handleInput}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* Logo */}
 
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-lg font-medium leading-6 text-gray-900"
-                >
-                  Upload Course Image
-                </label>
-              </div>
-              <div className="mt-2">
-                {
-                  imageSrc ? <> Image Uploaded</> : <div className="custom-file-upload">
+              {
+                loading ?
+                  <CircleLoader /> :
+                  <>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="password"
+                        className="block text-lg font-medium leading-6 text-gray-900"
+                      >
+                        Upload Course Image
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      {
+                        imageSrc ? <> Image Uploaded</> : <div className="custom-file-upload">
 
-                    <input
-                      id="file-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden "
-                    />
-                    <label for="file-upload">
-                      <div className="input-inner  inputbox">
-                        <svg
-                          width="50"
-                          height="50"
-                          viewBox="0 0 50 50"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                        >
-                          <rect width="50" height="50" fill="url(#pattern0)" />
-                          <defs>
-                            <pattern
-                              id="pattern0"
-                              patternContentUnits="objectBoundingBox"
-                              width="1"
-                              height="1"
-                            >
-                              <use
-                                xlinkHref="#image0_5_276"
-                                transform="scale(0.0111111)"
-                              />
-                            </pattern>
-                            <image
-                              id="image0_5_276"
-                              width="90"
-                              height="90"
-                              xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACe0lEQVR4nO2cP24TQRSHvyrQIxFBUnEFrgI0dIgqEOcANEBlJM7BLSgJCQgcTkCLgAbZFSAeWmkiWVa8/2b2eWfn90lPsmTPeufz29nx250FIYQQQgghhBBCCFFxDZgBZ8AKsBaxjTG3XYU+PgX2cOYAuGi5ozYCWTFt12MR+u6WyX0kW2SHd9V2Mz57Zfas5w5aZId31faqeIID5xLNew/RS4mmcjA4XQ/P3NlZfyUaiR4CZbQTEu2ERDsh0U5ItBMS7URp09neXAdOQulgtVb2nIUCmUjAIfClJisvwmdEZCbXSV6XrcyO4KRD2fM45otK53xsZc+pshxb2XOq051lB9G/arbzT2VSn6FDohNe26xuJdiGRCe6Wr9ouKot0S04bJDd5j4Nie6Q2cdhHF6GOO1w55FEOyHRTkj01EX3ZR94CXwEvoeoXr8I74kEPGq4tXcVPiMieN7hj0OV3aIn1jG6yL4JPAPeAT+BH8CHsI1bpf1iNpDs/SC2riL3mIKwAWU/AP5MdTjqWia1iJi32J97wO+G7bwqYR5tkVGdTJu4D/wdKLOLEW0tZc8TDUdFi7YWw8idhMNR0aKtIbNvJD5CihZtNZIeDjAcFS3agNcbteS7wLfER8glRYs24CvwBnjbYi4dI7t40ZbwR5tPoUxqmUT2WCaRPZZJZI9lEtljmUT2WCYxOrLZ0URkM4/OHYl2QqKdkGgnJNoJiXZCop2Q6KmL1uPYqF0ul4yzAf7m2ojbXhXV0ozBqdaDlC76CKfFN4uCRX/yfLzxQU/Z2xhz203Jt3FmLywhO+1wgtzGmNteLpc72sWDuoUQQgghhBBCCCEYIf8B/kaoZm018W4AAAAASUVORK5CYII="
-                            />
-                          </defs>
-                        </svg>
+                          <input
+                            id="file-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden "
+                          />
+                          <label for="file-upload">
+                            <div className="input-inner  inputbox">
+                              <svg
+                                width="50"
+                                height="50"
+                                viewBox="0 0 50 50"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                              >
+                                <rect width="50" height="50" fill="url(#pattern0)" />
+                                <defs>
+                                  <pattern
+                                    id="pattern0"
+                                    patternContentUnits="objectBoundingBox"
+                                    width="1"
+                                    height="1"
+                                  >
+                                    <use
+                                      xlinkHref="#image0_5_276"
+                                      transform="scale(0.0111111)"
+                                    />
+                                  </pattern>
+                                  <image
+                                    id="image0_5_276"
+                                    width="90"
+                                    height="90"
+                                    xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACe0lEQVR4nO2cP24TQRSHvyrQIxFBUnEFrgI0dIgqEOcANEBlJM7BLSgJCQgcTkCLgAbZFSAeWmkiWVa8/2b2eWfn90lPsmTPeufz29nx250FIYQQQgghhBBCCFFxDZgBZ8AKsBaxjTG3XYU+PgX2cOYAuGi5ozYCWTFt12MR+u6WyX0kW2SHd9V2Mz57Zfas5w5aZId31faqeIID5xLNew/RS4mmcjA4XQ/P3NlZfyUaiR4CZbQTEu2ERDsh0U5ItBMS7URp09neXAdOQulgtVb2nIUCmUjAIfClJisvwmdEZCbXSV6XrcyO4KRD2fM45otK53xsZc+pshxb2XOq051lB9G/arbzT2VSn6FDohNe26xuJdiGRCe6Wr9ouKot0S04bJDd5j4Nie6Q2cdhHF6GOO1w55FEOyHRTkj01EX3ZR94CXwEvoeoXr8I74kEPGq4tXcVPiMieN7hj0OV3aIn1jG6yL4JPAPeAT+BH8CHsI1bpf1iNpDs/SC2riL3mIKwAWU/AP5MdTjqWia1iJi32J97wO+G7bwqYR5tkVGdTJu4D/wdKLOLEW0tZc8TDUdFi7YWw8idhMNR0aKtIbNvJD5CihZtNZIeDjAcFS3agNcbteS7wLfER8glRYs24CvwBnjbYi4dI7t40ZbwR5tPoUxqmUT2WCaRPZZJZI9lEtljmUT2WCYxOrLZ0URkM4/OHYl2QqKdkGgnJNoJiXZCop2Q6KmL1uPYqF0ul4yzAf7m2ojbXhXV0ozBqdaDlC76CKfFN4uCRX/yfLzxQU/Z2xhz203Jt3FmLywhO+1wgtzGmNteLpc72sWDuoUQQgghhBBCCCEYIf8B/kaoZm018W4AAAAASUVORK5CYII="
+                                  />
+                                </defs>
+                              </svg>
 
-                        <p>Drag or drop file to upload</p>
-                      </div>
-                    </label>
-                  </div>
-                }
+                              <p>Drag or drop file to upload</p>
+                            </div>
+                          </label>
+                        </div>
+                      }
 
 
-                {/* <input
+                      {/* <input
                   id="logo"
                   name="logo"
                   type="image"
@@ -339,7 +355,10 @@ export default function CourseCreation(params) {
                   required
                   onChange={handleInput}
                 /> */}
-              </div>
+                    </div>
+                  </>
+              }
+
             </div>
             <div>
               <div className="flex items-center justify-between">

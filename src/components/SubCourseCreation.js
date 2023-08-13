@@ -15,7 +15,7 @@ export default function SubCourseCreation() {
   const [Course, setCourse] = useState([]);
   const navigate = useNavigate();
   const [data, setData] = useState({
-    name:"",
+    name: "",
     subcourses: "",
     startTime: "",
     endTime: "",
@@ -32,14 +32,12 @@ export default function SubCourseCreation() {
 
     axios
       .post("http://151.106.39.4:8080/insertsubCourses", {
-
         courseId: parseInt(params.id),
         subcourses: data.name,
-        InstituteId: Course.Institute,
+        InstituteId: Course[0].Institute,
       })
       .then((res) => {
         console.log(res);
-        notify();
 
         // navigate("course/" + params.id);
       })

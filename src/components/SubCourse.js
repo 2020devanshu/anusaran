@@ -257,7 +257,7 @@ export default function SubCourse() {
           />
         </div>
       </div>
-      <FloatingButton onClick={() => navigate("/addvideo")}>Add Videos</FloatingButton>
+      <FloatingButton onClick={() => navigate("/addvideo/" + params.id)}>Add Videos</FloatingButton>
     </>
   );
 
