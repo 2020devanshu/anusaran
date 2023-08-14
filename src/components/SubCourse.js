@@ -34,6 +34,20 @@ export default function SubCourse() {
   }
   useEffect(() => {
     console.log("params", params);
+    const fetchVideos = async () => {
+      if (params.id) {
+        const resp = await axios
+          .get(
+            "http://151.106.39.4:8080/getVideos"
+          )
+          .then(async (res) => {
+            const newarr = res.data.data.filter((x) => x.subCourseId == params.id)
+            console.log('newarr', newarr)
+            setvideo(newarr)
+          });
+        console.log("resp", resp);
+      }
+    }
     const fetchDetails = async () => {
       if (params.id) {
         const resp = await axios
@@ -60,83 +74,13 @@ export default function SubCourse() {
         console.log("resp", resp);
       }
     };
+    fetchVideos()
     fetchDetails();
   }, []);
 
-  const handleVideoUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      console.log("e.target.files", e.target.files);
 
-      // // Converting to a base64 string
-      // const reader = new FileReader();
-      // reader.onload = (e) => {
-      //   setImageSrc(e.target.result);
-      // };
-      // // reader.readAsDataURL(imgFile);
-      console.log("setvideo", URL.createObjectURL(e.target.files[0]));
 
-      // Alternatively, you can use the file object directly
-      setvideo(e.target.files[0]);
-    }
-  };
-  const handlePDFUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      console.log("e.target.files", e.target.files);
 
-      // // Converting to a base64 string
-      // const reader = new FileReader();
-      // reader.onload = (e) => {
-      //   setImageSrc(e.target.result);
-      // };
-      // // reader.readAsDataURL(imgFile);
-      console.log("setvideo", URL.createObjectURL(e.target.files[0]));
-
-      // Alternatively, you can use the file object directly
-      setAssignment(e.target.files[0]);
-    }
-  };
-  const uploadVideo = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", video);
-    const response = await axios.post(
-      "http://151.106.39.4:8080/uploadFile",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    console.log("response of video", response.data.data[0]);
-
-    // const fileUrl = response.data.url[0];
-    const resp = await axios
-      .get(
-        "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
-      )
-      .then(async (res) => {
-        const res2 = await axios
-          .post("http://151.106.39.4:8080/insertVideo", {
-            videoName: name,
-            instituteId: res.data.data[0].InstituteId,
-            courseId: parseInt(res.data.data[0].courseId),
-            subCourseId: parseInt(res.data.data[0].subCourseId),
-            videosPaths: response.data.data[0],
-          })
-          .then((res) => {
-            console.log("succ", res);
-            // localStorage.setItem("token", res.data.token);
-            // navigate("/institute-list");
-          })
-          .catch((err) => {
-            console.log("error is here", err);
-            // notify();
-          });
-        console.log("res2", res2);
-      })
-      .catch((err) => console.log("err in here", err));
-  };
   const uploadMinAttendance = async (e) => {
     e.preventDefault();
     const resp = await axios
@@ -251,10 +195,15 @@ export default function SubCourse() {
           </div>
         </div>
         <div>
-          <VideoCard
-            videoUrl="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4"
-            title="Big Buck Bunny"
-          />
+          {
+            video && video.length > 0 && video.map((x)=> {
+              return <VideoCard
+                videoUrl={x.videosPathsUrl}
+                title={x.fileName ? x.fileName : "no field"}
+              />
+            })
+          }
+          
         </div>
       </div>
       <FloatingButton onClick={() => navigate("/addvideo/" + params.id)}>Add Videos</FloatingButton>

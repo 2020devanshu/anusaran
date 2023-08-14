@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { useAppContext } from "./AppContext";
+import { CircleLoader } from "react-spinners";
+
 
 export default function AddVideo() {
   const { handleClose, close, handleOpen } = useAppContext();
+  const [loading, setloading] = useState(false)
 
   const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
   const [video, setvideo] = useState(null);
@@ -17,6 +20,7 @@ export default function AddVideo() {
   const [qr, setqr] = useState("");
   const [Attendance, setAttendance] = useState(null);
   const [assignmentDueDate, setAssignmentDueDate] = useState(new Date());
+  const [videoURL, setvideoURL] = useState(null)
   const params = useParams();
   const notify = () => toast("Try again");
   const [options, setOptions] = useState([]);
@@ -68,7 +72,9 @@ export default function AddVideo() {
     fge();
   }, []);
 
-  const handleVideoUpload = (e) => {
+  const handleVideoUpload = async (e) => {
+    setloading(true)
+
     if (e.target.files && e.target.files[0]) {
       console.log("e.target.files", e.target.files);
 
@@ -80,8 +86,26 @@ export default function AddVideo() {
       // // reader.readAsDataURL(imgFile);
       console.log("setvideo", URL.createObjectURL(e.target.files[0]));
 
+
+
       // Alternatively, you can use the file object directly
       setvideo(e.target.files[0]);
+
+      const formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      await axios.post(
+        "http://151.106.39.4:8080/uploads",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      ).then((res) => {
+        console.log('res.data.data[0]', res.data.url[0])
+        setvideoURL(res.data.url[0])
+        setloading(false)
+      })
     }
   };
   const handlePDFUpload = (e) => {
@@ -102,32 +126,23 @@ export default function AddVideo() {
   };
   const uploadVideo = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", video);
-    const response = await axios.post(
-      "http://151.106.39.4:8080/uploadFile",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    console.log("response of video", response.data.data);
+
 
     // const fileUrl = response.data.url[0];
-    const resp = await axios
+    await axios
       .get(
         "http://151.106.39.4:8080/getsubCoursesById?subcourses_id=" + params.id
       )
       .then(async (res) => {
-        const res2 = await axios
+        console.log("res2", res.data.data);
+
+        await axios
           .post("http://151.106.39.4:8080/insertVideo", {
-            videoName: name,
+            fileName: name,
             instituteId: res.data.data[0].InstituteId,
             courseId: parseInt(res.data.data[0].courseId),
-            subCourseId: parseInt(res.data.data[0].subCourseId),
-            videosPathsUrl: response.data.data[0],
+            subCourseId: parseInt(res.data.data[0].subcourses_id),
+            videosPathsUrl: videoURL,
           })
           .then((res) => {
             console.log("succ", res);
@@ -138,7 +153,6 @@ export default function AddVideo() {
             console.log("error is here", err);
             // notify();
           });
-        console.log("res2", res2);
       })
       .catch((err) => console.log("err in here", err));
   };
@@ -186,7 +200,31 @@ export default function AddVideo() {
         </div>
         <div class="border-b-2 border-black mb-2"></div>
         <div className="flex p-4">
-          <form className="space-y-6 w-full" action="#">
+          <form className="space-y-6 w-full" onSubmit={uploadVideo} >
+
+            <div className="flex justify-between">
+              <div className="w-full">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="name"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Video Name*
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleInput}
+                  />
+                </div>
+              </div>
+
+            </div>
             {/* Institute Name */}
             <div className="flex justify-between ">
 
@@ -194,47 +232,35 @@ export default function AddVideo() {
                 <div className="flex items-center justify-between"></div>
                 <div className="mt-2">
                   <>
-                    <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
-                      <h1 className="text-2xl font-bold">
-                        Upload course related videos
-                      </h1>
-                      {video && (
+                    {
+                      loading ? <CircleLoader /> :
                         <>
-                          <input
-                            type="text"
-                            onChange={(e) => setname(e.target.value)}
-                          ></input>
-                          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            <div onClick={uploadVideo}>Upload Video</div>
-                          </button>
+                          {
+                            videoURL ? <>Uploaded</> :
+                              <>
+                                <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+                                  <h1 className="text-2xl font-bold">
+                                    Upload course related videos
+                                  </h1>
+
+                                </div>
+                                <div className="mt-2">
+                                  <input
+                                    type="file"
+                                    accept="video/mp4,video/x-m4v,video/*"
+                                    onChange={handleVideoUpload}
+                                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  />
+
+                                </div>
+                              </>
+                          }
+
                         </>
-                      )}
-                    </div>
-                    <div className="mt-2">
-                      <input
-                        type="file"
-                        accept="video/mp4,video/x-m4v,video/*"
-                        onChange={handleVideoUpload}
-                        className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                      {/* <input
-                  id="logo"
-                  name="logo"
-                  type="image"
-                  alt="#"
-                  required
-                  onChange={handleInput}
-                /> */}
-                    </div>
+                    }
+
                   </>
-                  {/* <input
-                  id="logo"
-                  name="logo"
-                  type="image"
-                  alt="#"
-                  required
-                  onChange={handleInput}
-                /> */}
+
                 </div>
               </div>
             </div>

@@ -171,7 +171,7 @@ export default function Courses() {
               >
                 <div className="w-full">
                   <img
-                    src={institute.InstituteLogo}
+                    src={institute.coursesImageUrl}
                     className="w-full h-48 object-cover"
                   />
                 </div>
@@ -185,7 +185,7 @@ export default function Courses() {
                         </p>
                       </div>
                       <div>
-                        <p className="font text  ">By Sarim</p>
+                        <p className="font text  ">By Sarims</p>
                       </div>
                     </div>
                     <div>

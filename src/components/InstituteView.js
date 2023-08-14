@@ -90,7 +90,7 @@ export default function InstituteView() {
               >
                 <div className="border-b-2 border-black pb-6">
                   <img
-                    src={institute.InstituteLogo}
+                    src={institute.InstituteLogo  }
                     className="w-48 h-48 object-cover"
                   />
                 </div>

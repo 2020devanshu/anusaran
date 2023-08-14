@@ -18,7 +18,7 @@ export default function CourseCreation(params) {
   const [imageSrc, setImageSrc] = useState(null)
   const [InstituteId, setInstituteId] = useState(null);
   const [institutes, setinstitutes] = useState([]);
-  const [uploadedImageId, setuploadedImageId] = useState(null);
+  const [uploadImageURL, setuploadImageURL] = useState(null);
   const [loading, setloading] = useState(false)
 
 
@@ -113,7 +113,7 @@ export default function CourseCreation(params) {
       const formData = new FormData();
 
       // Send the file to the server
-      formData.append("file", imageSrc);
+      formData.append("file", e.target.files[0]);
 
       // Send the file to the server
       await axios.post(
@@ -127,6 +127,7 @@ export default function CourseCreation(params) {
       ).then((res) => {
         const fileUrl = res.data.url;
         console.log("fileUrl", fileUrl);
+        setuploadImageURL(fileUrl[0])
         setloading(false)
       })
 
@@ -141,29 +142,29 @@ export default function CourseCreation(params) {
     console.log("data.logo", data.logo);
 
 
-    // axios
-    //   .post("http://151.106.39.4:8080/insertCourses", {
-    //     course: data.name,
-    //     Institute: InstituteId,
-    //     coursesImageUrl
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setData({ ...data, course: "" });
+    axios
+      .post("http://151.106.39.4:8080/insertCourses", {
+        course: data.name,
+        Institute: InstituteId,
+        coursesImageUrl: uploadImageURL
+      })
+      .then((res) => {
+        console.log(res);
+        setData({ ...data, course: "" });
 
-    //     console.log("data", data);
-    //     notifySucc();
-    //     window.location.reload();
-    //     // navigate("./");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setData({ ...data, course: "" });
+        console.log("data", data);
+        notifySucc();
+        window.location.reload();
+        // navigate("./");
+      })
+      .catch((err) => {
+        console.log(err);
+        setData({ ...data, course: "" });
 
-    //     console.log("data", data);
+        console.log("data", data);
 
-    //     notify();
-    //   });
+        notify();
+      });
   };
   const customStyles = {
     control: (provided, state) => ({
