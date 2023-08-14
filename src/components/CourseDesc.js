@@ -8,6 +8,7 @@ import { useAppContext } from "./AppContext";
 export default function CourseDesc() {
   const { handleClose, close, handleOpen } = useAppContext();
 
+  const [courseData, setcourseData] = useState(null)
   const [myData, setData] = useState([]);
   const [name, setname] = useState("");
   const [qr, setqr] = useState("");
@@ -87,7 +88,8 @@ export default function CourseDesc() {
       const resp = await axios
         .get(`http://151.106.39.4:8080/getCoursesById?course_id=${params.id}`)
         .then(async (res) => {
-          console.log("ress", res.data.data[0].Institute);
+          setcourseData(res.data.data[0])
+          console.log("ress", res.data.data);
           if (res.data.data[0].Institute) {
             const resp2 = await axios
               .get(
@@ -168,7 +170,7 @@ export default function CourseDesc() {
                   <span className="mr-4 font-semibold">Instructor:</span>
                   <img
                     className="h-10 w-10 rounded-full border-2 border-white mr-4"
-                    src={"https://via.placeholder.com/150"}
+                    src={courseData ? courseData.coursesImageUrl : "https://via.placeholder.com/150"}
                     alt="Avatar"
                   />
                   Esthera Jackson
@@ -186,7 +188,7 @@ export default function CourseDesc() {
             </div>
             <div className="rightSide">
               <div>
-                <img src={require("../assets/rect.png")} />
+                <img src={courseData ? courseData.coursesImageUrl : "https://via.placeholder.com/150"} />
               </div>
             </div>
           </div>
@@ -212,7 +214,7 @@ export default function CourseDesc() {
           </div>
           <div className="end">
             <div className="font-bold text-2xl">Sub-Modules</div>
-            <div className="flex justify-around space-x-4">
+            <div className="flex justify-around space-x-4 flex-wrap">
               {subCourse &&
                 subCourse.length > 0 &&
                 subCourse.map((x) => {
@@ -220,7 +222,7 @@ export default function CourseDesc() {
                     <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden horizontalCard" onClick={() => navigate("/subcourse/" + x.subcourses_id)}>
                       <div className="w-1/3">
                         <img
-                          src={"https://via.placeholder.com/150"}
+                          src={x.subCoursesImageUrl}
                           alt="Avatar"
                           className="h-full w-full object-cover"
                         />

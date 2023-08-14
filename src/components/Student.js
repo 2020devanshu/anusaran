@@ -81,7 +81,7 @@ export default function Student() {
         console.log("res here", res);
         setratingData([
           ["Rating", "Frequency"],
-          ["1 star", randomIntFromInterval(1,1000)],
+          ["1 star", randomIntFromInterval(1, 1000)],
           ["2 star", randomIntFromInterval(1, 1000)],
           ["3 star", randomIntFromInterval(1, 1000)],
           ["4 star", randomIntFromInterval(1, 1000)],
@@ -370,8 +370,7 @@ export default function Student() {
             return (
               <div className="card rounded-xl bg-gray-100 w-1/6 flex flex-col items-center h-56 justify-center">
                 <div className="profile">
-                  <svg
-                    width="80"
+                  <svg width="80"
                     height="80"
                     viewBox="0 0 42 42"
                     fill="none"
@@ -379,9 +378,10 @@ export default function Student() {
                   >
                     <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
                   </svg>
+
                 </div>
-                <div className="details mt-4">
-                  <div>{studentData.name}</div>
+                <div className="details mt-4 w-full text-center">
+                  <div className="truncate w-4/5 mx-auto">{studentData.name}</div>
                   <div className="text-gray-500">btech, cse</div>
                 </div>
               </div>

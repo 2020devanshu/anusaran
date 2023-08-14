@@ -5,21 +5,12 @@ import { RxDashboard } from "react-icons/rx";
 import Principal from "../components/Principal";
 import Institute from "../components/Institute";
 import { Link, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom/dist";
 import Courses from "../components/Courses";
 import { useAppContext } from "../components/AppContext";
 
 export default function AdminDashboard() {
-  const { handleClose, close, handleOpen } = useAppContext();
-  const navigate = useNavigate()
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("email");
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
 
-    navigate("/");
-    window.location.reload(true);
-  };
   return (
     <div>
       <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">

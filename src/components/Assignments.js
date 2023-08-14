@@ -194,7 +194,7 @@ export default function Assignments() {
                         </div>
                     </> :
 
-                        <div className="flex justify-around gap-4"  >
+                        <div className="flex justify-around gap-4 flex-wrap"  >
                             {
                                 assignment && assignment.length > 0 && assignment.map((x) => {
                                     return (

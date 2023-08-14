@@ -63,6 +63,18 @@ export default function Courses() {
     axios.get("").then((response) => setData(response.data.data));
   };
 
+  function monthDiff(date1, date2) {
+    var months;
+    let date1n = new Date(date1)
+    let date2n = new Date(date2)
+
+    months = (date2n.getFullYear() - date1n.getFullYear()) * 12;
+    months -= date1n.getMonth();
+    months += date2n.getMonth();
+    return months <= 0 ? 0 : months;
+  }
+
+
   return (
     <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
       <div className="navbar flex justify-between w-full">
@@ -172,7 +184,7 @@ export default function Courses() {
                 <div className="w-full">
                   <img
                     src={institute.coursesImageUrl}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48"
                   />
                 </div>
 
@@ -185,7 +197,7 @@ export default function Courses() {
                         </p>
                       </div>
                       <div>
-                        <p className="font text  ">By Sarims</p>
+                        <p className="font text  ">By {institute.author ? institute.author : "Author"}</p>
                       </div>
                     </div>
                     <div>
@@ -194,7 +206,7 @@ export default function Courses() {
                   </div>
                   <div className="flex flex-row items-center justify-between mt-4">
                     <div className="flex flex-col text-purple-700">
-                      2 months
+                      {monthDiff(institute.startDate,institute.endDate)} months
                     </div>
                     <div>
                       <button
