@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom/dist";
 import { useAppContext } from "../components/AppContext";
+import FloatingButton from "./FloatingButton";
+
+
 
 export default function InstituteView() {
   const { handleClose, close, handleOpen } = useAppContext();
@@ -32,6 +35,7 @@ export default function InstituteView() {
 
   return (
     <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
+      <FloatingButton onClick={() => navigate("/institute-creation")}>Add Institute</FloatingButton>
       <div className="navbar flex justify-between w-full">
         <div className="navleftitem ml-6">
           <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
@@ -90,7 +94,7 @@ export default function InstituteView() {
               >
                 <div className="border-b-2 border-black pb-6">
                   <img
-                    src={institute.InstituteLogo  }
+                    src={institute.InstituteLogo}
                     className="w-48 h-48"
                   />
                 </div>

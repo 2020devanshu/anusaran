@@ -7,6 +7,8 @@ import ProfileCard from "./ProfileCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useMediaQuery } from "react-responsive";
+import FloatingButton from "./FloatingButton";
+
 
 
 export default function InstituteById() {
@@ -145,8 +147,13 @@ export default function InstituteById() {
     setlimit(!limit);
   };
 
+  const handleClickAdd = () => {
+    navigate("/principal-creation");
+  };
+
   return (
     <div className="flex flex-col justify-center p-10 items-center bg-white">
+      <FloatingButton onClick={handleClickAdd}>Add principal</FloatingButton>
       <div className="navbar md:flex justify-between w-full">
         <div className="navleftitem flex justify-center flex-col ">
           <h1 className="text-6xl font-bold xsm:mb-4 m-0">{Name}</h1>

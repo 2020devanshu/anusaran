@@ -86,13 +86,12 @@ export default function Courses() {
               Courses
             </h1>
           </div>
-          <div onClick={() => setcurrentActive("Self Learning")}>
+          <div onClick={() => setcurrentActive("")}>
             <h1
               className={`text-xl cursor-pointer ${currentActive === "Attendance" ? "text-purple-500" : ""
                 }`}
 
             >
-              Self Learning
             </h1>
           </div>
         </div>
@@ -206,7 +205,7 @@ export default function Courses() {
                   </div>
                   <div className="flex flex-row items-center justify-between mt-4">
                     <div className="flex flex-col text-purple-700">
-                      {monthDiff(institute.startDate,institute.endDate)} months
+                      {monthDiff(institute.startDate, institute.endDate)} months
                     </div>
                     <div>
                       <button

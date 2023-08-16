@@ -83,7 +83,8 @@ export default function SubCourseCreation() {
         courseId: parseInt(params.id),
         subcourses: data.name,
         InstituteId: Course[0].Institute,
-        subCoursesImageUrl: uploadImageURL
+        subCoursesImageUrl: uploadImageURL,
+        grading: data.grade,
       })
       .then((res) => {
         console.log(res);
@@ -178,7 +179,7 @@ export default function SubCourseCreation() {
                 <div className="w-full mt-2">
                   <div className="flex items-center justify-between">
                     <label
-                      htmlFor="name"
+                      htmlFor="grade"
                       className="block text-lg font-medium leading-6 text-gray-900"
                     >
                       Grading System*
@@ -187,7 +188,7 @@ export default function SubCourseCreation() {
                   <div className="mt-2">
                     <input
                       id="name"
-                      name="name"
+                      name="grade"
                       type="text"
                       required
                       className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
