@@ -4,8 +4,11 @@ import AssignmentCard from './AssignmentCard';
 import { useState } from 'react';
 import SubAssignmentCard from './SubAssignmentCard';
 import axios from 'axios';
+import FloatingButton from './FloatingButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Assignments() {
+    const navigate = useNavigate()
     const { handleClose, close, handleOpen } = useAppContext();
     const [currentAssignment, setcurrentAssignment] = useState("")
     const [currentSubAssignment, setcurrentSubAssignment] = useState("")
@@ -16,9 +19,8 @@ export default function Assignments() {
             const resp = await axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => { return res.data.data })
             console.log('resp', resp)
             if (localStorage.getItem("role") === "principal") {
-                let newArr = resp.filter((x) => x.instituteId === localStorage.getItem("institutionId"))
+                let newArr = resp.filter((x) => x.instituteId === parseInt(localStorage.getItem("institutionId")))
                 setassignment(newArr)
-
             }
             else
                 setassignment(resp)
@@ -36,8 +38,13 @@ export default function Assignments() {
         setcurrentSubAssignment(e)
     }
 
+    const addAssignment = () => {
+        navigate("/assignment-creation")
+    }
+
     return (
         <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
+            <FloatingButton onClick = {() => addAssignment()}>Add Assignments</FloatingButton>
             <div className="navbar flex justify-between w-full">
                 <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
                     <div>

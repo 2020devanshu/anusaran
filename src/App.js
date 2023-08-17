@@ -36,6 +36,7 @@ import Student from "./components/Student";
 import AddVideo from "./components/AddVideo";
 import Assignments from "./components/Assignments";
 import Teacher from "./components/Teacher";
+import AssignmentCreation from "./components/AssignmentCreation";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -81,6 +82,10 @@ const App = () => {
               <Route
                 path="principal-creation"
                 element={<PrincipalCreation />}
+              />
+              <Route
+                path="assignment-creation"
+                element={<AssignmentCreation />}
               />
               <Route path="course-creation" element={<CourseCreation />} />
               <Route path="dept-creation" element={<DeptCreation />} />

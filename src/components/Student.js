@@ -98,7 +98,7 @@ export default function Student() {
         .then((res) => res.data.data);
       setData(resp);
       if (localStorage.getItem("role") === "principal") {
-        let newArr = resp.filter((x) => x.institutionId === localStorage.getItem("institutionId"))
+        let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
         setData(newArr)
 
       }

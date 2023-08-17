@@ -38,9 +38,9 @@ export default function Courses() {
           "http://151.106.39.4:8080/getCoursesAll"
         );
         if (localStorage.getItem("role") === "principal") {
-          response = response.data.data.filter((x) => x.Institute === localStorage.getItem("institutionId"))
-          console.log('courses', response)
-          setInstitutes(response.data.data);
+          let response2 = response.data.data.filter((x) => x.Institute === parseInt(localStorage.getItem("institutionId")))
+          console.log('courses',response2, response.data.data, localStorage.getItem("institutionId"))
+          setInstitutes(response2);
 
         }
         else
