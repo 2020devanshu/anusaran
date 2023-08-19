@@ -12,6 +12,7 @@ export default function AssignmentCreation() {
     const { handleClose, close, handleOpen } = useAppContext();
     const [loading, setloading] = useState(false)
 
+    const params = useParams()
     const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
     const [video, setvideo] = useState(null);
     const [assignment, setAssignment] = useState(null);
@@ -131,25 +132,43 @@ export default function AssignmentCreation() {
 
 
         // const fileUrl = response.data.url[0];
-
-
-        await axios
-            .post("http://151.106.39.4:8080/inserAssignment", {
-                assignmentName: name,
-                instituteId: InstituteId,
-                courseId: parseInt(CourseId),
-                subCourseId: parseInt(SubCourseId),
-                assignmentsPathsUrl: videoURL,
-            })
-            .then((res) => {
-                console.log("succ", res);
-                // localStorage.setItem("token", res.data.token);
-                // navigate("/institute-list");
-            })
-            .catch((err) => {
-                console.log("error is here", err);
-                // notify();
-            });
+        if (params.id) {
+            await axios
+                .post("http://151.106.39.4:8080/inserAssignment", {
+                    assignmentsName: name,
+                    status: 1,
+                    assignmentsPathsUrl: videoURL,
+                    assignmentId: params.id
+                })
+                .then((res) => {
+                    console.log("succ", res);
+                    // localStorage.setItem("token", res.data.token);
+                    // navigate("/institute-list");
+                })
+                .catch((err) => {
+                    console.log("error is here", err);
+                    // notify();
+                });
+        }
+        else
+            await axios
+                .post("http://151.106.39.4:8080/inserAssignment", {
+                    assignmentsName: name,
+                    instituteId: InstituteId,
+                    courseId: parseInt(CourseId),
+                    subCourseId: parseInt(SubCourseId),
+                    assignmentsPathsUrl: videoURL,
+                    status: 0,
+                })
+                .then((res) => {
+                    console.log("succ", res);
+                    // localStorage.setItem("token", res.data.token);
+                    // navigate("/institute-list");
+                })
+                .catch((err) => {
+                    console.log("error is here", err);
+                    // notify();
+                });
 
     };
 
@@ -201,7 +220,7 @@ export default function AssignmentCreation() {
                             </svg>
                         </div>
                         <div onClick={handleOpen}>
-                            <p>Admin</p>
+                            <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>
                         </div>
                         <div>
                             <svg
@@ -245,9 +264,9 @@ export default function AssignmentCreation() {
                                         type="text"
                                         required
                                         className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        onChange={handleInput}
+                                        onChange={(e) => setname(e.target.value)}
                                     />
-                                </div>
+                                </div>  
                             </div>
 
                         </div>
@@ -291,73 +310,79 @@ export default function AssignmentCreation() {
                             </div>
                         </div>
                         {/* Logo */}
-                        <div className="w-full">
-                            <div className="flex items-center justify-between">
-                                <label
-                                    htmlFor="name"
-                                    className="block text-lg font-medium leading-6 text-gray-900"
-                                >
-                                    InstituteId
-                                </label>
-                            </div>
-                            <div className="mt-2">
-                                <Select
-                                    options={institutes}
-                                    onChange={(option) => {
-                                        setInstituteId(option.value);
-                                    }}
-                                    styles={customStyles}
-                                />
-                            </div>
-                        </div>
-                        {
-                            courses && courses.length > 0 && (
-
+                        {!params.id &&
+                            <>
                                 <div className="w-full">
                                     <div className="flex items-center justify-between">
                                         <label
                                             htmlFor="name"
                                             className="block text-lg font-medium leading-6 text-gray-900"
                                         >
-                                            CourseId
+                                            InstituteId
                                         </label>
                                     </div>
                                     <div className="mt-2">
                                         <Select
-                                            options={courses}
+                                            options={institutes}
                                             onChange={(option) => {
-                                                setCourseId(option.value);
+                                                setInstituteId(option.value);
                                             }}
                                             styles={customStyles}
                                         />
                                     </div>
                                 </div>
-                            )
-                        }
-                        {
-                            subcourses && subcourses.length > 0 && (
+                                {
+                                    courses && courses.length > 0 && (
 
-                                <div className="w-full">
-                                    <div className="flex items-center justify-between">
-                                        <label
-                                            htmlFor="name"
-                                            className="block text-lg font-medium leading-6 text-gray-900"
-                                        >
-                                            CourseId
-                                        </label>
-                                    </div>
-                                    <div className="mt-2">
-                                        <Select
-                                            options={subcourses}
-                                            onChange={(option) => {
-                                                setSubCourseId(option.value);
-                                            }}
-                                            styles={customStyles}
-                                        />
-                                    </div>
-                                </div>
-                            )
+                                        <div className="w-full">
+                                            <div className="flex items-center justify-between">
+                                                <label
+                                                    htmlFor="name"
+                                                    className="block text-lg font-medium leading-6 text-gray-900"
+                                                >
+                                                    CourseId
+                                                </label>
+                                            </div>
+                                            <div className="mt-2">
+                                                <Select
+                                                    options={courses}
+                                                    onChange={(option) => {
+                                                        setCourseId(option.value);
+                                                    }}
+                                                    styles={customStyles}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    subcourses && subcourses.length > 0 && (
+
+                                        <div className="w-full">
+                                            <div className="flex items-center justify-between">
+                                                <label
+                                                    htmlFor="name"
+                                                    className="block text-lg font-medium leading-6 text-gray-900"
+                                                >
+                                                    CourseId
+                                                </label>
+                                            </div>
+                                            <div className="mt-2">
+                                                <Select
+                                                    options={subcourses}
+                                                    onChange={(option) => {
+                                                        setSubCourseId(option.value);
+                                                    }}
+                                                    styles={customStyles}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </>
+
                         }
+
 
                         <div className="flex gap-5">
                             <button

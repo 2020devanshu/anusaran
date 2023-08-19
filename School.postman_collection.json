@@ -222,7 +222,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFrc2hpLmphc3dhbDNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUVVLV1RwcGR4VmRpRTNsWWt1aHplT2lad3BJSjZ4Z1U5VERSRlJCTjBucVY3Y2JTY09pdXUiLCJmbmFtZSI6IkFrc2hpIEphc3dhbCIsImxuYW1lIjpudWxsLCJwaG9uZSI6bnVsbCwiaWF0IjoxNjkxNDkzOTQyfQ.qdgtonSH4RTNZk0K39B165UjePXVwruOL0jbYXPV3J4\"\r\n}",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGk2bGwwbE5PdkoyWUp6aEF1SXZJLk9CRWRPOU9GZkxPaVkyWGxzM1RiZVdYdDRPOVRtaWxHIiwiZm5hbWUiOiJSYW1hbiIsImxuYW1lIjoiRGVlcCIsInBob25lIjo5ODY1NTU4NSwiaWF0IjoxNjkyMDQwMDQ1fQ.Hk66Uun4S_ZOdtnVSe7bPy9836LF6Qs5riXQmjxrZyU\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1107,7 +1107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"courseId\": 1,\r\n    \"subcourses\": \"laws\",\r\n    \"InstituteId\": 3,\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\",\r\n    \"startDate\":\"2023-08-08\",\r\n    \"endDate\":\"2023-08-09\",\r\n    \"subCoursesImageUrl\":\"sdfghj\",\r\n    \"grading\":5\r\n}",
+							"raw": "{\r\n    \"courseId\": 1,\r\n    \"subcourses\": \"laws1\",\r\n    \"InstituteId\": 1,\r\n    \"startTime\": \"09:22:20\",\r\n    \"endTime\": \"09:22:20\",\r\n    \"startDate\":\"2023-08-08\",\r\n    \"endDate\":\"2023-08-09\",\r\n    \"subCoursesImageUrl\":\"sdfghj\",\r\n    \"grading\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1569,20 +1569,15 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Amit Kumar/Downloads/1689578903972sample.pdf"
+									"src": "/C:/Users/Amit Kumar/Downloads/29354_6281704_1122986_109f415f_image.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://151.106.39.4:8080/uploads",
-							"protocol": "http",
+							"raw": "{{Domain}}/uploads",
 							"host": [
-								"151",
-								"106",
-								"39",
-								"4"
+								"{{Domain}}"
 							],
-							"port": "8080",
 							"path": [
 								"uploads"
 							]
@@ -3342,6 +3337,155 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "courseAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/courseAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"courseAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courseAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/courseAssignmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"courseAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AssignmentByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AssignmentByCourseId?courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AssignmentByCourseId"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseAssignmentById?id=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseAssignmentByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseAssignmentByCourseId?CourseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseAssignmentByCourseId"
+							],
+							"query": [
+								{
+									"key": "CourseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AssignmentBysubCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AssignmentBysubCourseId?subCourseId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AssignmentBysubCourseId"
+							],
+							"query": [
+								{
+									"key": "subCourseId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -3355,7 +3499,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"assignmentPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"assignmentsId\": 1,\r\n    \"submitDate\": \"2023-08-15\",\r\n    \"instituteId\": 1,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 1,\r\n    \"userId\": 1,\r\n    \"uploadPathUrl\": \"fghjkl\",\r\n    \"status\": \"Created\",\r\n    \"marks\": 3\r\n}",
+							"raw": "{\r\n    \"assignmentPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"assignmentsId\": 1,\r\n    \"submitDate\": \"2023-08-15\",\r\n    \"instituteId\": 1,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 1,\r\n    \"userId\": 1,\r\n    \"uploadPathUrl\": \"fghjkl\",\r\n    \"status\": \"Created\",\r\n    \"upstatus\":\"0\",\r\n    \"marks\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3448,7 +3592,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"assignmentPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"assignmentsId\": 3,\r\n    \"submitDate\": \"08/10/2023\",\r\n    \"instituteId\": 43,\r\n    \"courseId\": 31,\r\n    \"subCourseId\": 57,\r\n    \"userId\": 727,\r\n    \"marks\": 2,\r\n   \"uploadPathUrl\": \"cvbnm\",\r\n    \"status\": \"Created\"\r\n}",
+							"raw": "{\r\n   \"assignmentPaths\": \"https://s3-node12.s3.ap-south-1.amazonaws.com/1689578903972sample.pdf\",\r\n    \"assignmentsId\": 3,\r\n    \"submitDate\": \"08/10/2023\",\r\n    \"instituteId\": 43,\r\n    \"courseId\": 31,\r\n    \"subCourseId\": 57,\r\n    \"userId\": 727,\r\n    \"marks\": 2,\r\n   \"uploadPathUrl\": \"cvbnm\",\r\n    \"status\": \"Created\",\r\n    \"upstatus\":\"0\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3548,6 +3692,201 @@
 							],
 							"path": [
 								"assignmentNotsubmitte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courseUserAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/courseUserAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"courseUserAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courseUserAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/courseUserAssignmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"courseUserAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userAssignmentByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/userAssignmentByCourseId?courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"userAssignmentByCourseId"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "courseAssignmentByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/courseAssignmentByUserId?userId=727",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"courseAssignmentByUserId"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "727"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseUserAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseUserAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseUserAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseUserAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseUserAssignmentById?id=11",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseUserAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseUserAssignmentByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseUserAssignmentByCourseId?courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseUserAssignmentByCourseId"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserAssignmentBysubCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/UserAssignmentBysubCourseId?subCourseId=42",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"UserAssignmentBysubCourseId"
+							],
+							"query": [
+								{
+									"key": "subCourseId",
+									"value": "42"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subCourseUserAssignmentByuserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/subCourseUserAssignmentByuserId?userId=727",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"subCourseUserAssignmentByuserId"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "727"
+								}
 							]
 						}
 					},
@@ -4527,6 +4866,28 @@
 									"key": "instituteId",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "getAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getAdmin",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getAdmin"
 							]
 						}
 					},

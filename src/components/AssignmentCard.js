@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AssignmentCard = ({ name, assignments, handleAssignment }) => {
+const AssignmentCard = ({ name, assignments, handleAssignment,id }) => {
     return (
-        <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow-sm w-1/3" onClick={() => handleAssignment(name)}>
+        <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow-sm w-1/3" onClick={() => handleAssignment(name,id)}>
             <div className="flex items-start">
 
                 <div className="ml-4">

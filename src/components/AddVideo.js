@@ -175,7 +175,7 @@ export default function AddVideo() {
               </svg>
             </div>
             <div onClick={handleOpen}>
-              <p>Admin</p>
+              <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>
             </div>
             <div>
               <svg

@@ -11,12 +11,18 @@ export default function Assignments() {
     const navigate = useNavigate()
     const { handleClose, close, handleOpen } = useAppContext();
     const [currentAssignment, setcurrentAssignment] = useState("")
+    const [currentAssignmentId, setcurrentAssignmentId] = useState(null)
+    const [currentSubAssignmentId, setcurrentSubAssignmentId] = useState(null)
+
+
     const [currentSubAssignment, setcurrentSubAssignment] = useState("")
     const [assignment, setassignment] = useState(null)
+    const [subassignment, setsubassignment] = useState(null)
+
 
     useEffect(() => {
         const fetchAssignment = async () => {
-            const resp = await axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => { return res.data.data })
+            const resp = await axios.get("http://151.106.39.4:8080/courseAssignment").then((res) => { return res.data.data })
             console.log('resp', resp)
             if (localStorage.getItem("role") === "principal") {
                 let newArr = resp.filter((x) => x.instituteId === parseInt(localStorage.getItem("institutionId")))
@@ -25,26 +31,53 @@ export default function Assignments() {
             else
                 setassignment(resp)
         }
+
         fetchAssignment()
     }, [])
 
+    useEffect(() => {
+        const fetchSubAssignment = async () => {
+            const resp = await axios.get("http://151.106.39.4:8080/subCourseAssignment").then((res) => { return res.data.data })
+            let newArr = resp.filter((x) => x.assignmentId === parseInt(currentAssignmentId))
+            console.log('resp', resp, newArr, currentAssignmentId)
 
-    const handleAssignmentName = (e) => {
+            setsubassignment(newArr)
+        }
+        fetchSubAssignment()
+        fetchStudents()
+    }, [currentAssignmentId])
+    useEffect(() => {
+        fetchStudents()
+    }, [currentSubAssignmentId])
+
+    const fetchStudents = async () => {
+        const resp = await axios.get("http://151.106.39.4:8080/getUserAssignment").then((res) => { return res.data.data })
+        let newArr = resp.filter((x) => x.assignmentId === parseInt(currentSubAssignmentId))
+        console.log('students', resp, newArr, currentAssignmentId)
+
+    }
+
+    const handleAssignmentName = (e, id) => {
+        setcurrentAssignmentId(id)
         setcurrentAssignment(e)
     }
 
-    const handleSubName = (e) => {
+    const handleSubName = (e, id) => {
         console.log('e', e)
+        setcurrentSubAssignmentId(id)
         setcurrentSubAssignment(e)
     }
 
     const addAssignment = () => {
-        navigate("/assignment-creation")
+        if (currentAssignmentId) {
+            navigate("/assignment-creation/" + currentAssignmentId)
+        }
+        else navigate("/assignment-creation")
     }
 
     return (
         <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
-            <FloatingButton onClick = {() => addAssignment()}>Add Assignments</FloatingButton>
+            <FloatingButton onClick={() => addAssignment()}>Add Assignments</FloatingButton>
             <div className="navbar flex justify-between w-full">
                 <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
                     <div>
@@ -69,7 +102,7 @@ export default function Assignments() {
                             </svg>
                         </div>
                         <div onClick={handleOpen}>
-                            <p>Admin</p>
+                            <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>
                         </div>
                         <div>
                             <svg
@@ -186,17 +219,25 @@ export default function Assignments() {
                                 {currentAssignment}
                             </div>
                             <div className='flex mt-8  text-xl justify-around w-1/2'>
-                                <p>
-                                    Total Assignments: <span className='font-bold text-2xl'> 3</span>
-                                </p>
-                                <p>
-                                    Average Marks:<span className='font-bold text-2xl'> 9.5</span>
-                                </p>
+                                {
+                                    subassignment && subassignment.length > 0 &&
+                                    <>
+                                        <p>
+                                            Total Assignments: <span className='font-bold text-2xl'>{subassignment.length}</span>
+                                        </p>
+                                        <p>
+                                            Average Marks:<span className='font-bold text-2xl'> 9.5</span>
+                                        </p>
+                                    </>
+                                }
+
                             </div>
-                            <div className='flex gap-4' >
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
-                                <SubAssignmentCard assignmentName={"something"} score={"29/30"} submissionDate={"21-03-2023"} handleSubNameClick={handleSubName} />
+                            <div className='flex gap-4 flex-wrap justify-center' >
+                                {
+                                    subassignment && subassignment.length > 0 && subassignment.map((x) => {
+                                        return <SubAssignmentCard key={x.id} assignmentName={x.assignmentsName} score={"29/30"} submissionDate={"21-03-2023"} id={x.id} handleSubNameClick={handleSubName} />
+                                    })
+                                }
                             </div>
                         </div>
                     </> :
@@ -205,7 +246,7 @@ export default function Assignments() {
                             {
                                 assignment && assignment.length > 0 && assignment.map((x) => {
                                     return (
-                                        <AssignmentCard name={x.assignmentsName} assignments={5} key={1} handleAssignment={handleAssignmentName} />
+                                        <AssignmentCard name={x.assignmentsName} assignments={5} key={1} id={x.id} handleAssignment={handleAssignmentName} />
                                     )
                                 })
                             }

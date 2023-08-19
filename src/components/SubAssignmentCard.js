@@ -1,14 +1,14 @@
 import React from 'react';
 
-const SubAssignmentCard = ({ assignmentName, score, submissionDate, handleSubNameClick }) => {
+const SubAssignmentCard = ({ assignmentName, score, submissionDate, handleSubNameClick, id }) => {
     return (
-        <div className="flex justify-between items-center bg-gray-200 p-4 rounded-lg shadow-sm my-2 w-1/3" onClick={() => handleSubNameClick(assignmentName)}>
+        <div className="flex justify-between items-center bg-gray-200 p-4 rounded-lg shadow-sm my-2 " onClick={() => handleSubNameClick(assignmentName, id)}>
             <div className='w-full'>
                 <div className='flex justify-between w-full'>
 
                     <div className="text-lg font-semibold">{assignmentName}</div>
 
-                    <span className='font-bold text-2xl mr-4'>{score}</span>
+                    {/* <span className='font-bold text-2xl mr-4'>{score}</span> */}
                 </div>
                 <div>
                     <div className='flex font-bold items-center'>

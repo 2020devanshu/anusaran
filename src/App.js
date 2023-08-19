@@ -87,6 +87,10 @@ const App = () => {
                 path="assignment-creation"
                 element={<AssignmentCreation />}
               />
+              <Route
+                path="assignment-creation/:id"
+                element={<AssignmentCreation />}
+              />
               <Route path="course-creation" element={<CourseCreation />} />
               <Route path="dept-creation" element={<DeptCreation />} />
               <Route path="feedback" element={<Feedback />} />
