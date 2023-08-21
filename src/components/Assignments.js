@@ -22,7 +22,7 @@ export default function Assignments() {
 
     useEffect(() => {
         const fetchAssignment = async () => {
-            const resp = await axios.get("http://151.106.39.4:8080/courseAssignment").then((res) => { return res.data.data })
+            const resp = await axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => { return res.data.data })
             console.log('resp', resp)
             if (localStorage.getItem("role") === "principal") {
                 let newArr = resp.filter((x) => x.instituteId === parseInt(localStorage.getItem("institutionId")))

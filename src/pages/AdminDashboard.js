@@ -10,6 +10,7 @@ import { useAppContext } from "../components/AppContext";
 
 export default function AdminDashboard() {
   const { handleClose, close, handleOpen, handleLogout } = useAppContext();
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -17,40 +18,7 @@ export default function AdminDashboard() {
         <div className="navbar flex justify-between w-full">
           <div className="navleftitem">
             <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
-              <svg
-                width="150"
-                height="150"
-                viewBox="0 0 150 150"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="75" cy="75" r="75" fill="#7455F6" />
-                <mask
-                  id="mask0_14_301"
-                  style={{ maskType: "alpha" }}
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="150"
-                  height="150"
-                >
-                  <circle cx="75" cy="75" r="75" fill="#D9D9D9" />
-                </mask>
-                <g mask="url(#mask0_14_301)">
-                  <circle
-                    cx="74.9997"
-                    cy="69.9153"
-                    r="19.0678"
-                    fill="#FEFEFE"
-                  />
-                  <circle
-                    cx="74.9999"
-                    cy="143.644"
-                    r="49.5763"
-                    fill="#FEFEFE"
-                  />
-                </g>
-              </svg>
+              <img src={localStorage.getItem("profilePic")} className="w-36 h-32"/>
 
               <h1 className=" text-2xl ml-4">
                 Welcome back,<br></br> <span>Admin</span>
@@ -62,18 +30,10 @@ export default function AdminDashboard() {
             onClick={handleOpen}
           >
             <div>
-              <svg
-                width="42"
-                height="42"
-                viewBox="0 0 42 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-              </svg>
+              <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
             </div>
             <div>
-              <p className="font-bold">Admins</p>
+              <p className="font-bold">Admin</p>
             </div>
             <div onClick={handleLogout}>
               <svg
@@ -148,7 +108,8 @@ export default function AdminDashboard() {
                 </p>
               </div>
             </div>
-            <div className="teachercontent text-center h-10 w-64 items-center flex justify-center font-bold rounded-xl">
+            <div className="teachercontent text-center h-10 w-64 items-center flex justify-center font-bold rounded-xl"
+              onClick={() => navigate("institute-list")}>
               Institutes
               <svg
                 width="30"

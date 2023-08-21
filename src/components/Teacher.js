@@ -79,7 +79,7 @@ export default function Teacher() {
 
       if (localStorage.getItem("role") === "principal") {
         let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
-        console.log('resp,newArr', resp,newArr)
+        console.log('resp,newArr', resp, newArr)
         setData(newArr);
       }
       else
@@ -190,15 +190,8 @@ export default function Teacher() {
         <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
           <div className=" flex items-center justify-end w-full gap-5">
             <div>
-              <svg
-                width="42"
-                height="42"
-                viewBox="0 0 42 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-              </svg>
+              <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
+
             </div>
             <div onClick={handleOpen}>
               <p>Admin</p>

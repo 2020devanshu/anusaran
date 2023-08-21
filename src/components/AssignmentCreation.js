@@ -95,9 +95,11 @@ export default function AssignmentCreation() {
         await axios
             .get("http://151.106.39.4:8080/getCourses?Institute=" + InstituteId)
             .then((res) => {
+                console.log('res.data.data', res.data.data)
+
                 setCourses(
                     res.data.data.map((inst) => ({
-                        value: inst.courseId,
+                        value: inst.course_id,
                         label: inst.course,
                     }))
                 );
@@ -109,8 +111,8 @@ export default function AssignmentCreation() {
             .then((res) => {
                 setSubCourses(
                     res.data.data.map((inst) => ({
-                        value: inst.subcourseId,
-                        label: inst.subcourse,
+                        value: inst.subcourses_id,
+                        label: inst.subcourses,
                     }))
                 );
             });
@@ -138,7 +140,8 @@ export default function AssignmentCreation() {
                     assignmentsName: name,
                     status: 1,
                     assignmentsPathsUrl: videoURL,
-                    assignmentId: params.id
+                    assignmentId: params.id,
+                    lastDate: data.endTime
                 })
                 .then((res) => {
                     console.log("succ", res);
@@ -158,7 +161,6 @@ export default function AssignmentCreation() {
                     courseId: parseInt(CourseId),
                     subCourseId: parseInt(SubCourseId),
                     assignmentsPathsUrl: videoURL,
-                    status: 0,
                 })
                 .then((res) => {
                     console.log("succ", res);
@@ -266,49 +268,52 @@ export default function AssignmentCreation() {
                                         className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         onChange={(e) => setname(e.target.value)}
                                     />
-                                </div>  
+                                </div>
                             </div>
 
                         </div>
                         {/* Institute Name */}
-                        <div className="flex justify-between ">
+                        {
+                            params.id ? <div className="flex justify-between ">
 
-                            <div className="w-1/2">
-                                <div className="flex items-center justify-between"></div>
-                                <div className="mt-2">
-                                    <>
-                                        {
-                                            loading ? <CircleLoader /> :
-                                                <>
-                                                    {
-                                                        videoURL ? <>Uploaded</> :
-                                                            <>
-                                                                <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
-                                                                    <h1 className="text-2xl font-bold">
-                                                                        Upload course related Assignment
-                                                                    </h1>
+                                <div className="w-1/2">
+                                    <div className="flex items-center justify-between"></div>
+                                    <div className="mt-2">
+                                        <>
+                                            {
+                                                loading ? <CircleLoader /> :
+                                                    <>
+                                                        {
+                                                            videoURL ? <>Uploaded</> :
+                                                                <>
+                                                                    <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+                                                                        <h1 className="text-2xl font-bold">
+                                                                            Upload course related Assignment
+                                                                        </h1>
 
-                                                                </div>
-                                                                <div className="mt-2">
-                                                                    <input
-                                                                        type="file"
-                                                                        accept=".pdf"
-                                                                        onChange={handlePDFUpload}
-                                                                        className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                    />
+                                                                    </div>
+                                                                    <div className="mt-2">
+                                                                        <input
+                                                                            type="file"
+                                                                            accept=".pdf"
+                                                                            onChange={handlePDFUpload}
+                                                                            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
 
-                                                                </div>
-                                                            </>
-                                                    }
+                                                                    </div>
+                                                                </>
+                                                        }
 
-                                                </>
-                                        }
+                                                    </>
+                                            }
 
-                                    </>
+                                        </>
 
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div> : <></>
+                        }
+
                         {/* Logo */}
                         {!params.id &&
                             <>
@@ -347,6 +352,7 @@ export default function AssignmentCreation() {
                                                 <Select
                                                     options={courses}
                                                     onChange={(option) => {
+                                                        console.log('option', option)
                                                         setCourseId(option.value);
                                                     }}
                                                     styles={customStyles}
@@ -364,7 +370,7 @@ export default function AssignmentCreation() {
                                                     htmlFor="name"
                                                     className="block text-lg font-medium leading-6 text-gray-900"
                                                 >
-                                                    CourseId
+                                                    SubCourseId
                                                 </label>
                                             </div>
                                             <div className="mt-2">
@@ -381,6 +387,29 @@ export default function AssignmentCreation() {
                                 }
                             </>
 
+                        }
+
+                        {
+                            params.id &&
+                            <>
+                                <div className="flex justify-between flex-col">
+
+                                    <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+                                        <h1 className=" font-bold">
+                                            Select end date
+                                        </h1>
+
+                                    </div>
+                                    <div className="mt-2 w-1/2">
+                                        <input type="date" name="endTime" onChange={handleInput}
+                                            className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+
+                                    </div>
+                                </div>
+
+
+                            </>
                         }
 
 

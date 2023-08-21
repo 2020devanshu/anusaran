@@ -64,15 +64,7 @@ export default function PrincipalDashboard() {
             onClick={handleOpen}
           >
             <div>
-              <svg
-                width="42"
-                height="42"
-                viewBox="0 0 42 42"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-              </svg>
+              <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
             </div>
             <div>
               <p className="font-bold">Principal</p>

@@ -7,7 +7,7 @@ import FloatingButton from "./FloatingButton";
 
 
 export default function InstituteView() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const [imgUrl, setimgUrl] = useState(null);
   const [institutes, setInstitutes] = useState([]);
   const navigate = useNavigate();
@@ -37,36 +37,26 @@ export default function InstituteView() {
     <div className="flex flex-col justify-center bg-white md:p-14 px-10 items-center">
       <FloatingButton onClick={() => navigate("/institute-creation")}>Add Institute</FloatingButton>
       <div className="navbar flex justify-between w-full">
-        <div className="navleftitem ml-6">
-          <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
-            <h1 className=" font-bold md:text-2xl ">
-              Welcome, <span>{localStorage.getItem("role")}</span>
-            </h1>
-          </div>
+        <div className="navleftitem">
+
         </div>
-        <div className="navitemright flex items-center gap-5 invisible md:visible md:flex">
+        <div
+          class="invisible md:visible md:flex items-center gap-5 navitemright"
+          onClick={handleOpen}
+        >
           <div>
-            <svg
-              width="42"
-              height="42"
-              viewBox="0 0 42 42"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-            </svg>
+            <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
           </div>
-          <div onClick={handleOpen}>
-            <p>{localStorage.getItem("role")}</p>
+          <div>
+            <p className="font-bold">Admin</p>
           </div>
-          <div onClick={handleClose}>
+          <div onClick={handleLogout}>
             <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-
             >
               <path
                 d="M16.8307 17.7C16.5804 17.4111 16.4552 17.0833 16.4552 16.7167C16.4552 16.35 16.5804 16.0444 16.8307 15.8L19.357 13.3333H9.55903C9.17212 13.3333 8.8478 13.2056 8.58606 12.95C8.32432 12.6944 8.19346 12.3778 8.19346 12C8.19346 11.6222 8.32432 11.3056 8.58606 11.05C8.8478 10.7944 9.17212 10.6667 9.55903 10.6667H19.357L16.8307 8.2C16.5576 7.93333 16.4211 7.61667 16.4211 7.25C16.4211 6.88333 16.5576 6.56667 16.8307 6.3C17.0811 6.03333 17.394 5.9 17.7696 5.9C18.1451 5.9 18.458 6.02222 18.7084 6.26667L23.6245 11.0667C23.761 11.2 23.8578 11.3444 23.9147 11.5C23.9715 11.6556 24 11.8222 24 12C24 12.1778 23.9715 12.3444 23.9147 12.5C23.8578 12.6556 23.761 12.8 23.6245 12.9333L18.7084 17.7333C18.4125 18.0222 18.0882 18.15 17.7354 18.1167C17.3826 18.0833 17.0811 17.9444 16.8307 17.7ZM2.73115 24C1.98009 24 1.33713 23.7389 0.802276 23.2167C0.267425 22.6944 0 22.0667 0 21.3333V2.66667C0 1.93333 0.267425 1.30556 0.802276 0.783333C1.33713 0.261111 1.98009 0 2.73115 0H10.9246C11.3115 0 11.6358 0.127778 11.8976 0.383333C12.1593 0.638889 12.2902 0.955556 12.2902 1.33333C12.2902 1.71111 12.1593 2.02778 11.8976 2.28333C11.6358 2.53889 11.3115 2.66667 10.9246 2.66667H2.73115V21.3333H10.9246C11.3115 21.3333 11.6358 21.4611 11.8976 21.7167C12.1593 21.9722 12.2902 22.2889 12.2902 22.6667C12.2902 23.0444 12.1593 23.3611 11.8976 23.6167C11.6358 23.8722 11.3115 24 10.9246 24H2.73115Z"

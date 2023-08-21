@@ -56,6 +56,8 @@ export default function SubCourse() {
             params.id
           )
           .then(async (res) => {
+            console.log('res.data.data[0]', res.data.data[0])
+            setname(res.data.data[0].subcourses)
             const respQr = await axios
               .get(
                 `http://151.106.39.4:8080/instituteQr?institute_id=${res.data.data[0].InstituteId}&subcourses_id=${params.id}`
@@ -159,15 +161,8 @@ export default function SubCourse() {
           <div className="navitemright flex flex-col items-center gap-5 w-1/2 px-10 pt-10">
             <div className=" flex items-center justify-end w-full gap-5">
               <div>
-                <svg
-                  width="42"
-                  height="42"
-                  viewBox="0 0 42 42"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-                </svg>
+                <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
+
               </div>
               <div onClick={handleOpen}>
                 <p>Admin</p>
@@ -191,19 +186,19 @@ export default function SubCourse() {
         </div>
         <div className="workContainer mb-4 w-full">
           <div>
-            <h1 className="text-6xl mb-2">AiMl</h1>
+            <h1 className="text-6xl mb-2">{name}</h1>
           </div>
         </div>
         <div>
           {
-            video && video.length > 0 && video.map((x)=> {
+            video && video.length > 0 && video.map((x) => {
               return <VideoCard
                 videoUrl={x.videosPathsUrl}
                 title={x.fileName ? x.fileName : "no field"}
               />
             })
           }
-          
+
         </div>
       </div>
       <FloatingButton onClick={() => navigate("/addvideo/" + params.id)}>Add Videos</FloatingButton>

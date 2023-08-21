@@ -35,10 +35,12 @@ export default function AdminLogin() {
             .then((verificationResponse) => {
               console.log(
                 "Verification successful:",
-                verificationResponse.data
+                verificationResponse.data[0].user[0].profilePhoto
               );
               localStorage.setItem("token", res.data.data);
               localStorage.setItem("role", "admin");
+              localStorage.setItem("profilePic", verificationResponse.data[0].user[0].profilePhoto);
+
 
               navigate("admin-dashboard");
               window.location.reload(true);
