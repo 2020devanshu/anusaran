@@ -18,7 +18,7 @@ export default function AssignmentCreation() {
     const [assignment, setAssignment] = useState(null);
     const [name, setname] = useState("");
     const [videoURL, setvideoURL] = useState(null)
-    const notify = () => toast("Try again");
+    const notify = () => toast("Success");
 
 
 
@@ -147,10 +147,11 @@ export default function AssignmentCreation() {
                     console.log("succ", res);
                     // localStorage.setItem("token", res.data.token);
                     // navigate("/institute-list");
+                    notify();
+
                 })
                 .catch((err) => {
                     console.log("error is here", err);
-                    // notify();
                 });
         }
         else
@@ -161,11 +162,14 @@ export default function AssignmentCreation() {
                     courseId: parseInt(CourseId),
                     subCourseId: parseInt(SubCourseId),
                     assignmentsPathsUrl: videoURL,
+                    status: 0,
                 })
                 .then((res) => {
                     console.log("succ", res);
                     // localStorage.setItem("token", res.data.token);
                     // navigate("/institute-list");
+                    notify();
+
                 })
                 .catch((err) => {
                     console.log("error is here", err);
@@ -211,15 +215,8 @@ export default function AssignmentCreation() {
                 <div className="navitemright flex flex-col items-center gap-5 w-1/2 px-10 pt-10">
                     <div className=" flex items-center justify-end w-full gap-5">
                         <div>
-                            <svg
-                                width="42"
-                                height="42"
-                                viewBox="0 0 42 42"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-                            </svg>
+                            <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
+
                         </div>
                         <div onClick={handleOpen}>
                             <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>

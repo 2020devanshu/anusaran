@@ -9,7 +9,7 @@ import { CircleLoader } from "react-spinners";
 
 
 export default function AddVideo() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, notify } = useAppContext();
   const [loading, setloading] = useState(false)
 
   const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
@@ -22,7 +22,6 @@ export default function AddVideo() {
   const [assignmentDueDate, setAssignmentDueDate] = useState(new Date());
   const [videoURL, setvideoURL] = useState(null)
   const params = useParams();
-  const notify = () => toast("Try again");
   const [options, setOptions] = useState([]);
   const [Course, setCourse] = useState([]);
   const navigate = useNavigate();

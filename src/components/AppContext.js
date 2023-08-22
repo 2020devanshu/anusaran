@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export const AppContext = createContext();
 
@@ -7,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [close, setClose] = useState(false);
   const navigate = useNavigate()
 
+  const notify = () => toast("Success");
 
   useEffect(() => {
     console.log("close", close);
@@ -29,7 +31,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ close, handleClose, handleOpen, handleLogout }}>
+    <AppContext.Provider value={{ close, handleClose, handleOpen, handleLogout, notify }}>
       {children}
     </AppContext.Provider>
   );
