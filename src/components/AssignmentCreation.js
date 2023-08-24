@@ -138,7 +138,7 @@ export default function AssignmentCreation() {
             await axios
                 .post("http://151.106.39.4:8080/inserAssignment", {
                     assignmentsName: name,
-                    status: 1,
+                    status: "1",
                     assignmentsPathsUrl: videoURL,
                     assignmentId: params.id,
                     lastDate: data.endTime
@@ -162,7 +162,7 @@ export default function AssignmentCreation() {
                     courseId: parseInt(CourseId),
                     subCourseId: parseInt(SubCourseId),
                     assignmentsPathsUrl: videoURL,
-                    status: 0,
+                    status: "0",
                 })
                 .then((res) => {
                     console.log("succ", res);
