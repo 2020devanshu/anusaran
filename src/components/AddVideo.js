@@ -260,21 +260,23 @@ export default function AddVideo() {
               </div>
             </div>
             {/* Logo */}
+            {
+              !loading && <div className="flex gap-5">
+                <button
+                  type="submit"
+                  className="flex w-1/12 justify-center rounded-md bg-purple-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                >
+                  Create
+                </button>
+                <button
+                  type="submit"
+                  className="flex w-1/12 justify-center rounded-md px-5 py-3 text-lg font-semibold leading-6 text-purple-500 border-purple-500 border-2 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                >
+                  Reset
+                </button>
+              </div>
+            }
 
-            <div className="flex gap-5">
-              <button
-                type="submit"
-                className="flex w-1/12 justify-center rounded-md bg-purple-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
-              >
-                Create
-              </button>
-              <button
-                type="submit"
-                className="flex w-1/12 justify-center rounded-md px-5 py-3 text-lg font-semibold leading-6 text-purple-500 border-purple-500 border-2 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
-              >
-                Reset
-              </button>
-            </div>
           </form>
         </div>
       </div>

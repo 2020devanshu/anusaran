@@ -19,40 +19,7 @@ export default function PrincipalDashboard() {
         <div className="navbar flex justify-between w-full">
           <div className="navleftitem">
             <div className="mt-10 md:mt-0 flex justify-center items-center mb-4">
-              <svg
-                width="150"
-                height="150"
-                viewBox="0 0 150 150"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="75" cy="75" r="75" fill="#7455F6" />
-                <mask
-                  id="mask0_14_301"
-                  style={{ maskType: "alpha" }}
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="150"
-                  height="150"
-                >
-                  <circle cx="75" cy="75" r="75" fill="#D9D9D9" />
-                </mask>
-                <g mask="url(#mask0_14_301)">
-                  <circle
-                    cx="74.9997"
-                    cy="69.9153"
-                    r="19.0678"
-                    fill="#FEFEFE"
-                  />
-                  <circle
-                    cx="74.9999"
-                    cy="143.644"
-                    r="49.5763"
-                    fill="#FEFEFE"
-                  />
-                </g>
-              </svg>
+              <img src={localStorage.getItem("profilePic")} className="w-36 h-32" />
 
               <h1 className=" text-2xl ml-4">
                 Welcome back,<br></br> <span>Principal</span>
