@@ -363,6 +363,7 @@ export default function TeacherCreation({ currId }) {
                 </div>
               </div>
               {/* Email */}
+              
               <div className="w-full">
                 <div className="flex items-center justify-between">
                   <label
