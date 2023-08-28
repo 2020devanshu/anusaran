@@ -284,25 +284,29 @@ export default function TeacherCreation({ currId }) {
             </div>
 
             <div className="flex justify-between">
-              <div className="w-full mr-4">
-                <div className="flex items-center justify-between mt-2">
-                  <label
-                    htmlFor="lname"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Profile Pic
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+              <div className="w-1/2 mr-4">
+                <div className="flex flex-col mt-2">
+                  <div>
+                    <label
+                      htmlFor="lname"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Profile Pic
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="block w-4/6 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
               </div>
               {/* Gender */}
-              <div className="w-full">
-                <div className="flex items-center justify-between">
+              <div className="w-1/2">
+                <div className="flex flex">
                   <label
                     htmlFor="gender"
                     className="block text-sm font-medium leading-6 text-gray-900"
@@ -310,13 +314,13 @@ export default function TeacherCreation({ currId }) {
                     Gender
                   </label>
                 </div>
-                <div className=" flex flex-row justify-center space-x-20 mt-2">
+                <div className=" flex flex-row  space-x-20 mt-2">
                   <input
                     onChange={handleInput}
                     type="radio"
                     name="gender"
                     value="Male"
-                    className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />{" "}
                   Male
                   <input
@@ -324,7 +328,7 @@ export default function TeacherCreation({ currId }) {
                     name="gender"
                     onChange={handleInput}
                     value="Female"
-                    className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block  rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />{" "}
                   Female
                   <input
@@ -332,7 +336,7 @@ export default function TeacherCreation({ currId }) {
                     onChange={handleInput}
                     name="gender"
                     value="etc"
-                    className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block  rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />{" "}
                   Others
                 </div>
@@ -341,7 +345,7 @@ export default function TeacherCreation({ currId }) {
             {/* Dob */}
             <div className="flex justify-between">
               <div className="w-full">
-                <div className="flex items-center justify-between">
+                <div className="flex justify-between">
                   <label
                     htmlFor="gender"
                     className="block text-sm font-medium leading-6 text-gray-900"
@@ -349,7 +353,7 @@ export default function TeacherCreation({ currId }) {
                     Date Of Birth
                   </label>
                 </div>
-                <div className="flex justify-center mt-2">
+                <div className="flex  mt-2">
                   <input
                     type="date"
                     onChange={handleInput}

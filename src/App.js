@@ -37,8 +37,11 @@ import AddVideo from "./components/AddVideo";
 import Assignments from "./components/Assignments";
 import Teacher from "./components/Teacher";
 import AssignmentCreation from "./components/AssignmentCreation";
+import { useAppContext } from "./components/AppContext";
 
 const App = () => {
+  const { handleClose, close, handleOpen, notify } = useAppContext();
+
   const [token, setToken] = useState("");
   const [role, setrole] = useState("");
 
@@ -52,18 +55,18 @@ const App = () => {
   }, [token, role, []]);
 
   return (
-    <AppProvider>
+    <>
       {token ? (
         <div className="flex">
           <NavBar />
-          <div className="w-full ">
+          <div className="w-full " onClick={handleClose}>
             <Routes>
               {role === "admin" ? (
                 <>
                   <Route path="/" element={<AdminDashboard />} />
                   <Route path="/admin-dashboard" element={<AdminDashboard />} />
                   <Route path="institute-list" element={<InstituteView />} />
-                
+
                 </>
               ) : (
                 <>
@@ -146,7 +149,7 @@ const App = () => {
           </Routes>
         </>
       )}
-    </AppProvider>
+    </>
   );
 };
 

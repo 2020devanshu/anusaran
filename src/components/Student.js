@@ -25,12 +25,18 @@ export default function Student() {
   ]);
   const [InstituteId, setInstituteId] = useState(null);
   const [CourseId, setCourseId] = useState(null);
-  const [daysOrWeekId, setdaysOrWeekId] = useState(null);
+  const [daysOrWeekId, setdaysOrWeekId] = useState(1);
   const [courses, setCourses] = useState([]);
   const [studentAttendanceData, setstudentAttendanceData] = useState({});
   const [numberOfNo, setnumberOfNo] = useState(0);
   const [numberOfYes, setnumberOfYes] = useState(0);
   const [ratingData, setratingData] = useState(["Rating", "Frequency"]);
+  const [attendanceData, setattendanceData] = useState([
+    ["Boolean", "Value"],
+    ["No", numberOfNo],
+    ["Yes", numberOfYes],
+  ]);
+
 
   const fetchAttendance = async () => {
     const resp = await axios
@@ -42,9 +48,9 @@ export default function Student() {
         return res.data.userData;
       });
 
-    let attendanceTemp = { ...studentAttendanceData };
-    let currNo = numberOfNo;
-    let currYess = numberOfYes;
+    let attendanceTemp = {};
+    let currNo = 0;
+    let currYess = 0;
     // For each user in your data
     for (let user of resp) {
       // If the user is present
@@ -55,10 +61,16 @@ export default function Student() {
       if (user.name !== "") {
         if (attendanceTemp[user.user_id]) {
           // Increase the count
-          attendanceTemp[user.user_id].count++;
+          if (user.isPersent === "1") {
+            attendanceTemp[user.user_id].count++;
+
+          }
         } else {
           // If not, initialize it with 1
-          attendanceTemp[user.user_id] = { name: user.name, count: 1 };
+          if (user.isPersent === "1") {
+            attendanceTemp[user.user_id] = { name: user.name, count: 1 };
+
+          }
         }
       }
     }
@@ -66,7 +78,12 @@ export default function Student() {
     setnumberOfNo(currNo);
     setnumberOfYes(currYess);
 
-    console.log("studentAttendanceData", attendanceTemp);
+    setattendanceData([
+      ["Boolean", "Value"],
+      ["No", currNo / daysOrWeekId],
+      ["Yes", currYess / daysOrWeekId],
+    ])
+    console.log("studentAttendanceData", attendanceData);
   };
   function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -149,12 +166,8 @@ export default function Student() {
     fetchCourses();
     fetchAttendance();
     fetchFeedback()
-  }, [InstituteId, CourseId]);
-  const attendanceData = [
-    ["Boolean", "Value"],
-    ["No", numberOfNo],
-    ["Yes", numberOfYes],
-  ];
+  }, [InstituteId, CourseId, daysOrWeekId]);
+
 
   const attendanceOptions = {
     colors: ["#EE5D50", "#05CD99"],
@@ -311,18 +324,21 @@ export default function Student() {
                                   <tr>
                                     <td>{x.name}</td>
                                     <td className="flex items-center gap-5">
-                                      <svg
-                                        width="22"
-                                        height="13"
-                                        viewBox="0 0 22 13"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M21.4989 9.1212L16.453 4.07528L13.372 0.978531C12.0673 -0.326177 9.94517 -0.326177 8.64046 0.978531L0.497759 9.1212C-0.571158 10.1901 0.199092 12.0136 1.69243 12.0136H10.5111H20.3042C21.8133 12.0136 22.5678 10.1901 21.4989 9.1212Z"
-                                          fill="#05CD99"
-                                        />
-                                      </svg>
+                                      {
+                                        x.count > 5 ?
+                                          <>
+                                            <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M21.4989 9.1212L16.453 4.07528L13.372 0.978531C12.0673 -0.326177 9.94517 -0.326177 8.64046 0.978531L0.497759 9.1212C-0.571158 10.1901 0.199092 12.0136 1.69243 12.0136H10.5111H20.3042C21.8133 12.0136 22.5678 10.1901 21.4989 9.1212Z" fill="#05CD99" />
+                                            </svg>
+
+                                          </> :
+                                          <>
+                                            <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                              <path d="M20.3 0H10.5105H1.69513C0.186633 0 -0.567617 1.82277 0.500903 2.8913L8.64055 11.0309C9.94478 12.3351 12.0661 12.3351 13.3703 11.0309L16.4659 7.93534L21.5099 2.8913C22.5627 1.82277 21.8085 0 20.3 0Z" fill="#EE5D50" />
+                                            </svg>
+                                          </>
+                                      }
+
                                       {x.count}
                                       <div
                                         style={{
@@ -381,7 +397,8 @@ export default function Student() {
             );
           })}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

@@ -1,0 +1,23 @@
+ 
+2)couse>open courseId> static data replace and check alignment
+ ---> replied in group; why I cant replace data, data in database is different to what is needed 
+
+// Admin
+
+
+3)assignments>static data replace to dynamic data {5 assignment} 
+--> same issue data that I receive from api doesnt give me information on how many subassignments are there in an assignment; 
+
+
+5)Assignmentname me jo static data replace to dynemic data
+---> there is no average marks in data  for me to replace
+
+
+9)teacher>modules:static data replace and set alignment
+
+---> which data to map..?
+
+12)Feedbacks:slider buttom not show --> meaning?
+
+
+

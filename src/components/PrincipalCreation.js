@@ -120,7 +120,7 @@ export default function PrincipalCreation({ currId }) {
           <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
             <div className=" flex items-center justify-end w-full gap-5">
               <div>
-                <img src={localStorage.getItem("profilePic")} className="w-8 h-8"/>
+                <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
               </div>
               <div onClick={handleOpen}>
                 <p>Admin</p>
@@ -154,353 +154,367 @@ export default function PrincipalCreation({ currId }) {
 
               {/* First Name */}
               <div className="flex flex-row w-full">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="fname"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    First Name
-                  </label>
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="fname"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      First Name
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="firstName"
+                      name="fname"
+                      type="text"
+                      required
+                      onChange={handleInput}
+                      className="block w-2/5 inputbox  rounded-md border-0 px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <input
-                    id="firstName"
-                    name="fname"
-                    type="text"
-                    required
-                    onChange={handleInput}
-                    className="block w-2/5 inputbox  rounded-md border-0 px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-
                 {/* {last name} */}
-
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="lname"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Last Name
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="firstName"
-                    name="lname"
-                    type="text"
-                    required
-                    onChange={handleInput}
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="lname"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Last Name
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="firstName"
+                      name="lname"
+                      type="text"
+                      required
+                      onChange={handleInput}
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
               </div>
               {/* Profile */}
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="lname"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Profile Pic
-                  </label>
-                </div>
-                <input
-                  id="file-upload"
-                  type="file"
-                  required
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-
-              </div>
-
-              {/* Gender */}
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="gender"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Gender
-                  </label>
-                </div>
-                <div className="flex flex-row mt-2">
+              <div className="flex flex-row">
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="lname"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Profile Pic
+                    </label>
+                  </div>
                   <input
-                    onChange={handleInput}
-                    type="radio"
-                    name="gender"
-                    value="Male"
-                    className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />{" "}
-                  Male
-                  <input
-                    type="radio"
-                    name="gender"
-                    onChange={handleInput}
-                    value="Female"
-                    className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />{" "}
-                  Female
-                  <input
-                    type="radio"
-                    onChange={handleInput}
-                    name="gender"
-                    value="etc"
-                    className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />{" "}
-                  Others
-                </div>
-              </div>
-
-              {/* Dob */}
-              <div className="flex flex-row mt-2 w-full">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="gender"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Date Of Birth
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    type="date"
-                    onChange={handleInput}
-                    name="dob"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-
-                {/* Email */}
-
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    onChange={handleInput}
-                    type="email"
+                    id="file-upload"
+                    type="file"
                     required
-                    autoComplete="email"
+                    accept="image/*"
+                    onChange={handleImageUpload}
                     className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+
+                </div>
+
+                {/* Gender */}
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="gender"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Gender
+                    </label>
+                  </div>
+                  <div className="flex flex-row mt-2 w-1/3">
+                    <input
+                      onChange={handleInput}
+                      type="radio"
+                      name="gender"
+                      value="Male"
+                      className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />{" "}
+                    Male
+                    <input
+                      type="radio"
+                      name="gender"
+                      onChange={handleInput}
+                      value="Female"
+                      className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />{" "}
+                    Female
+                    <input
+                      type="radio"
+                      onChange={handleInput}
+                      name="gender"
+                      value="etc"
+                      className="block w-2/5 rounded-md px-3 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />{" "}
+                    Others
+                  </div>
                 </div>
               </div>
-
-
-              {/* Phone Number */}
+              {/* Dob */}
               <div className="flex flex-row">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Phone Number
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="phone"
-                    onChange={handleInput}
-                    name="phone"
-                    type="tel"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+                <div className="flex flex-col w-1/2">
+                  <div className="flex flex-col mt-2 w-full">
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="gender"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Date Of Birth
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        type="date"
+                        onChange={handleInput}
+                        name="dob"
+                        className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
 
-                {/* city */}
+                    {/* Email */}
 
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    city
-                  </label>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Email address
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        id="email"
+                        name="email"
+                        onChange={handleInput}
+                        type="email"
+                        required
+                        autoComplete="email"
+                        className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
                 </div>
-                <div className="mt-2">
-                  <input
-                    onChange={handleInput}
-                    id="additional"
-                    name="city"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+                {/* Phone Number */}
+                <div className="flex flex-col w-1/2">
+                  <div className="flex flex-col">
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Phone Number
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        id="phone"
+                        onChange={handleInput}
+                        name="phone"
+                        type="tel"
+                        className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+
+                    {/* city */}
+
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="city"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        city
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        onChange={handleInput}
+                        id="additional"
+                        name="city"
+                        type="text"
+                        className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
+
               {/* address  */}
-              <div className="flex flex-row">
+              <div className="flex flex-row w-full">
+                <div className="flex flex-col w-1/2">
 
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="address"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Address
-                  </label>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="address"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Address
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      onChange={handleInput}
+                      id="address"
+                      name="address"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="userName"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      additional
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="userName"
+                      onChange={handleInput}
+                      name="userName"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <input
-                    onChange={handleInput}
-                    id="address"
-                    name="address"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="userName"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    additional
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="userName"
-                    onChange={handleInput}
-                    name="userName"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              {/* zipcode */}
-              <div className="flex flex-row">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="zipcode"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    zipcode
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    onChange={handleInput}
-                    id="zipcode"
-                    name="zipCode"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+                {/* zipcode */}
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="zipcode"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      zipcode
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      onChange={handleInput}
+                      id="zipcode"
+                      name="zipCode"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
 
-                {/* state */}
+                  {/* state */}
 
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="state"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    state
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    onChange={handleInput}
-                    id="state"
-                    name="state"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="state"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      state
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      onChange={handleInput}
+                      id="state"
+                      name="state"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
               </div>
               {/* country */}
-              <div className="flex flex-row">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    country
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    onChange={handleInput}
-                    id="country"
-                    name="country"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+              <div className="flex flex-row w-full">
+
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="country"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      country
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      onChange={handleInput}
+                      id="country"
+                      name="country"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+
+                  {/* ID */}
+
+                  {/* Year */}
+
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="year"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Year
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="year"
+                      onChange={handleInput}
+                      name="year"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
 
-                {/* ID */}
+                {/* Username */}
+                <div className="flex flex-col w-1/2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="userName"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Username
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="userName"
+                      onChange={handleInput}
+                      name="userName"
+                      type="text"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
 
-                {/* Year */}
+                  {/* Password */}
 
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="year"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Year
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="year"
-                    onChange={handleInput}
-                    name="year"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              {/* Username */}
-              <div className="flex flex-row">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="userName"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Username
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="userName"
-                    onChange={handleInput}
-                    name="userName"
-                    type="text"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-
-                {/* Password */}
-
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Password
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    onChange={handleInput}
-                    type="password"
-                    autoComplete="current-password"
-                    className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Password
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="password"
+                      name="password"
+                      onChange={handleInput}
+                      type="password"
+                      autoComplete="current-password"
+                      className="block w-2/5 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={disable}
-                className="flex w-2/5 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-1/12 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Create
               </button>
