@@ -9,7 +9,7 @@ import { CircleLoader } from "react-spinners";
 
 
 export default function AddVideo() {
-  const { handleClose, close, handleOpen, notify } = useAppContext();
+  const { handleClose, close, handleOpen, notify, handleLogout } = useAppContext();
   const [loading, setloading] = useState(false)
 
   const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
@@ -49,12 +49,13 @@ export default function AddVideo() {
         endTime: data.endTime,
       })
       .then((res) => {
+        notify();
+
         console.log(res);
         navigate("course/" + params.id);
       })
       .catch((err) => {
         console.log(err);
-        notify();
       });
   };
   useEffect(() => {
@@ -145,6 +146,7 @@ export default function AddVideo() {
           })
           .then((res) => {
             console.log("succ", res);
+            notify()
             // localStorage.setItem("token", res.data.token);
             // navigate("/institute-list");
           })
@@ -172,7 +174,7 @@ export default function AddVideo() {
             <div onClick={handleOpen}>
               <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"

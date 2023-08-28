@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom/dist";
 import { useAppContext } from "../components/AppContext";
 
 export default function PrincipalDashboard() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen,handleLogout } = useAppContext();
 
   return (
     <div>
@@ -36,7 +36,7 @@ export default function PrincipalDashboard() {
             <div>
               <p className="font-bold">Principal</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"

@@ -20,6 +20,10 @@
   background-color: #9077f8;
 }
 
+.carousel .slide img {
+  width: 30%;
+}
+
 .carousel .control-dots .dot {
   /* apply margin-top */
   margin-top: 1rem;

@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Select from "react-select";
+import { useAppContext } from "../components/AppContext";
 
 export default function TeacherCreation({ currId }) {
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
+
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
@@ -215,7 +218,7 @@ export default function TeacherCreation({ currId }) {
             <div >
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"

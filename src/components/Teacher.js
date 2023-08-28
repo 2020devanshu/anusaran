@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Teacher() {
   const navigate = useNavigate()
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const [currentActive, setcurrentActive] = useState("");
   const [myData, setData] = useState([]);
   const [institutes, setinstitutes] = useState([]);
@@ -222,7 +222,7 @@ export default function Teacher() {
             <div onClick={handleOpen}>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"
@@ -248,6 +248,7 @@ export default function Teacher() {
               localStorage.getItem("role") === "admin" && <Select
                 options={institutes}
                 onChange={(option) => {
+                  setCourses(null)
                   setInstituteId(option.value);
                 }}
               />
@@ -256,25 +257,29 @@ export default function Teacher() {
           </div>
           {InstituteId && (
             <div>
-              <div className="topbar flex justify-around">
-                <div>
-                  <h1>Attendance Pie Chart</h1>
+              {
+                courses && courses.length > 0 &&
+                <div className="topbar flex justify-around">
+                  <div>
+                    <h1>Attendance Pie Chart</h1>
+                  </div>
+                  <div className="flex gap-5">
+                    <Select
+                      options={courses}
+                      onChange={(option) => {
+                        setCourseId(option.value);
+                      }}
+                    />
+                    <Select
+                      options={daysOrWeek}
+                      onChange={(option) => {
+                        setdaysOrWeekId(option.value);
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="flex gap-5">
-                  <Select
-                    options={courses}
-                    onChange={(option) => {
-                      setCourseId(option.value);
-                    }}
-                  />
-                  <Select
-                    options={daysOrWeek}
-                    onChange={(option) => {
-                      setdaysOrWeekId(option.value);
-                    }}
-                  />
-                </div>
-              </div>
+              }
+
               {CourseId && (
                 <>
                   <div className="midbar  flex justify-center items-center">

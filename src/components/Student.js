@@ -5,7 +5,7 @@ import Select from "react-select";
 import { Chart } from "react-google-charts";
 
 export default function Student() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const [currentActive, setcurrentActive] = useState("");
   const [myData, setData] = useState([]);
   const [institutes, setinstitutes] = useState([]);
@@ -26,7 +26,7 @@ export default function Student() {
   const [InstituteId, setInstituteId] = useState(null);
   const [CourseId, setCourseId] = useState(null);
   const [daysOrWeekId, setdaysOrWeekId] = useState(1);
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(null);
   const [studentAttendanceData, setstudentAttendanceData] = useState({});
   const [numberOfNo, setnumberOfNo] = useState(0);
   const [numberOfYes, setnumberOfYes] = useState(0);
@@ -220,7 +220,7 @@ export default function Student() {
             <div onClick={handleOpen}>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"
@@ -271,6 +271,7 @@ export default function Student() {
               localStorage.getItem("role") === "admin" && <Select
                 options={institutes}
                 onChange={(option) => {
+                  setCourses(null)
                   setInstituteId(option.value);
                 }}
               />
@@ -278,25 +279,30 @@ export default function Student() {
           </div>
           {InstituteId && (
             <div>
-              <div className="topbar flex justify-around">
-                <div>
-                  <h1>Attendance Pie Chart</h1>
+              {
+                courses && courses.length > 0 &&
+                <div className="topbar flex justify-around">
+                  <div>
+                    <h1>Attendance Pie Chart</h1>
+                  </div>
+
+                  <div className="flex gap-5">
+                    <Select
+                      options={courses}
+                      onChange={(option) => {
+                        setCourseId(option.value);
+                      }}
+                    />
+                    <Select
+                      options={daysOrWeek}
+                      onChange={(option) => {
+                        setdaysOrWeekId(option.value);
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="flex gap-5">
-                  <Select
-                    options={courses}
-                    onChange={(option) => {
-                      setCourseId(option.value);
-                    }}
-                  />
-                  <Select
-                    options={daysOrWeek}
-                    onChange={(option) => {
-                      setdaysOrWeekId(option.value);
-                    }}
-                  />
-                </div>
-              </div>
+              }
+
               {CourseId && (
                 <>
                   <div className="midbar  flex justify-center items-center">

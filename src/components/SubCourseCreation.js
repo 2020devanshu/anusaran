@@ -9,13 +9,12 @@ import { CircleLoader } from "react-spinners";
 
 
 export default function SubCourseCreation() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, notify,handleLogout } = useAppContext();
   const [uploadImageURL, setuploadImageURL] = useState(null);
   const [imageSrc, setImageSrc] = useState(null)
 
   const [loading, setloading] = useState(false)
   const params = useParams();
-  const notify = () => toast("Try again");
   const [options, setOptions] = useState([]);
   const [Course, setCourse] = useState([]);
   const navigate = useNavigate();
@@ -77,6 +76,8 @@ export default function SubCourseCreation() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dateObj1 = new Date(data.startTime);
+    const dateObj2 = new Date(data.endTime);
 
     axios
       .post("http://151.106.39.4:8080/insertsubCourses", {
@@ -84,12 +85,17 @@ export default function SubCourseCreation() {
         subcourses: data.name,
         InstituteId: Course[0].Institute,
         subCoursesImageUrl: uploadImageURL,
-        grading: data.grade,
+        startDate: dateObj1.toISOString().split('T')[0],
+        endDate: dateObj2.toISOString().split('T')[0],
+
+        startTime: dateObj1.toTimeString().split(' ')[0],
+        endTime: dateObj2.toTimeString().split(' ')[0],
+        grading: parseInt(data.grade),
       })
       .then((res) => {
         console.log(res);
-
-        // navigate("course/" + params.id);
+        notify()
+        // navigate("course/" + params.id); 
       })
       .catch((err) => {
         console.log(err);
@@ -122,7 +128,7 @@ export default function SubCourseCreation() {
             <div onClick={handleOpen}>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"
@@ -183,6 +189,46 @@ export default function SubCourseCreation() {
                       id="name"
                       name="grade"
                       type="text"
+                      required
+                      className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      onChange={handleInput}
+                    />
+                  </div>
+                </div>
+                <div className="w-full mt-2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="startTime"
+                      className="block text-lg font-medium leading-6 text-gray-900"
+                    >
+                      Start Time
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="name"
+                      name="startTime"
+                      type="datetime-local"
+                      required
+                      className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      onChange={handleInput}
+                    />
+                  </div>
+                </div>
+                <div className="w-full mt-2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="startTime"
+                      className="block text-lg font-medium leading-6 text-gray-900"
+                    >
+                      End Time
+                    </label>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      id="name"
+                      name="endTime"
+                      type="datetime-local"
                       required
                       className="block w-4/6 inputbox  rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       onChange={handleInput}

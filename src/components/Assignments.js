@@ -5,6 +5,7 @@ import { useState } from 'react';
 import SubAssignmentCard from './SubAssignmentCard';
 import axios from 'axios';
 import FloatingButton from './FloatingButton';
+import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 
 export default function Assignments() {
@@ -13,7 +14,20 @@ export default function Assignments() {
     const [currentAssignment, setcurrentAssignment] = useState("")
     const [currentAssignmentId, setcurrentAssignmentId] = useState(null)
     const [currentSubAssignmentId, setcurrentSubAssignmentId] = useState(null)
-
+    const [institutes, setinstitutes] = useState([]);
+    const [InstituteId, setInstituteId] = useState(null);
+    const fetchInstitutes = async () => {
+        await axios
+            .get("http://151.106.39.4:8080/getAllInstitute")
+            .then((res) => {
+                setinstitutes(
+                    res.data.data.map((inst) => ({
+                        value: inst.institute_id,
+                        label: inst.InstituteName,
+                    }))
+                );
+            });
+    };
 
     const [currentSubAssignment, setcurrentSubAssignment] = useState("")
     const [assignment, setassignment] = useState(null)
@@ -28,18 +42,21 @@ export default function Assignments() {
                 let newArr = resp.filter((x) => x.instituteId === parseInt(localStorage.getItem("institutionId")))
                 setassignment(newArr)
             }
-            else
-                setassignment(resp)
+            else {
+                let newArr = resp.filter((x) => x.instituteId === parseInt(InstituteId))
+                setassignment(newArr)
+            }
         }
 
+        fetchInstitutes()
         fetchAssignment()
-    }, [])
+    }, [InstituteId])
 
     useEffect(() => {
         const fetchSubAssignment = async () => {
             const resp = await axios.get("http://151.106.39.4:8080/subCourseAssignment").then((res) => { return res.data.data })
             let newArr = resp.filter((x) => x.assignmentId === parseInt(currentAssignmentId))
-            console.log('resp', resp, newArr, currentAssignmentId)
+            console.log('respss', resp, newArr, currentAssignmentId)
 
             setsubassignment(newArr)
         }
@@ -58,6 +75,7 @@ export default function Assignments() {
     }
 
     const handleAssignmentName = (e, id) => {
+        console.log('id', id)
         setcurrentAssignmentId(id)
         setcurrentAssignment(e)
     }
@@ -116,6 +134,7 @@ export default function Assignments() {
             </div>
 
             <div class="border-b-2 border-black mb-2"></div>
+
             {
                 currentSubAssignment ? <>
                     <div>
@@ -212,17 +231,15 @@ export default function Assignments() {
                                 {currentAssignment}
                             </div>
                             <div className='flex mt-8  text-xl justify-around w-1/2'>
-                                {
-                                    subassignment && subassignment.length > 0 &&
-                                    <>
-                                        <p>
-                                            Total Assignments: <span className='font-bold text-2xl'>{subassignment.length}</span>
-                                        </p>
-                                        <p>
-                                            Average Marks:<span className='font-bold text-2xl'> 9.5</span>
-                                        </p>
-                                    </>
-                                }
+
+                                <p>
+                                    Total Assignments: <span className='font-bold text-2xl'>{subassignment.length}</span>
+                                </p>
+                                <p>
+                                    Average Marks:<span className='font-bold text-2xl'> {subassignment.length}</span>
+                                </p>
+
+
 
                             </div>
                             <div className='flex gap-4 flex-wrap justify-center' >
@@ -234,17 +251,30 @@ export default function Assignments() {
                             </div>
                         </div>
                     </> :
+                        <>
+                            <div className="flex justify-center mb-4">
+                                {
+                                    localStorage.getItem("role") === "admin" && <Select
+                                        options={institutes}
+                                        onChange={(option) => {
+                                            setInstituteId(option.value);
+                                        }}
 
-                        <div className="flex justify-around gap-4 flex-wrap"  >
-                            {
-                                assignment && assignment.length > 0 && assignment.map((x) => {
-                                    return (
-                                        <AssignmentCard name={x.assignmentsName} assignments={5} key={1} id={x.id} handleAssignment={handleAssignmentName} />
-                                    )
-                                })
-                            }
+                                    />
+                                }
 
-                        </div>
+                            </div>
+                            <div className="flex justify-around gap-4 flex-wrap"  >
+                                {
+                                    assignment && assignment.length > 0 && assignment.map((x) => {
+                                        return (
+                                            <AssignmentCard name={x.assignmentsName} assignments={5} key={1} id={x.id} handleAssignment={handleAssignmentName} />
+                                        )
+                                    })
+                                }
+
+                            </div>
+                        </>
             }
 
         </div>

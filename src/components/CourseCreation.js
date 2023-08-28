@@ -8,7 +8,7 @@ import { useAppContext } from "./AppContext";
 import { CircleLoader } from "react-spinners";
 
 export default function CourseCreation(params) {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const [options, setOptions] = useState([]);
   const [princ, setprinc] = useState([]);
   const [courses, setcourses] = useState([]);
@@ -209,7 +209,7 @@ export default function CourseCreation(params) {
             <div onClick={handleOpen}>
               <p>Admin</p>
             </div>
-            <div>
+            <div onClick={handleLogout}>
               <svg
                 width="24"
                 height="24"
