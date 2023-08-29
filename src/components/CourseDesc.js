@@ -169,11 +169,11 @@ export default function CourseDesc() {
                   Esthera Jackson
                 </p>
                 <p>
-                  <span className="font-bold mr-4">Start Date:</span> {courseData.startDate}
+                  <span className="font-bold mr-4">Start Date:</span> {courseData && courseData.startDate}
                 </p>
                 <p>
                   {" "}
-                  <span className="font-bold mr-4">End Date:</span> {courseData.endDate}
+                  <span className="font-bold mr-4">End Date:</span> {courseData && courseData.endDate}
                 </p>
               </div>
             </div>
