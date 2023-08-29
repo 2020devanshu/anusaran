@@ -44,19 +44,30 @@ export default function NavBar({ }) {
     <div>
       <div className="absolute" >
         <div className="p-2.5 mt-1 flex items-center">
-          <img src={mainLogo} alt="Logo" onClick={handleOpen} style={{ width: "13%", cursor: "pointer" }} />
+          <button onClick={handleOpen} className="focus:outline-none">
+            <svg className={`${!close ? 'hidden' : 'block'} w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+
+          </button>
         </div>
+
       </div>
       {localStorage.getItem("role") === "admin" ? (
         <div
           className={`${close ? "hidden " : "block "
-            } h-screen sticky top-0 bottom-0 lg:left-0 p-2 w-[350px] md:w-[300px] text-center `}
-          style={{ backgroundColor: "#F8F6FF" }}
+            } h-screen sticky top-0 bottom-0 lg:left-0 p-2 w-[350px] md:w-[300px] text-center transform transition-transform duration-300 ease-in-out`}
+          style={{ backgroundColor: "#F8F6FF", transform: close ? 'translateX(-100%)' : 'translateX(0)' }}
         >
-          <div className="text-gray-100 text-xl " onClick={handleClose}>
-            <div className="p-2.5 mt-1 flex items-center">
+          <div className="text-gray-100 text-xl ">
+            <div className="p-2.5 mt-1 flex items-center justify-between">
               <div className="rounded-md">
                 <img src={mainLogo} alt="Logo" style={{ width: "20%" }} />
+              </div>
+              <div onClick={handleClose}>
+                <svg className={`block w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </div>
             </div>
           </div>
@@ -220,10 +231,15 @@ export default function NavBar({ }) {
             } h-screen sticky top-0 bottom-0 lg:left-0 p-2 w-[350px] md:w-[300px] text-center `}
           style={{ backgroundColor: "#F8F6FF" }}
         >
-          <div className="text-gray-100 text-xl">
-            <div className="p-2.5 mt-1 flex items-center" onClick={handleClose}>
+          <div className="text-gray-100 text-xl ">
+            <div className="p-2.5 mt-1 flex items-center justify-between">
               <div className="rounded-md">
                 <img src={mainLogo} alt="Logo" style={{ width: "20%" }} />
+              </div>
+              <div onClick={handleClose}>
+                <svg className={`block w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </div>
             </div>
           </div>

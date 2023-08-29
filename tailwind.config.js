@@ -9,5 +9,10 @@ module.exports = {
       },
     },
   },
+  corePlugins: {
+    // ...
+    transition: true,
+    transform: true,
+  },
   plugins: [],
 };

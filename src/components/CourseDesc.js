@@ -169,13 +169,11 @@ export default function CourseDesc() {
                   Esthera Jackson
                 </p>
                 <p>
-                  <span className="font-bold mr-4">Start Date:</span> 21 July,
-                  2023
+                  <span className="font-bold mr-4">Start Date:</span> {courseData.startDate}
                 </p>
                 <p>
                   {" "}
-                  <span className="font-bold mr-4">End Date:</span> 21 July,
-                  2024
+                  <span className="font-bold mr-4">End Date:</span> {courseData.endDate}
                 </p>
               </div>
             </div>
@@ -207,7 +205,7 @@ export default function CourseDesc() {
           </div>
           <div className="end">
             <div className="font-bold text-2xl">Sub-Modules</div>
-            <div className="flex justify-around space-x-4 flex-wrap">
+            <div className="flex justify-around space-x-4 space-y-4 flex-wrap">
               {subCourse &&
                 subCourse.length > 0 &&
                 subCourse.map((x) => {

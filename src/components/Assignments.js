@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Assignments() {
     const navigate = useNavigate()
-    const { handleClose, close, handleOpen } = useAppContext();
+    const { handleClose, close, handleOpen, handleLogout } = useAppContext();
     const [currentAssignment, setcurrentAssignment] = useState("")
     const [currentAssignmentId, setcurrentAssignmentId] = useState(null)
     const [currentSubAssignmentId, setcurrentSubAssignmentId] = useState(null)
@@ -36,7 +36,7 @@ export default function Assignments() {
 
     useEffect(() => {
         const fetchAssignment = async () => {
-            const resp = await axios.get("http://151.106.39.4:8080/getAllAssignment").then((res) => { return res.data.data })
+            const resp = await axios.get("http://151.106.39.4:8080/courseAssignment").then((res) => { return res.data.data })
             console.log('resp', resp)
             if (localStorage.getItem("role") === "principal") {
                 let newArr = resp.filter((x) => x.instituteId === parseInt(localStorage.getItem("institutionId")))
@@ -76,6 +76,7 @@ export default function Assignments() {
 
     const handleAssignmentName = (e, id) => {
         console.log('id', id)
+        navigate("/subassignment/" + id)
         setcurrentAssignmentId(id)
         setcurrentAssignment(e)
     }
@@ -115,7 +116,7 @@ export default function Assignments() {
                         <div onClick={handleOpen}>
                             <p>{localStorage.getItem("role") === "principal" ? "Principal" : "Admin"}</p>
                         </div>
-                        <div>
+                        <div onClick={handleLogout} className='cursor-pointer'>
                             <svg
                                 width="24"
                                 height="24"
@@ -143,8 +144,8 @@ export default function Assignments() {
                                 {currentSubAssignment}
                             </div>
                             <div>
-                                <p className="text-gray-600 mt-4 ">Assignment Date: <span className='text-red-500'>{"23-05-2023"}</span></p>
-                                <p className="text-gray-600 mt-4 ">Submission Date: <span className='text-red-500'>{"23-05-2023"}</span></p>
+                                <p className="text-gray-600 mt-4 ">Assignment Date: <span className='text-red-500'>{subassignment.startDate}</span></p>
+                                <p className="text-gray-600 mt-4 ">Submission Date: <span className='text-red-500'>{subassignment.endDate}</span></p>
 
                             </div>
                         </div>
@@ -245,7 +246,7 @@ export default function Assignments() {
                             <div className='flex gap-4 flex-wrap justify-center' >
                                 {
                                     subassignment && subassignment.length > 0 && subassignment.map((x) => {
-                                        return <SubAssignmentCard key={x.id} assignmentName={x.assignmentsName} score={"29/30"} submissionDate={"21-03-2023"} id={x.id} handleSubNameClick={handleSubName} />
+                                        return <SubAssignmentCard key={x.id} assignmentName={x.assignmentsName} score={"29/30"} submissionDate={x.submitDate} id={x.id} handleSubNameClick={handleSubName} />
                                     })
                                 }
                             </div>

@@ -38,6 +38,8 @@ import Assignments from "./components/Assignments";
 import Teacher from "./components/Teacher";
 import AssignmentCreation from "./components/AssignmentCreation";
 import { useAppContext } from "./components/AppContext";
+import SubAssignment from "./components/SubAssignment";
+import SubAssignmentDetails from "./components/SubAssignmentDetails";
 
 const App = () => {
   const { handleClose, close, handleOpen, notify } = useAppContext();
@@ -59,7 +61,7 @@ const App = () => {
       {token ? (
         <div className="flex">
           <NavBar />
-          <div className="w-full " onClick={handleClose}>
+          <div className="w-full " >
             <Routes>
               {role === "admin" ? (
                 <>
@@ -78,6 +80,8 @@ const App = () => {
                 </>
               )}
 
+
+
               <Route path="teacher-creation" element={<TeacherCreation />} />
               <Route path="student-creation" element={<StudentCreation />} />
               <Route path="students" element={<Student />} />
@@ -93,6 +97,14 @@ const App = () => {
               <Route
                 path="assignment-creation/:id"
                 element={<AssignmentCreation />}
+              />
+              <Route
+                path="subassignment/:id"
+                element={<SubAssignment />}
+              />
+              <Route
+                path="subassignmentdetails/:id"
+              element={<SubAssignmentDetails />}
               />
               <Route path="course-creation" element={<CourseCreation />} />
               <Route path="dept-creation" element={<DeptCreation />} />
