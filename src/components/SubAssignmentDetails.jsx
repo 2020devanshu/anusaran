@@ -17,7 +17,21 @@ export default function SubAssignmentDetails() {
     navigate("/assignment-creation");
   };
   useEffect(() => {
-    const fetchSubAssignment = async () => {};
+    const fetchSubAssignment = async () => {
+      const resp = await axios
+        .get("http://151.106.39.4:8080/getAllAssignment")
+        .then((res) => {
+          return res.data.data;
+        });
+      console.log("resp", resp);
+      if (localStorage.getItem("role") === "principal") {
+        let newArr = resp.filter((x) => x.id === parseInt(params.id));
+        setsubassignment(newArr);
+      } else {
+        let newArr = resp.filter((x) => x.id === parseInt(params.id));
+        setsubassignment(newArr);
+      }
+    };
     const assignmentSumbitDetails = async () => {
       const resp = await axios
         .get("http://151.106.39.4:8080/assignmentSubmitted")

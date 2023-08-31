@@ -394,7 +394,7 @@ export default function Student() {
                 </div>
                 <div className="details mt-4 w-full text-center">
                   <div className="truncate w-4/5 mx-auto">{studentData.name}</div>
-                  <div className="text-gray-500">btech, cse</div>
+                  {/* <div className="text-gray-500">btech, cse</div> */}
                 </div>
               </div>
             );
