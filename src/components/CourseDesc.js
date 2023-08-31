@@ -151,35 +151,31 @@ export default function CourseDesc() {
           </div>
           <div className="intro flex items-center">
             <div className="leftSide">
-              <div className="font-bold">
+              {/* <div className="font-bold">
                 <h1>
                   Launch your career as a front-end developer. Build job-ready
                   skills for an in-demand career and earn a credential from
                   Meta. No degree or prior experience required to get started.
                 </h1>
-              </div>
-              <div>
-                <p className="flex items-center">
-                  <span className="mr-4 font-semibold">Instructor:</span>
-                  <img
-                    className="h-10 w-10 rounded-full border-2 border-white mr-4"
-                    src={courseData ? courseData.coursesImageUrl : "https://via.placeholder.com/150"}
-                    alt="Avatar"
-                  />
-                  Esthera Jackson
-                </p>
-                <p>
-                  <span className="font-bold mr-4">Start Date:</span> {courseData && courseData.startDate}
-                </p>
-                <p>
-                  {" "}
-                  <span className="font-bold mr-4">End Date:</span> {courseData && courseData.endDate}
-                </p>
-              </div>
+              </div> */}
+
             </div>
-            <div className="rightSide">
+            <div className="flex flex-col items-center w-full">
               <div>
                 <img src={courseData ? courseData.coursesImageUrl : "https://via.placeholder.com/150"} />
+              </div>
+              <div className="flex mt-8">
+                <div>
+                  <p>
+                    <span className="font-bold mr-4">Start Date:</span> {courseData && courseData.startDate}
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    {" "}
+                    <span className="font-bold mr-4">End Date:</span> {courseData && courseData.endDate}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -196,12 +192,17 @@ export default function CourseDesc() {
               eu ultrices vitae auctor eu. Auctor neque vitae tempus quam
               pellentesque. Pretium fusce id velit ut tortor pretium.
             </div>
-            <button
-              onClick={handleClickAdd}
-              className="mt-28 bg-purple-500 text-white px-4 py-2 rounded-full"
-            >
-              Create Sub-Module
-            </button>
+            {
+              localStorage.getItem("role") === "principal" &&
+              <button
+                onClick={handleClickAdd}
+                className="mt-28 bg-purple-500 text-white px-4 py-2 rounded-full"
+              >
+                Create Sub-Module
+              </button>
+
+            }
+
           </div>
           <div className="end">
             <div className="font-bold text-2xl">Sub-Modules</div>

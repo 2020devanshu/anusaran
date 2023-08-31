@@ -11,6 +11,7 @@ export default function SubAssignmentDetails() {
   const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const [subassignment, setsubassignment] = useState(null);
   const [assignment, setassignment] = useState(null);
+  const [marks, setmarks] = useState(0);
 
   const addAssignment = () => {
     navigate("/assignment-creation");
@@ -26,6 +27,23 @@ export default function SubAssignmentDetails() {
       //   console.log("newArr", newArr[0]);
       setsubassignment(newArr);
     };
+    const assignmentSumbitDetails = async () => {
+      const resp = await axios
+        .get("http://151.106.39.4:8080/assignmentSubmitted")
+        .then((res) => {
+          return res.data.data;
+        });
+
+      let newArr = resp.filter((x) => x.assignmentsId === parseInt(params.id));
+      //   console.log("newArr", newArr[0]);
+      let mks = 0;
+      for (let x of newArr) {
+        mks += parseInt(x.marks);
+      }
+      setmarks(mks);
+      setassignment(newArr);
+    };
+    assignmentSumbitDetails();
     fetchSubAssignment();
   }, []);
   const handleSubName = (e, id) => {
@@ -34,9 +52,12 @@ export default function SubAssignmentDetails() {
   };
   return (
     <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
-      <FloatingButton onClick={() => addAssignment()}>
-        Add Assignments
-      </FloatingButton>
+      {localStorage.getItem("role") === "principal" && (
+        <FloatingButton onClick={() => addAssignment()}>
+          Add Assignments
+        </FloatingButton>
+      )}
+
       <div className="navbar flex justify-between w-full">
         <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
           <div>
@@ -79,11 +100,7 @@ export default function SubAssignmentDetails() {
       <div class="border-b-2 border-black mb-2"></div>
       <div>
         <div className="flex justify-between w-full">
-          <div className="flex text-3xl ml-4 font-bold">
-            {subassignment &&
-              subassignment.length > 0 &&
-              subassignment[0].assignmentsName}
-          </div>
+          <div className="flex text-3xl ml-4 font-bold"></div>
           <div>
             {/* <p className="text-gray-600 mt-4 ">
               Assignment Date:{" "}
@@ -129,27 +146,43 @@ export default function SubAssignmentDetails() {
               fill="#1C1C1C"
             />
           </svg>
-          Algorithms
+          {subassignment &&
+            subassignment.length > 0 &&
+            subassignment[0].assignmentsName}
         </div>
         <div className="flex mt-8  text-xl justify-around w-10/12">
-          <p>
+          {/* <p>
             Total Students: <span className="font-bold text-2xl"> 3</span>
-          </p>
+          </p> */}
           <p>
             Total Assignment Submitted:
-            <span className="font-bold text-2xl"> 9.5</span>
+            <span className="font-bold text-2xl">
+              {" "}
+              {assignment && assignment.length}
+            </span>
           </p>
           <p>
-            Average Marks:<span className="font-bold text-2xl"> 9.5</span>
+            Average Marks:<span className="font-bold text-2xl"> {marks}</span>
           </p>
         </div>
         <div className="mt-8">
+
           <table className="w-full">
             <thead>
-              <th className="w-1/5 text-left text-gray-400">Student Name</th>
+              <th className="w-1/5 text-left text-gray-400">Submitted Student Name</th>
               <th className="w-3/5 text-left text-gray-400">UID</th>
             </thead>
             <tbody>
+              {assignment &&
+                assignment.length > 0 &&
+                assignment.map((x) => {
+                  return (
+                    <tr>
+                      <td>{x.name}</td>
+                      <td>{x.userId}</td>
+                    </tr>
+                  );
+                })}
               {/* <tr>
                                         <td>{x.name}</td>
                                         <td className="flex items-center gap-5">

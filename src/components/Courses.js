@@ -8,18 +8,24 @@ import AvatarGroup from "./AvatarGroup";
 import FloatingButton from "./FloatingButton";
 
 export default function Courses() {
-  const images = [
-    "https://via.placeholder.com/150",
-    "https://via.placeholder.com/150",
-    "https://via.placeholder.com/150",
-  ];
+
+  // const images = [
+  //   "https://via.placeholder.com/150",
+  //   "https://via.placeholder.com/150",
+  //   "https://via.placeholder.com/150",
+  // ];
   const [currentActive, setcurrentActive] = useState("");
 
   const [myData, setData] = useState([]);
   const { handleClose, close, handleOpen } = useAppContext();
   const [imgUrl, setimgUrl] = useState(null);
-  const [institutes, setInstitutes] = useState([]);
+  const [courses, setcourses] = useState([]);
   const navigate = useNavigate();
+  const [institutes, setinstitutes] = useState([]);
+  const [InstituteId, setInstituteId] = useState(null);
+  const [InstituteName, setInstituteName] = useState(null);
+
+  const [images, setimages] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -30,27 +36,66 @@ export default function Courses() {
     window.location.reload(true);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-
-      try {
-        const response = await axios.get(
-          "http://151.106.39.4:8080/getCoursesAll"
+  const fetchInstitutes = async () => {
+    await axios
+      .get("http://151.106.39.4:8080/getAllInstitute")
+      .then((res) => {
+        setinstitutes(
+          res.data.data.map((inst) => ({
+            value: inst.institute_id,
+            label: inst.InstituteName,
+          }))
         );
-        if (localStorage.getItem("role") === "principal") {
-          let response2 = response.data.data.filter((x) => x.Institute === parseInt(localStorage.getItem("institutionId")))
-          console.log('courses',response2, response.data.data, localStorage.getItem("institutionId"))
-          setInstitutes(response2);
+      });
+  };
 
-        }
-        else
-          setInstitutes(response.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchData = async () => {
+
+    try {
+      const response = await axios.get(
+        "http://151.106.39.4:8080/getCoursesAll"
+      );
+      if (localStorage.getItem("role") === "principal") {
+        let response2 = response.data.data.filter((x) => x.Institute === parseInt(localStorage.getItem("institutionId")))
+        console.log('courses', response2, response.data.data, localStorage.getItem("institutionId"))
+        setcourses(response2);
+
       }
-    };
+      else {
+        let response2 = response.data.data.filter((x) => x.Institute === parseInt(InstituteId))
+        console.log('courses', response2, response.data.data, InstituteId, localStorage.getItem("institutionId"))
+        setcourses(response2);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchStudents = async () => {
+    const resp = await axios
+      .get("http://151.106.39.4:8080/getDataAllSt")
+      .then((res) => res.data.data);
+    setData(resp);
+    if (localStorage.getItem("role") === "principal") {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId"))).slice(0, 3)
+      setData(newArr)
+    }
+    else {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(InstituteId)).slice(0, 3)
+      setimages(newArr.map((X) => { return X.profilePhoto }))
+      setData(newArr)
+    }
+  };
+
+  useEffect(() => {
     fetchData();
+    fetchInstitutes()
   }, []);
+
+  useEffect(() => {
+    fetchStudents()
+    fetchData()
+  }, [InstituteId]);
 
   const handleClick = (institute) => {
     navigate("course/" + institute.course_id);
@@ -122,6 +167,19 @@ export default function Courses() {
         </div>
       </div>
       <div class="border-b-2 border-black mb-2"></div>
+      <div className="flex justify-center">
+        {
+          localStorage.getItem("role") === "admin" && <Select
+            options={institutes}
+            onChange={(option) => {
+              setInstituteName(option.label)
+              setInstituteId(option.value);
+            }}
+            placeholder="Select Institute"
+          />
+        }
+
+      </div>
       {currentActive === "Self Learning" ? (
         <div className="mainbox w-full md:mt-8 flex gap-12 flex-wrap justify-center">
           <div className="flex flex-wrap mt-10 gap-5 justify-center">
@@ -167,7 +225,7 @@ export default function Courses() {
       ) : (
         <div className="mainbox w-full md:mt-8 flex gap-12 flex-wrap justify-center">
           <div className="flex flex-wrap mt-10 gap-5 justify-center">
-            {institutes.map((institute) => (
+            {courses.map((institute) => (
               <div
                 key={institute.course_id}
                 onClick={() => handleClick(institute)}
@@ -189,7 +247,7 @@ export default function Courses() {
                         </p>
                       </div>
                       <div>
-                        <p className="font text  ">By {institute.author ? institute.author : "Author"}</p>
+                        <p className="font text  ">By {InstituteName}</p>
                       </div>
                     </div>
                     <div>
@@ -215,7 +273,11 @@ export default function Courses() {
           </div>
         </div>
       )}
-      <FloatingButton onClick={handleClickAdd}>Add Courses</FloatingButton>
+      {
+        localStorage.getItem("role") === "principal" &&
+        <FloatingButton onClick={handleClickAdd}>Add Courses</FloatingButton>
+
+      }
 
     </div>
   );

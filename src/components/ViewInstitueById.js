@@ -9,9 +9,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { useMediaQuery } from "react-responsive";
 import FloatingButton from "./FloatingButton";
 
+import { useAppContext } from "../components/AppContext";
 
 
 export default function InstituteById() {
+  const { handleClose, close, handleOpen } = useAppContext();
+
   const params = useParams();
   const [Name, setName] = useState("");
   const [logo, setlogo] = useState("");
@@ -44,7 +47,7 @@ export default function InstituteById() {
     setcurrId(params.id);
     const fetchFeedback = async () => {
       const resp = await axios
-        .get(`http://151.106.39.4:8080/getFeedback?instituteId=${params.id}`)
+        .get(`http://151.106.39.4:8080/studentFeedbackAll?instituteId=${params.id}`)
         .then((res2) => {
           if (res2.data.data && res2.data.data.length > 0) {
             const pairs = [];
@@ -152,7 +155,7 @@ export default function InstituteById() {
   };
 
   return (
-    <div className="flex flex-col justify-center p-10 items-center bg-white">
+    <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
       <FloatingButton onClick={handleClickAdd}>Add principal</FloatingButton>
       <div className="navbar md:flex justify-between w-full">
         <div className="navleftitem flex justify-center flex-col ">
@@ -171,7 +174,7 @@ export default function InstituteById() {
         <div className="navitemright  flex-col items-center gap-5 w-1/2 p-10 xsm:hidden md:flex">
           <div className=" flex items-center justify-end w-full gap-5">
             <div>
-              <img src={localStorage.getItem("profilePic")} className="w-8 h-8"/>
+              <img src={localStorage.getItem("profilePic")} className="w-8 h-8" />
             </div>
             <div>
               <p>Admin</p>
@@ -209,9 +212,8 @@ export default function InstituteById() {
             princi.map((x) => {
               return (
                 <ProfileCard
-                  imgSrc={x.profilePhoto}
-                  name={x.name}
-                  designation="Principal"
+                  {...x}
+                  designation={"Principal"}
                 />
               );
             })}
@@ -253,8 +255,7 @@ export default function InstituteById() {
             stud.slice(0, 3).map((x, ind) => {
               return (
                 <ProfileCard
-                  imgSrc={x.profilePhoto}
-                  name={x.name}
+                  {...x}
                   designation="Student"
                 />
               );
@@ -264,8 +265,8 @@ export default function InstituteById() {
             stud.map((x, ind) => {
               return (
                 <ProfileCard
-                  imgSrc={x.profilePhoto}
-                  name={x.name}
+                  {...x}
+
                   designation="Student"
                 />
               );
@@ -350,8 +351,8 @@ export default function InstituteById() {
             teacher.map((x, ind) => {
               return (
                 <ProfileCard
-                  imgSrc={x.profilePhoto}
-                  name={x.name}
+                  {...x}
+
                   designation="Teacher"
                 />
               );
@@ -366,22 +367,49 @@ export default function InstituteById() {
         </div>
         <div class="border-b-2 border-black mb-2"></div>
 
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          showIndicators={true}
-          infiniteLoop={true}
-          useKeyboardArrows={true}
-        >
-          {pairedFeedbacks.map((feedbackPair, index) => (
-            <div key={index} className="flex justify-around">
-              {feedbackPair.map((feedback, idx) => (
-                <FeedbackCard key={idx} {...feedback} />
-              ))}
-            </div>
-          ))}
-        </Carousel>
-        <div className="flex justify-center"></div>
+
+        {
+          close ? <Carousel
+            showThumbs={false}
+            showStatus={false}
+            showIndicators={true}
+            infiniteLoop={false}
+            useKeyboardArrows={true}
+          >
+
+            {pairedFeedbacks.map((feedbackPair, index) => (
+              <div key={index} className="flex flex-wrap justify-around">
+                {feedbackPair.map((feedback, idx) => (
+                  <div key={idx} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8">
+                    <FeedbackCard data={feedback} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </Carousel> : <Carousel
+            showThumbs={false}
+            showStatus={false}
+            showIndicators={true}
+            infiniteLoop={false}
+            useKeyboardArrows={true}
+          >
+            {
+              pairedFeedbacks.slice(0, 2).map((feedbackPair, index) => (
+                <div key={index} className="flex flex-wrap justify-around">
+                  {feedbackPair.map((feedback, idx) => (
+                    <div key={idx} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8">
+                      <FeedbackCard data={feedback} />
+                    </div>
+                  ))}
+                </div>
+              ))
+            }
+          </Carousel>
+        }
+
+
+
+
       </div>
       {/* {feedback && feedback.length > 0 && (
         <h1 className="text-4xl">feedback</h1>

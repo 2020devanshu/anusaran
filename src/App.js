@@ -98,13 +98,10 @@ const App = () => {
                 path="assignment-creation/:id"
                 element={<AssignmentCreation />}
               />
+
               <Route
                 path="subassignment/:id"
-                element={<SubAssignment />}
-              />
-              <Route
-                path="subassignmentdetails/:id"
-              element={<SubAssignmentDetails />}
+                element={<SubAssignmentDetails />}
               />
               <Route path="course-creation" element={<CourseCreation />} />
               <Route path="dept-creation" element={<DeptCreation />} />

@@ -51,9 +51,12 @@ export default function SubAssignment() {
   };
   return (
     <div className="flex min-h-full flex-1 flex-col  bg-white px-6 lg:px-8 ">
-      <FloatingButton onClick={() => addAssignment()}>
-        Add Assignments
-      </FloatingButton>
+      {localStorage.getItem("role") === "principal" && (
+        <FloatingButton onClick={() => addAssignment()}>
+          Add Assignments
+        </FloatingButton>
+      )}
+
       <div className="navbar flex justify-between w-full">
         <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10">
           <div>

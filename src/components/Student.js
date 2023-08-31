@@ -107,21 +107,24 @@ export default function Student() {
         console.log('ratingData', ratingData)
       });
   }
+  const fetchStudents = async () => {
+    const resp = await axios
+      .get("http://151.106.39.4:8080/getDataAllSt")
+      .then((res) => res.data.data);
+    setData(resp);
+    if (localStorage.getItem("role") === "principal") {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
+      setData(newArr)
+
+    }
+    else {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(InstituteId))
+      setData(newArr)
+    }
+  };
 
   useEffect(() => {
-    const fetchStudents = async () => {
-      const resp = await axios
-        .get("http://151.106.39.4:8080/getDataAllSt")
-        .then((res) => res.data.data);
-      setData(resp);
-      if (localStorage.getItem("role") === "principal") {
-        let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
-        setData(newArr)
 
-      }
-      else
-        setData(resp)
-    };
     const fetchInstitutes = async () => {
       await axios
         .get("http://151.106.39.4:8080/getAllInstitute")
@@ -166,6 +169,7 @@ export default function Student() {
     fetchCourses();
     fetchAttendance();
     fetchFeedback()
+    fetchStudents()
   }, [InstituteId, CourseId, daysOrWeekId]);
 
 
@@ -185,23 +189,25 @@ export default function Student() {
       <div className="navbar flex justify-between w-full ml-4">
         <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10 cursor-pointer z-50">
           <div>
-            <h1
-              className="text-4xl cursor-pointer"
+            <button
+              className={`text-xl cursor-pointer p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition ${currentActive === "" ? "bg-purple-500 text-white hover:bg-purple-600" : ""
+                }`}
               onClick={() => setcurrentActive("")}
             >
               Students
-            </h1>
+            </button>
           </div>
           <div>
-            <h1
-              className={`text-xl cursor-pointer ${currentActive === "Attendance" ? "text-purple-500" : ""
+            <button
+              className={`text-xl cursor-pointer p-2 bg-gray-200 text-black rounded-lg hover:bg-gray-300 transition ${currentActive === "Attendance" ? "bg-purple-500 text-white hover:bg-purple-600" : ""
                 }`}
               onClick={() => setcurrentActive("Attendance")}
             >
               Attendance
-            </h1>
+            </button>
           </div>
-          <div>
+
+          {/* <div>
             <h1
               className={`text-xl cursor-pointer ${currentActive === "Feedback" ? "text-purple-500" : ""
                 }`}
@@ -209,7 +215,7 @@ export default function Student() {
             >
               Feedback
             </h1>
-          </div>
+          </div> */}
         </div>
         <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
           <div className=" flex items-center justify-end w-full gap-5">
@@ -239,20 +245,21 @@ export default function Student() {
       </div>
 
       <div class="border-b-2 border-black mb-2"></div>
+      <div className="flex justify-center mb-4">
+        {
+          localStorage.getItem("role") === "admin" && <Select
+            options={institutes}
+            onChange={(option) => {
+              setInstituteId(option.value);
+            }}
+            placeholder="Select Institute"
+          />
+        }
+
+      </div>
       {currentActive === "Feedback" ? (
         <div>
-          <div className="flex justify-center">
-            {
-              localStorage.getItem("role") === "admin" && <Select
-                options={institutes}
-                onChange={(option) => {
-                  setInstituteId(option.value);
-                }}
 
-              />
-            }
-
-          </div>
           <div>
             <Chart
               chartType="Bar"
@@ -266,17 +273,7 @@ export default function Student() {
         </div>
       ) : currentActive === "Attendance" ? (
         <div>
-          <div className="flex justify-center">
-            {
-              localStorage.getItem("role") === "admin" && <Select
-                options={institutes}
-                onChange={(option) => {
-                  setCourses(null)
-                  setInstituteId(option.value);
-                }}
-              />
-            }
-          </div>
+
           {InstituteId && (
             <div>
               {
@@ -321,6 +318,8 @@ export default function Student() {
                         <table className="w-full">
                           <thead>
                             <th className="w-1/5 text-left">Student Name</th>
+                            <th className="w-1/5 text-left">Threshold</th>
+
                             <th className="w-3/5 text-left">Attendance</th>
                           </thead>
                           <tbody>
@@ -329,7 +328,7 @@ export default function Student() {
                                 return (
                                   <tr>
                                     <td>{x.name}</td>
-                                    <td className="flex items-center gap-5">
+                                    <td>
                                       {
                                         x.count > 5 ?
                                           <>
@@ -344,6 +343,9 @@ export default function Student() {
                                             </svg>
                                           </>
                                       }
+
+                                    </td>
+                                    <td className="flex items-center gap-5">
 
                                       {x.count}
                                       <div
@@ -385,14 +387,7 @@ export default function Student() {
             return (
               <div className="card rounded-xl bg-gray-100 w-1/6 flex flex-col items-center h-56 justify-center">
                 <div className="profile">
-                  <svg width="80"
-                    height="80"
-                    viewBox="0 0 42 42"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-                  </svg>
+                  <img src={studentData.profilePhoto} className="w-24 h-24" />
 
                 </div>
                 <div className="details mt-4 w-full text-center">

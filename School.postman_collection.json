@@ -2825,6 +2825,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "uploades",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -3224,7 +3232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"assignmentsName\": \"new Assignment\",\r\n    \"assignmentsPathsUrl\": \"dfghjkl\",\r\n    \"lastDate\": \"2023-08-15\",\r\n    \"instituteId\": 1,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 1\r\n}",
+							"raw": "{\r\n    \"assignmentsName\": \"Prince \",\r\n    \"assignmentsPathsUrl\": \"dfghjkl\",\r\n    \"lastDate\": \"2023-08-15\",\r\n    \"instituteId\": 1,\r\n    \"courseId\": 1,\r\n    \"subCourseId\": 1,\r\n    \"status\":\"1\",\r\n    \"assignmentId\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3277,6 +3285,75 @@
 								{
 									"key": "id",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AllAssignmentByInstituteId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AllAssignmentByInstituteId?instituteId=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AllAssignmentByInstituteId"
+							],
+							"query": [
+								{
+									"key": "instituteId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AssignmentByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AssignmentByCourseId?courseId=31",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AssignmentByCourseId"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AssignmentBysubCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/AssignmentBysubCourseId?subCourseId=43",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"AssignmentBysubCourseId"
+							],
+							"query": [
+								{
+									"key": "subCourseId",
+									"value": "43"
 								}
 							]
 						}
@@ -3339,6 +3416,23 @@
 					"response": []
 				},
 				{
+					"name": "instituteAllAssignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/instituteAllAssignment",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"instituteAllAssignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "courseAssignment",
 					"request": {
 						"method": "GET",
@@ -3379,29 +3473,6 @@
 					"response": []
 				},
 				{
-					"name": "AssignmentByCourseId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/AssignmentByCourseId?courseId=31",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"AssignmentByCourseId"
-							],
-							"query": [
-								{
-									"key": "courseId",
-									"value": "31"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "subCourseAssignment",
 					"request": {
 						"method": "GET",
@@ -3424,7 +3495,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/subCourseAssignmentById?id=2",
+							"raw": "{{Domain}}/subCourseAssignmentById?id=35",
 							"host": [
 								"{{Domain}}"
 							],
@@ -3434,7 +3505,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "35"
 								}
 							]
 						}
@@ -3458,29 +3529,6 @@
 								{
 									"key": "CourseId",
 									"value": "31"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AssignmentBysubCourseId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/AssignmentBysubCourseId?subCourseId=43",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"AssignmentBysubCourseId"
-							],
-							"query": [
-								{
-									"key": "subCourseId",
-									"value": "43"
 								}
 							]
 						}
@@ -3536,12 +3584,35 @@
 					"response": []
 				},
 				{
+					"name": "getUserAssignmentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/getUserAssignmentById?id=1",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"getUserAssignmentById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getUserAssignmentByUserId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/getUserAssignmentByUserId?userId=1",
+							"raw": "{{Domain}}/getUserAssignmentByUserId?userId=727",
 							"host": [
 								"{{Domain}}"
 							],
@@ -3551,34 +3622,7 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getUserAssignmentById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/getUserAssignmentById?userId=1&assignmentsId=1",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"getUserAssignmentById"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "1"
-								},
-								{
-									"key": "assignmentsId",
-									"value": "1"
+									"value": "727"
 								}
 							]
 						}
@@ -3654,26 +3698,39 @@
 					"response": []
 				},
 				{
-					"name": "assignmentNotUploadUser",
+					"name": "assignmentSubmitted",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/assignmentNotUploadUser?instituteId=1&subCourseId=1",
+							"raw": "{{Domain}}/assignmentSubmitted",
 							"host": [
 								"{{Domain}}"
 							],
 							"path": [
-								"assignmentNotUploadUser"
+								"assignmentSubmitted"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignmentSubmittedByAssignmentsId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Domain}}/assignmentSubmittedByAssignmentsId?assignmentsId=2",
+							"host": [
+								"{{Domain}}"
+							],
+							"path": [
+								"assignmentSubmittedByAssignmentsId"
 							],
 							"query": [
 								{
-									"key": "instituteId",
-									"value": "1"
-								},
-								{
-									"key": "subCourseId",
-									"value": "1"
+									"key": "assignmentsId",
+									"value": "2"
 								}
 							]
 						}
@@ -3681,102 +3738,22 @@
 					"response": []
 				},
 				{
-					"name": "assignmentNotsubmitte",
+					"name": "assignmentSubmittedByUserId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/assignmentNotsubmitte",
+							"raw": "{{Domain}}/assignmentSubmittedByUserId?userId=5",
 							"host": [
 								"{{Domain}}"
 							],
 							"path": [
-								"assignmentNotsubmitte"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "courseUserAssignment",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/courseUserAssignment",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"courseUserAssignment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "courseUserAssignmentById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/courseUserAssignmentById?id=1",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"courseUserAssignmentById"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "userAssignmentByCourseId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/userAssignmentByCourseId?courseId=31",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"userAssignmentByCourseId"
-							],
-							"query": [
-								{
-									"key": "courseId",
-									"value": "31"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "courseAssignmentByUserId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/courseAssignmentByUserId?userId=727",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"courseAssignmentByUserId"
+								"assignmentSubmittedByUserId"
 							],
 							"query": [
 								{
 									"key": "userId",
-									"value": "727"
+									"value": "5"
 								}
 							]
 						}
@@ -3784,39 +3761,39 @@
 					"response": []
 				},
 				{
-					"name": "subCourseUserAssignment",
+					"name": "assignmentPending",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/subCourseUserAssignment",
+							"raw": "{{Domain}}/assignmentPending",
 							"host": [
 								"{{Domain}}"
 							],
 							"path": [
-								"subCourseUserAssignment"
+								"assignmentPending"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "subCourseUserAssignmentById",
+					"name": "assignmentPendingByAssignmentsId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/subCourseUserAssignmentById?id=11",
+							"raw": "{{Domain}}/assignmentPendingByAssignmentsId?assignmentsId=2",
 							"host": [
 								"{{Domain}}"
 							],
 							"path": [
-								"subCourseUserAssignmentById"
+								"assignmentPendingByAssignmentsId"
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "11"
+									"key": "assignmentsId",
+									"value": "2"
 								}
 							]
 						}
@@ -3824,68 +3801,22 @@
 					"response": []
 				},
 				{
-					"name": "subCourseUserAssignmentByCourseId",
+					"name": "assignmentPendingByUserId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Domain}}/subCourseUserAssignmentByCourseId?courseId=31",
+							"raw": "{{Domain}}/assignmentPendingByUserId?userId=621",
 							"host": [
 								"{{Domain}}"
 							],
 							"path": [
-								"subCourseUserAssignmentByCourseId"
-							],
-							"query": [
-								{
-									"key": "courseId",
-									"value": "31"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UserAssignmentBysubCourseId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/UserAssignmentBysubCourseId?subCourseId=42",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"UserAssignmentBysubCourseId"
-							],
-							"query": [
-								{
-									"key": "subCourseId",
-									"value": "42"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "subCourseUserAssignmentByuserId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Domain}}/subCourseUserAssignmentByuserId?userId=727",
-							"host": [
-								"{{Domain}}"
-							],
-							"path": [
-								"subCourseUserAssignmentByuserId"
+								"assignmentPendingByUserId"
 							],
 							"query": [
 								{
 									"key": "userId",
-									"value": "727"
+									"value": "621"
 								}
 							]
 						}

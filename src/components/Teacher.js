@@ -111,20 +111,24 @@ export default function Teacher() {
       });
   }
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      const resp = await axios
-        .get("http://151.106.39.4:8080/getAllTeacher")
-        .then((res) => res.data.data);
-      setData(resp);
-      if (localStorage.getItem("role") === "principal") {
-        let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
-        setData(newArr)
+  const fetchStudents = async () => {
+    const resp = await axios
+      .get("http://151.106.39.4:8080/getAllTeacher")
+      .then((res) => res.data.data);
+    setData(resp);
+    if (localStorage.getItem("role") === "principal") {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(localStorage.getItem("institutionId")))
+      setData(newArr)
 
-      }
-      else
-        setData(resp)
-    };
+    }
+    else {
+      let newArr = resp.filter((x) => x.institutionId === parseInt(InstituteId))
+      setData(newArr)
+    }
+  };
+
+  useEffect(() => {
+
     const fetchInstitutes = async () => {
       await axios
         .get("http://151.106.39.4:8080/getAllInstitute")
@@ -167,6 +171,7 @@ export default function Teacher() {
       setCourses(newArr);
     };
     fetchCourses();
+    fetchStudents()
     fetchAttendance();
     fetchFeedback()
   }, [InstituteId, CourseId, daysOrWeekId]);
@@ -187,30 +192,23 @@ export default function Teacher() {
       <div className="navbar flex justify-between w-full">
         <div className="navleftitemflex flex flex-row items-center gap-5 w-1/2 p-10 z-50 ml-4">
           <div>
-            <h1
-              className="text-4xl cursor-pointer"
+            <button
+              className={`text-xl cursor-pointer p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition ${currentActive === "" ? "bg-purple-500 text-white hover:bg-purple-600" : ""
+                }`}
               onClick={() => setcurrentActive("")}
             >
               Teachers
-            </h1>
+            </button>
           </div>
+
           <div>
-            <h1
-              className={`text-xl cursor-pointer ${currentActive === "" ? "text-purple-500" : ""
-                }`}
-              onClick={() => setcurrentActive("Modules")}
-            >
-              Modules
-            </h1>
-          </div>
-          <div>
-            <h1
-              className={`text-xl cursor-pointer ${currentActive === "Attendance" ? "text-purple-500" : ""
+            <button
+              className={`text-xl cursor-pointer p-2 bg-gray-200 text-black rounded-lg hover:bg-gray-300 transition ${currentActive === "Attendance" ? "bg-purple-500 text-white hover:bg-purple-600" : ""
                 }`}
               onClick={() => setcurrentActive("Attendance")}
             >
               Attendance
-            </h1>
+            </button>
           </div>
         </div>
         <div className="navitemright flex flex-col items-center gap-5 w-1/2 p-10">
@@ -241,20 +239,23 @@ export default function Teacher() {
       </div>
 
       <div class="border-b-2 border-black mb-2"></div>
+      <div className="flex justify-center mb-4">
+        {
+          localStorage.getItem("role") === "admin" && <Select
+            options={institutes}
+            onChange={(option) => {
+
+              setCourses(null)
+              setInstituteId(option.value);
+            }}
+            placeholder="Select Institute"
+          />
+        }
+
+      </div>
       {currentActive === "Attendance" ? (
         <div>
-          <div className="flex justify-center">
-            {
-              localStorage.getItem("role") === "admin" && <Select
-                options={institutes}
-                onChange={(option) => {
-                  setCourses(null)
-                  setInstituteId(option.value);
-                }}
-              />
-            }
 
-          </div>
           {InstituteId && (
             <div>
               {
@@ -362,15 +363,7 @@ export default function Teacher() {
             return (
               <div className="card rounded-xl bg-gray-100 w-1/4 flex flex-col items-center h-56 justify-center">
                 <div className="profile">
-                  <svg
-                    width="80"
-                    height="80"
-                    viewBox="0 0 42 42"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="21" cy="21" r="21" fill="#D9D9D9" />
-                  </svg>
+                  <img src={studentData.profilePhoto} className="w-24 h-24" />
                 </div>
                 <div className="details mt-4">
                   <div className="flex flex-col justify-center items-center">
@@ -388,7 +381,11 @@ export default function Teacher() {
           })}
         </div>
       )}
-      <FloatingButton onClick={() => navigate("/teacher-creation")}>Add Teachers</FloatingButton>
+      {
+        localStorage.getItem("role") === "principal" &&
+        <FloatingButton onClick={() => navigate("/teacher-creation")}>Add Teachers</FloatingButton>
+
+      }
     </div>
   );
 }
