@@ -11,6 +11,8 @@ import { CircleLoader } from "react-spinners";
 export default function AddVideo() {
   const { handleClose, close, handleOpen, notify, handleLogout } = useAppContext();
   const [loading, setloading] = useState(false)
+  const [loading2, setloading2] = useState(false)
+
 
   const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
   const [video, setvideo] = useState(null);
@@ -24,6 +26,9 @@ export default function AddVideo() {
   const params = useParams();
   const [options, setOptions] = useState([]);
   const [Course, setCourse] = useState([]);
+  const [imageSrc, setimageSrc] = useState([]);
+  const [uploadImageURL, setuploadImageURL] = useState(null)
+
   const navigate = useNavigate();
   const [data, setData] = useState({
     subcourses: "",
@@ -71,6 +76,51 @@ export default function AddVideo() {
     };
     fge();
   }, []);
+
+  const handleImageUpload = async (e) => {
+    setloading2(true)
+    if (e.target.files && e.target.files[0]) {
+      console.log("e.target.files", e.target.files);
+      const imgFile = e.target.files[0];
+
+      // // Converting to a base64 string
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   setImageSrc(e.target.result);
+      // };
+      // // reader.readAsDataURL(imgFile);
+      console.log("imageSrc", URL.createObjectURL(e.target.files[0]));
+
+      // Alternatively, you can use the file object directly
+      setimageSrc(e.target.files[0]);
+      console.log("data.logo", data.logo);
+      const formData = new FormData();
+
+      // Send the file to the server
+      formData.append("file", e.target.files[0]);
+
+      // Send the file to the server
+      await axios.post(
+        "http://151.106.39.4:8080/uploads",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      ).then((res) => {
+        const fileUrl = res.data.url;
+        console.log("fileUrl", fileUrl);
+        setuploadImageURL(fileUrl[0])
+        setloading2(false)
+      })
+
+      // Get the URL of the uploaded file
+
+
+      // Get the URL of the uploaded file
+    }
+  };
 
   const handleVideoUpload = async (e) => {
     setloading(true)
@@ -143,6 +193,7 @@ export default function AddVideo() {
             courseId: parseInt(res.data.data[0].courseId),
             subCourseId: parseInt(res.data.data[0].subcourses_id),
             videosPathsUrl: videoURL,
+            videoImage: uploadImageURL
           })
           .then((res) => {
             console.log("succ", res);
@@ -246,6 +297,44 @@ export default function AddVideo() {
                                     type="file"
                                     accept="video/mp4,video/x-m4v,video/*"
                                     onChange={handleVideoUpload}
+                                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  />
+
+                                </div>
+                              </>
+                          }
+
+                        </>
+                    }
+
+                  </>
+
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between ">
+
+              <div className="w-1/2">
+                <div className="flex items-center justify-between"></div>
+                <div className="mt-2">
+                  <>
+                    {
+                      loading2 ? <CircleLoader /> :
+                        <>
+                          {
+                            uploadImageURL ? <>Uploaded</> :
+                              <>
+                                <div class="p-5 space-y-10 items-center md:space-y-0 flex flex-col md:flex-row overflow-hidden">
+                                  <h1 className="text-2xl font-bold">
+                                    Upload thumbnail
+                                  </h1>
+
+                                </div>
+                                <div className="mt-2">
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
                                     className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                   />
 

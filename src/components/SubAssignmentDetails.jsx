@@ -17,16 +17,7 @@ export default function SubAssignmentDetails() {
     navigate("/assignment-creation");
   };
   useEffect(() => {
-    const fetchSubAssignment = async () => {
-      const resp = await axios
-        .get("http://151.106.39.4:8080/subCourseAssignment")
-        .then((res) => {
-          return res.data.data;
-        });
-      let newArr = resp.filter((x) => x.id === parseInt(params.id));
-      //   console.log("newArr", newArr[0]);
-      setsubassignment(newArr);
-    };
+    const fetchSubAssignment = async () => {};
     const assignmentSumbitDetails = async () => {
       const resp = await axios
         .get("http://151.106.39.4:8080/assignmentSubmitted")
@@ -166,10 +157,11 @@ export default function SubAssignmentDetails() {
           </p>
         </div>
         <div className="mt-8">
-
           <table className="w-full">
             <thead>
-              <th className="w-1/5 text-left text-gray-400">Submitted Student Name</th>
+              <th className="w-1/5 text-left text-gray-400">
+                Submitted Student Name
+              </th>
               <th className="w-3/5 text-left text-gray-400">UID</th>
             </thead>
             <tbody>

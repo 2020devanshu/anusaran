@@ -250,6 +250,8 @@ export default function Student() {
           localStorage.getItem("role") === "admin" && <Select
             options={institutes}
             onChange={(option) => {
+              setCourseId(null)
+              setCourses(null)
               setInstituteId(option.value);
             }}
             placeholder="Select Institute"

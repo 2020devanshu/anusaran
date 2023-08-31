@@ -244,7 +244,7 @@ export default function Teacher() {
           localStorage.getItem("role") === "admin" && <Select
             options={institutes}
             onChange={(option) => {
-
+              setCourseId(null)
               setCourses(null)
               setInstituteId(option.value);
             }}

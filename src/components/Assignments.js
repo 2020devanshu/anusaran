@@ -53,14 +53,7 @@ export default function Assignments() {
     }, [InstituteId])
 
     useEffect(() => {
-        const fetchSubAssignment = async () => {
-            const resp = await axios.get("http://151.106.39.4:8080/subCourseAssignment").then((res) => { return res.data.data })
-            let newArr = resp.filter((x) => x.assignmentId === parseInt(currentAssignmentId))
-            console.log('respss', resp, newArr, currentAssignmentId)
-
-            setsubassignment(newArr)
-        }
-        fetchSubAssignment()
+        
         fetchStudents()
     }, [currentAssignmentId])
     useEffect(() => {
