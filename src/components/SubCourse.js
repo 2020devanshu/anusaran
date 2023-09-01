@@ -167,7 +167,7 @@ export default function SubCourse() {
               <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
-              <div>
+              <div onClick={handleClose}>
                 <svg
                   width="24"
                   height="24"
