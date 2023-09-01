@@ -22,7 +22,7 @@ export default function AssignmentCreation() {
 
 
 
-    const [InstituteId, setInstituteId] = useState(null);
+    const [InstituteId, setInstituteId] = useState(localStorage.getItem("institutionId") ? localStorage.getItem("institutionId") : null);
     const [institutes, setinstitutes] = useState([]);
     const [CourseId, setCourseId] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -109,8 +109,10 @@ export default function AssignmentCreation() {
         await axios
             .get("http://151.106.39.4:8080/getsubCourses?InstituteId=" + InstituteId)
             .then((res) => {
+                let newarr = res.data.data.filter((x) => x.courseId === CourseId)
+                console.log('newarr', newarr)
                 setSubCourses(
-                    res.data.data.map((inst) => ({
+                    newarr.map((inst) => ({
                         value: inst.subcourses_id,
                         label: inst.subcourses,
                     }))
@@ -122,7 +124,7 @@ export default function AssignmentCreation() {
 
         fetchSubCourses()
         fetchCourses()
-    }, [InstituteId]);
+    }, [InstituteId,CourseId]);
 
     useEffect(() => {
         fetchInstitutes()
@@ -134,47 +136,28 @@ export default function AssignmentCreation() {
 
 
         // const fileUrl = response.data.url[0];
-        if (params.id) {
-            await axios
-                .post("http://151.106.39.4:8080/inserAssignment", {
-                    assignmentsName: name,
-                    status: "1",
-                    assignmentsPathsUrl: videoURL,
-                    assignmentId: params.id,
-                    lastDate: data.endTime
-                })
-                .then((res) => {
-                    console.log("succ", res);
-                    // localStorage.setItem("token", res.data.token);
-                    // navigate("/institute-list");
-                    notify();
 
-                })
-                .catch((err) => {
-                    console.log("error is here", err);
-                });
-        }
-        else
-            await axios
-                .post("http://151.106.39.4:8080/inserAssignment", {
-                    assignmentsName: name,
-                    instituteId: InstituteId,
-                    courseId: parseInt(CourseId),
-                    subCourseId: parseInt(SubCourseId),
-                    assignmentsPathsUrl: videoURL,
-                    status: "0",
-                })
-                .then((res) => {
-                    console.log("succ", res);
-                    // localStorage.setItem("token", res.data.token);
-                    // navigate("/institute-list");
-                    notify();
+        await axios
+            .post("http://151.106.39.4:8080/inserAssignment", {
+                assignmentsName: name,
+                instituteId: InstituteId,
+                courseId: parseInt(CourseId),
+                subCourseId: parseInt(SubCourseId),
+                assignmentsPathsUrl: videoURL,
+                status: "0",
+                lastDate: data.endTime
+            })
+            .then((res) => {
+                console.log("succ", res);
+                // localStorage.setItem("token", res.data.token);
+                // navigate("/institute-list");
+                notify();
 
-                })
-                .catch((err) => {
-                    console.log("error is here", err);
-                    // notify();
-                });
+            })
+            .catch((err) => {
+                console.log("error is here", err);
+                // notify();
+            });
 
     };
 
@@ -271,7 +254,7 @@ export default function AssignmentCreation() {
                         </div>
                         {/* Institute Name */}
                         {
-                            params.id ? <div className="flex justify-between ">
+                            <div className="flex justify-between ">
 
                                 <div className="w-1/2">
                                     <div className="flex items-center justify-between"></div>
@@ -308,31 +291,33 @@ export default function AssignmentCreation() {
 
                                     </div>
                                 </div>
-                            </div> : <></>
+                            </div>
                         }
 
                         {/* Logo */}
-                        {!params.id &&
+                        {
+
                             <>
-                                <div className="w-full">
-                                    <div className="flex items-center justify-between">
-                                        <label
-                                            htmlFor="name"
-                                            className="block text-lg font-medium leading-6 text-gray-900"
-                                        >
-                                            InstituteId
-                                        </label>
-                                    </div>
-                                    <div className="mt-2">
-                                        <Select
-                                            options={institutes}
-                                            onChange={(option) => {
-                                                setInstituteId(option.value);
-                                            }}
-                                            styles={customStyles}
-                                        />
-                                    </div>
-                                </div>
+                                {localStorage.getItem("role") === "admin" &&
+                                    <div className="w-full">
+                                        <div className="flex items-center justify-between">
+                                            <label
+                                                htmlFor="name"
+                                                className="block text-lg font-medium leading-6 text-gray-900"
+                                            >
+                                                InstituteId
+                                            </label>
+                                        </div>
+                                        <div className="mt-2">
+                                            <Select
+                                                options={institutes}
+                                                onChange={(option) => {
+                                                    setInstituteId(option.value);
+                                                }}
+                                                styles={customStyles}
+                                            />
+                                        </div>
+                                    </div>}
                                 {
                                     courses && courses.length > 0 && (
 
@@ -387,7 +372,7 @@ export default function AssignmentCreation() {
                         }
 
                         {
-                            params.id &&
+
                             <>
                                 <div className="flex justify-between flex-col">
 

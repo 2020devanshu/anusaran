@@ -368,13 +368,13 @@ export default function Teacher() {
                 <div className="details mt-4">
                   <div className="flex flex-col justify-center items-center">
                     <div>{studentData.name}</div>
-                    <div className="text-gray-500">btech, cse</div>
+                    {/* <div className="text-gray-500">btech, cse</div> */}
                   </div>
-                  <div>
+                  {/* <div>
                     <button class="py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary bg-gray-400 hover:bg-blue-light focus:outline-none active:shadow-none mr-2">Primary</button>
                     <button class="py-2 px-4 shadow-md no-underline rounded-full bg-blue text-white font-sans font-semibold text-sm border-blue btn-primary bg-gray-400 hover:bg-blue-light focus:outline-none active:shadow-none mr-2">Primary</button>
 
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );

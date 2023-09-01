@@ -94,10 +94,7 @@ const App = () => {
                 path="assignment-creation"
                 element={<AssignmentCreation />}
               />
-              <Route
-                path="assignment-creation/:id"
-                element={<AssignmentCreation />}
-              />
+              
 
               <Route
                 path="subassignment/:id"

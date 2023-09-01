@@ -53,7 +53,7 @@ export default function Assignments() {
     }, [InstituteId])
 
     useEffect(() => {
-        
+
         fetchStudents()
     }, [currentAssignmentId])
     useEffect(() => {
@@ -81,10 +81,7 @@ export default function Assignments() {
     }
 
     const addAssignment = () => {
-        if (currentAssignmentId) {
-            navigate("/assignment-creation/" + currentAssignmentId)
-        }
-        else navigate("/assignment-creation")
+        navigate("/assignment-creation")
     }
 
     return (

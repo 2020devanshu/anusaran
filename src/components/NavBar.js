@@ -64,7 +64,7 @@ export default function NavBar({ }) {
               <div className="rounded-md">
                 <img src={mainLogo} alt="Logo" style={{ width: "20%" }} />
               </div>
-              <div onClick={handleClose}>
+              <div >
                 <svg className={`block w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -236,7 +236,7 @@ export default function NavBar({ }) {
               <div className="rounded-md">
                 <img src={mainLogo} alt="Logo" style={{ width: "20%" }} />
               </div>
-              <div onClick={handleClose}>
+              <div onClick={handleClose} >
                 <svg className={`block w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -246,7 +246,7 @@ export default function NavBar({ }) {
           <div className="flex justify-center flex-col">
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"/"}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer text-center navItem w-3/5"
               >
@@ -270,7 +270,7 @@ export default function NavBar({ }) {
             </div>
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"/institute-list/institute/" + localStorage.getItem("institutionId")}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer  text-center navItem w-3/5"
               >
@@ -295,7 +295,7 @@ export default function NavBar({ }) {
             </div>
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"courses"}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer navItem w-3/5 text-center"
               >
@@ -313,7 +313,7 @@ export default function NavBar({ }) {
             </div>
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"assignments"}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer navItem w-3/5 text-center"
               >
@@ -334,7 +334,7 @@ export default function NavBar({ }) {
 
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"students"}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer navItem w-3/5 text-center"
               >
@@ -355,7 +355,7 @@ export default function NavBar({ }) {
 
             <div className="flex justify-center ">
               <Link
-                onClick={handleClose}
+
                 to={"teacher"}
                 className="p-2.5 flex mt-3 items-center rounded-md px-4 duration-300 cursor-pointer navItem w-3/5 text-center"
               >
