@@ -6,7 +6,7 @@ import QRCode from "qrcode.react";
 import { useAppContext } from "./AppContext";
 
 export default function CourseDesc() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
 
   const [courseData, setcourseData] = useState(null)
   const [myData, setData] = useState([]);
@@ -128,7 +128,7 @@ export default function CourseDesc() {
               <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
-              <div onClick={handleClose}>
+              <div onClick={handleLogout}>
                 <svg
                   width="24"
                   height="24"

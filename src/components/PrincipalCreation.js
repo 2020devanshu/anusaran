@@ -6,7 +6,7 @@ import { useAppContext } from "../components/AppContext";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function PrincipalCreation({ currId }) {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const params = useParams();
   const notify = () => toast("Try again");
   const navigate = useNavigate();
@@ -125,7 +125,7 @@ export default function PrincipalCreation({ currId }) {
               <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
-              <div onClick={handleClose}>
+              <div onClick={handleLogout}>
                 <svg
                   width="24"
                   height="24"

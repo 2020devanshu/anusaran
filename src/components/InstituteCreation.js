@@ -6,7 +6,7 @@ import { useAppContext } from "../components/AppContext";
 import { CircleLoader } from "react-spinners";
 
 export default function InstituteCreation() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
 
   const notify = () => toast("Try again");
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ export default function InstituteCreation() {
               <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
-              <div onClick={handleClose}>
+              <div onClick={handleLogout}>
                 <svg
                   width="24"
                   height="24"

@@ -12,7 +12,7 @@ import FloatingButton from "./FloatingButton";
 import { useNavigate } from "react-router-dom";
 
 export default function SubCourse() {
-  const { handleClose, close, handleOpen } = useAppContext();
+  const { handleClose, close, handleOpen, handleLogout } = useAppContext();
   const navigate = useNavigate();
 
   const [numnderAttemdamce, setnumnderAttemdamce] = useState(null);
@@ -167,7 +167,7 @@ export default function SubCourse() {
               <div onClick={handleOpen}>
                 <p>Admin</p>
               </div>
-              <div onClick={handleClose}>
+              <div onClick={handleLogout}>
                 <svg
                   width="24"
                   height="24"
