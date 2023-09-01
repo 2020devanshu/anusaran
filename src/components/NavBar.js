@@ -64,7 +64,7 @@ export default function NavBar({ }) {
               <div className="rounded-md">
                 <img src={mainLogo} alt="Logo" style={{ width: "20%" }} />
               </div>
-              <div >
+              <div onClick={handleClose} >
                 <svg className={`block w-6 h-6`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
